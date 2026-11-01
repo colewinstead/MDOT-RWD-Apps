@@ -1,0 +1,35 @@
+{
+  "cases": [
+    {
+      "length": 5,
+      "width": 4,
+      "height": 4,
+      "pavement": false,
+      "openings": [
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      "observed": {
+        "sourceSha256": "a11965cd84bdd325fe7a1279b0f8bc7f056f1c2ce0ea873f047c2847df99dbbb",
+        "basicLine": 1380,
+        "arrays": {
+          "concrete": [
+            0,
+            2.61385942
+          ],
+          "steel": [
+            0,
+            218.74501
+          ]
+        },
+        "rawHex": {
+          "concrete": "0000000079492740",
+          "steel": "00000000b9be5a43"
+        }
+      }
+    }
+  ]
+}
