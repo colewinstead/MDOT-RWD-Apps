@@ -1,0 +1,95 @@
+{
+  "note": "Long decimal keyboard text is converted differently by original QB64 parser and JavaScript. These are retained observations, not numerical regression acceptance fixtures. Common four-decimal inputs were rerun successfully.",
+  "cases": [
+    {
+      "type": "SS-3",
+      "choice": 6,
+      "height": 7.6514999999999995,
+      "observed": {
+        "values": {
+          "minimum": 6.417,
+          "concrete": 2.53214812,
+          "steel": 143.9865,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 7.65149975,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "1058cd40",
+          "concrete": "b70e2240",
+          "steel": "8bfc0f43",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "16d9f440",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "7.6514999999999995"
+    },
+    {
+      "type": "SS-3",
+      "choice": 13,
+      "height": 5.2764999999999995,
+      "observed": {
+        "values": {
+          "minimum": 4.042,
+          "concrete": 1.585148,
+          "steel": 114.986496,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 5.27649975,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "10588140",
+          "concrete": "21e6ca3f",
+          "steel": "16f9e542",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "16d9a840",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "5.2764999999999995"
+    },
+    {
+      "type": "SS-3",
+      "choice": 16,
+      "height": 6.6514999999999995,
+      "observed": {
+        "values": {
+          "minimum": 5.417,
+          "concrete": 2.496148,
+          "steel": 140.9865,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 6.65149975,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "1058ad40",
+          "concrete": "e4c01f40",
+          "steel": "8bfc0c43",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "16d9d440",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "6.6514999999999995"
+    }
+  ]
+}

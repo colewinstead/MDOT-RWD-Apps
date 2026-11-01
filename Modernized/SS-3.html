@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-wpZ/rycdInG354sfZoxg5UK0Tf3st/olF+DbwqlUgOI=' 'sha256-TrI8zKCdwbO389UCx43DkiPxujh/RKNTJ7wmi52zNoo='; style-src 'sha256-B46yToPvm7hZj14UquiV50EWSkaUNsphJFqLzGCXvE8='; img-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>SS-3 · Storm sewer inlet quantities</title>
+<style>:root{color-scheme:light;--ink:#152e3a;--muted:#536b76;--teal:#007c78;--line:#d9e3e6;--paper:#fff;--back:#f0f4f5;--soft:#e8f5f2;--error:#a02822;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15px;line-height:1.5}*{box-sizing:border-box}body{margin:0;background:var(--back);color:var(--ink)}button,input,select{font:inherit}button{cursor:pointer;border:1px solid #b8cbd0;background:white;color:var(--ink);border-radius:6px;padding:9px 15px;font-weight:600}button:hover{background:#e8f0f2}button:disabled{opacity:.5;cursor:not-allowed}button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #55aba6;outline-offset:3px}.primary{background:var(--teal);color:white;border-color:var(--teal)}.primary:hover{background:#006864}.quiet{border-color:transparent;color:var(--muted)}.app-shell{max-width:1420px;margin:auto;padding:0 40px}.masthead{display:flex;align-items:center;gap:18px;padding:34px 0 26px}.brand-mark{width:58px;height:58px;display:grid;place-items:center;background:var(--ink);color:white;border-radius:12px;font-size:22px;font-weight:800;letter-spacing:-1px}.eyebrow{font-size:11px;letter-spacing:1.8px;font-weight:700;margin:0 0 5px;color:var(--teal)}h1{font-size:28px;line-height:1.2;letter-spacing:-.7px;margin:0}h2{font-size:18px;margin:0;letter-spacing:-.3px}h3{font-size:15px;margin:0}.subtitle{margin:6px 0 0;color:var(--muted);font-size:14px}.offline{margin-left:auto;font-size:10px;letter-spacing:1.3px;font-weight:700;color:var(--muted);white-space:nowrap}.toolbar{display:flex;gap:16px;align-items:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;margin-bottom:26px}.file-actions{display:flex;gap:8px}.toolbar p{margin:0 auto 0 0;color:var(--muted);font-size:12px}.project-card,.input-card,.result-card,.schedule-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:24px}.section-title{display:flex;align-items:center;gap:10px;margin-bottom:20px}.section-title>.muted{margin-left:auto;font-size:12px}.step{font-variant-numeric:tabular-nums;font-size:11px;letter-spacing:1px;font-weight:700;background:var(--soft);color:var(--teal);padding:4px 7px;border-radius:4px}.muted{color:var(--muted)}.project-fields{display:grid;grid-template-columns:1.3fr 1fr 1fr .85fr;gap:18px}label{display:block;font-size:12px;font-weight:650;margin-bottom:16px}input,select{display:block;width:100%;border:1px solid #b8cbd0;background:#fff;color:var(--ink);border-radius:5px;padding:10px 11px;margin-top:7px;min-width:0;font-size:14px}input:invalid:not(:placeholder-shown){border-color:#b45448}input::placeholder{color:#758b94}input[type=number]{font-variant-numeric:tabular-nums}.project-fields label{margin-bottom:0}.workspace{display:grid;grid-template-columns:350px minmax(0,1fr);gap:22px;margin:22px 0}.inlet-actions{display:flex;gap:8px}.inlet-actions button{padding:7px 10px;font-size:12px}hr{border:0;border-top:1px solid var(--line);margin:22px 0}.two-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}.unit{float:right;color:var(--muted);font-weight:400}.hint{font-size:12px;color:var(--muted);line-height:1.6;margin:9px 0}.text-button{border:0;padding:0;background:transparent!important;color:var(--teal);font-size:12px;margin:1px 0 18px;text-decoration:underline;text-underline-offset:3px}.input-note{border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:12px;margin:0}.error{padding:12px;border-radius:5px;background:#fff0ed;color:var(--error);font-size:13px}.result-card{display:flex;flex-direction:column;padding:28px 30px}.result-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:26px}.result-top h2{font-size:25px;overflow-wrap:anywhere}.result-top .muted{font-size:13px;margin:5px 0 0}.type-badge{border:1px solid #b9d9d5;border-radius:5px;padding:5px 12px;font-weight:700;font-size:13px;color:var(--teal);background:#f0f9f7}.quantities{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding:24px 0;border-top:2px solid var(--ink);border-bottom:1px solid var(--line)}.quantity>span{font-size:13px;color:var(--muted)}.quantity p{margin:7px 0 0;display:flex;align-items:baseline;gap:10px}.quantity strong{font-size:42px;font-weight:650;letter-spacing:-1.5px;line-height:1.2;font-variant-numeric:tabular-nums}.quantity p>span{color:var(--muted);font-size:15px}.hardware{display:flex;gap:34px;margin:20px 0 30px}.hardware>div{display:flex;gap:14px;font-size:13px}.hardware span{color:var(--muted)}.hardware strong{font-weight:600}.basis-head{display:flex;align-items:baseline;gap:10px;justify-content:space-between;margin-bottom:10px}.basis-head>span{font-size:11px;color:var(--muted)}table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}th{text-align:right;color:var(--muted);font-size:11px;font-weight:600;padding:11px 12px;border-bottom:1px solid var(--line);white-space:nowrap}td{text-align:right;padding:13px 12px;border-bottom:1px solid var(--line)}th:first-child,td:first-child{text-align:left;padding-left:0}th:last-child,td:last-child{padding-right:0}.breakdown tr:last-child td{font-weight:700;background:#f1f7f6}.breakdown td:first-child{padding-left:8px}.breakdown td:last-child{padding-right:8px}.basis-note{margin-top:auto;padding-top:28px;font-size:11px;color:var(--muted)}.basis-note strong{font-size:12px;color:var(--ink)}.basis-note p{margin:5px 0 0}.table-scroll{overflow:auto}.schedule td{white-space:nowrap}.schedule td:first-child strong{display:block;font-size:13px}.schedule td:first-child span{display:block;color:var(--muted);font-size:11px}.schedule tfoot td{font-weight:700;border-bottom:0;padding-top:18px}.schedule tfoot td:first-child{color:var(--teal)}.schedule button{border:0;background:transparent;padding:0;color:var(--teal);text-align:left}.invalid-result{background:#fff3ee;border-radius:6px;padding:26px;margin:10px 0;color:var(--error)}.invalid-result p{font-size:13px;margin-bottom:0}.instructions{margin:22px 0;border:1px solid var(--line);border-radius:8px;background:#f7fafa}.instructions summary{cursor:pointer;padding:15px 20px;font-weight:600;font-size:13px}.instructions>div{padding:0 24px 16px;max-width:950px;font-size:13px;color:var(--muted)}.instructions li{padding:4px 0}footer{font-size:11px;color:var(--muted);padding:5px 0 30px;display:flex;justify-content:space-between;gap:20px}#report{display:none}[hidden]{display:none!important}@media(max-width:1050px){.app-shell{padding:0 24px}.workspace{grid-template-columns:310px minmax(0,1fr)}.result-card{padding:24px}.quantity strong{font-size:34px}.basis-head{display:block}.project-fields{grid-template-columns:1fr 1fr}.toolbar{flex-wrap:wrap}.toolbar p{order:3;width:100%}.toolbar>.primary{margin-left:auto}}@media(max-width:740px){.app-shell{padding:0 16px}.masthead{padding:24px 0;gap:12px}.brand-mark{width:43px;height:43px;flex-shrink:0;font-size:18px}h1{font-size:21px}.subtitle{font-size:12px}.offline{display:none}.toolbar{margin-bottom:20px;gap:10px}.toolbar button{font-size:12px;padding:9px 11px}.file-actions{gap:5px}.workspace{grid-template-columns:1fr;gap:18px;margin:18px 0}.project-card,.input-card,.result-card,.schedule-card{padding:20px}.section-title>.muted{display:none}.project-fields{gap:15px}.quantity strong{font-size:34px}.quantities{gap:12px}.basis-head>span{display:block;margin-top:4px}.hardware{gap:25px}.result-top h2{font-size:23px}footer{display:block}footer span{display:block;margin-top:5px}}@media print{@page{size:auto;margin:15mm}body{background:white;color:#000;font-size:10pt;line-height:1.4}.app-shell{display:none}#report{display:block}#report h1{font-size:22pt;line-height:1.2;margin:4pt 0 12pt}#report h2{break-after:avoid;font-size:13pt;margin:18pt 0 8pt}#report h3{font-size:11pt;margin:8pt 0}#report p{margin:5pt 0}#report .report-kicker{font-size:9pt;letter-spacing:1pt;font-weight:700;color:#315c63}#report .report-meta{overflow-wrap:anywhere;display:grid;grid-template-columns:1fr 1fr;border-top:2pt solid #18333e;border-bottom:1pt solid #b7c5c9;padding:9pt 0;gap:5pt 20pt}#report table{font-size:9pt;width:100%;margin:8pt 0}#report th{font-size:8pt;color:#222;white-space:normal}#report td,#report th{padding:6pt 4pt;border-bottom:.5pt solid #b7c5c9}#report th:first-child,#report td:first-child{padding-left:0}#report td:first-child>strong,#report td:first-child>span{display:block;overflow-wrap:anywhere}#report tfoot{font-weight:bold}#report thead{display:table-header-group}#report tr{break-inside:avoid}#report .report-inlet{break-inside:avoid;border-top:1pt solid #8aa1a8;padding-top:10pt;margin-top:15pt}#report .report-inlet h2{margin:0 0 7pt}#report .report-footnote{font-size:8pt;color:#333;margin-top:14pt}#report .report-details{overflow-wrap:anywhere;display:grid;grid-template-columns:1fr 1fr;gap:4pt 16pt}#report .report-notes{border-top:1pt solid #b7c5c9;padding-top:9pt;margin-top:15pt;font-size:8pt}#report .report-total td{font-weight:bold;border-top:1pt solid #18333e}}
+</style>
+</head>
+<body>
+<div class="app-shell">
+<header class="masthead"><div class="brand-mark" aria-hidden="true">SS</div><div><p class="eyebrow">ROADWAY DESIGN UTILITIES</p><h1>Storm sewer inlet quantities</h1><p class="subtitle">SS-3 &amp; SS-4 · Concrete, reinforcement, grate and frame</p></div><span class="offline">OFFLINE / PORTABLE</span></header>
+<nav class="toolbar" aria-label="Project actions"><div class="file-actions"><button id="open-project">Open project</button><button id="save-project">Save project</button><input id="open-file" type="file" accept=".json,application/json" hidden></div><p id="file-status" role="status">New project · save a file to keep your work</p><button id="print-report" class="primary">Print / Save PDF</button></nav>
+<main>
+<section class="project-card" aria-labelledby="project-heading"><div class="section-title"><span class="step">01</span><h2 id="project-heading">Project information</h2><span class="muted">Included in every report</span></div><div class="project-fields"><label>Project number<input id="project-number" maxlength="160" placeholder="Enter project number" autocomplete="off"></label><label>County<input id="county" maxlength="160" placeholder="Enter county" autocomplete="off"></label><label>Prepared by<input id="prepared-by" maxlength="160" placeholder="Name or initials" autocomplete="off"></label><label>Report date<input id="report-date" type="date"></label></div></section>
+<div class="workspace">
+<section class="input-card" aria-labelledby="inlet-heading"><div class="section-title"><span class="step">02</span><h2 id="inlet-heading">Inlet inputs</h2></div><label>Current inlet<select id="inlet-select"></select></label><div class="inlet-actions"><button id="add-inlet">+ Add inlet</button><button id="remove-inlet" class="quiet">Remove inlet</button></div><hr><div class="two-fields"><label>Inlet ID<input id="inlet-id" maxlength="80"></label><label>Station<input id="station" maxlength="80" placeholder="e.g. 125+00"></label></div><label>Standard inlet<select id="inlet-type"><option>SS-3</option><option>SS-4</option></select></label><label>Pipe size<select id="pipe-size"></select></label><label>Inlet height H <span class="unit">ft</span><input id="height" type="number" step="any" required aria-describedby="height-hint"></label><p class="hint" id="height-hint"></p><button id="use-minimum" class="text-button">Use listed minimum height</button><p class="input-note">Quantities include the legacy deduction for <strong>one pipe opening</strong>. Pipe size and height are the original calculation inputs.</p><p id="input-error" class="error" role="alert" hidden></p></section>
+<section class="result-card" aria-labelledby="results-heading"><div class="result-top"><div><p class="eyebrow">CURRENT INLET / QUANTITY SHEET</p><h2 id="results-heading"></h2><p class="muted" id="result-context"></p></div><span id="type-badge" class="type-badge"></span></div><div id="result-content"><div class="quantities"><div class="quantity"><span>Concrete</span><p><strong id="concrete">—</strong><span>yd³</span></p></div><div class="quantity"><span>Reinforcing steel</span><p><strong id="steel">—</strong><span>lb</span></p></div></div><div class="hardware"><div><span>Grate</span><strong id="grate">—</strong></div><div><span>Frame</span><strong id="frame">—</strong></div></div><div class="basis-head"><h3>Calculation breakdown</h3><span>Unrounded values used internally</span></div><div class="table-scroll"><table class="breakdown"><thead><tr><th scope="col">Component</th><th scope="col">Concrete (yd³)</th><th scope="col">Steel (lb)</th></tr></thead><tbody id="breakdown-rows"></tbody></table></div><p class="hint" id="calculation-note"></p></div><div id="invalid-result" class="invalid-result" hidden><h3>Check the inlet inputs</h3><p>Correct the highlighted issue to calculate quantities and produce a report.</p></div><div class="basis-note"><strong>Legacy calculation basis</strong><p>SS-3 executable v3.0 · October 10, 2011. Original quantity tables and height additions are preserved. This is a quantity estimate; it does not check structural adequacy or certify current standard-drawing compliance.</p></div></section>
+</div>
+<section class="schedule-card" aria-labelledby="schedule-heading"><div class="section-title"><span class="step">03</span><h2 id="schedule-heading">Project schedule</h2><span class="muted" id="inlet-count"></span></div><div class="table-scroll"><table class="schedule"><thead><tr><th>Inlet / station</th><th>Type</th><th>Pipe</th><th>Height (ft)</th><th>Concrete (yd³)</th><th>Steel (lb)</th><th>Grate (lb)</th><th>Frame (lb)</th></tr></thead><tbody id="schedule-rows"></tbody><tfoot id="schedule-total"></tfoot></table></div><p class="hint" id="project-error" role="status"></p></section>
+<details class="instructions"><summary>Using this portable app</summary><div><p>Open the single SS-3.html file in a current browser on Mac or Windows. No installation, server or internet connection is needed.</p><ol><li>Enter project information, then select an inlet type and pipe size. The height starts at the original listed minimum; enter the actual height in decimal feet.</li><li>Add inlets to build the project schedule. Select an inlet to edit it. Changes update the quantities immediately.</li><li><strong>Save project</strong> downloads your inputs as a JSON file. Keep that file and use <strong>Open project</strong> to resume. Save again after editing; closing this page does not save your changes.</li><li><strong>Print / Save PDF</strong> creates a complete project report. Choose your browser’s Save as PDF destination for a PDF copy. Reports contain quantities, inputs and each inlet’s calculation breakdown.</li></ol><p>Heights below the original listed minimum are blocked as a modern input safeguard. SS-4 reinforcement remains 31 lb at every accepted height, as in the original. The original SS-4 report does not list grate or frame weights; a dash means not reported, not zero.</p></div></details>
+<footer>SS-3 / SS-4 · Reconstructed legacy quantity calculator <span>All project data stays on your computer.</span></footer>
+</main></div>
+<section id="report" aria-label="Printable project report"></section>
+<script>'use strict';
+const SS3 = (() => {
+  const f = Math.fround;
+  // Preserve the decimal constants and float32 stores in this exact legacy build.
+  const rows3 = [
+    ['18 in. round',3.5,.869,76], ['24 in. round',4.084,1.117,87],
+    ['30 in. round',4.667,1.385,94], ['36 in. round',5.25,1.671,105],
+    ['42 in. round',5.834,1.978,116], ['48 in. round',6.417,2.305,123],
+    ['54 in. round',7,2.65,135], ['60 in. round',7.583,3.016,146],
+    ['66 in. round',8.167,3.402,153], ['72 in. round',8.75,3.806,164],
+    ['22 × 13 in. arch',3.125,.855,76], ['29 × 19 in. arch',3.583,1.085,83],
+    ['36 × 23 in. arch',4.042,1.358,94], ['44 × 27 in. arch',4.468,1.631,101],
+    ['51 × 31 in. arch',4.943,1.942,113], ['58 × 36 in. arch',5.417,2.269,120],
+    ['65 × 40 in. arch',5.833,2.575,130], ['73 × 45 in. arch',6.333,2.966,139],
+    ['88 × 54 in. arch',7.25,3.765,156]
+  ];
+  const rows4 = [['15 in. round',3.125,.64,31], ['18 in. round',3.4167,.67,31],
+    ['24 in. round',4,.74,31], ['22 × 13 in. arch',3,.62,31]];
+  function pipes(type) {
+    if (type !== 'SS-3' && type !== 'SS-4') throw new Error('Choose SS-3 or SS-4.');
+    return (type === 'SS-3' ? rows3 : rows4).map(([label,minHeight,baseConcrete,baseSteel],i) =>
+      ({id:i+1,label,minHeight,baseConcrete,baseSteel}));
+  }
+  function calculate(input) {
+    if (!input || typeof input !== 'object') throw new Error('Inlet inputs are required.');
+    const pipe = pipes(input.type).find(p => p.id === input.pipeId);
+    if (!pipe) throw new Error('Choose a supported pipe size.');
+    if (!['number','string'].includes(typeof input.height) || String(input.height).trim() === '')
+      throw new Error('Enter the inlet height in decimal feet.');
+    const height = f(Number(input.height));
+    if (!Number.isFinite(height) || height <= 0) throw new Error('Height must be a finite positive number.');
+    // Modern input safeguard: the original accepts heights below its baseline without reducing quantities.
+    if (height < f(pipe.minHeight)) throw new Error(`Height must be at least ${pipe.minHeight} ft for this pipe.`);
+    const extraHeight = f(height - f(pipe.minHeight));
+    const extraConcrete = f(extraHeight * (input.type === 'SS-3' ? .184 : .185));
+    const extraSteel = input.type === 'SS-3' ? f(extraHeight * 17) : 0;
+    const result = {type:input.type,pipeId:pipe.id,pipeLabel:pipe.label,height,minHeight:pipe.minHeight,
+      baseConcrete:f(pipe.baseConcrete),baseSteel:f(pipe.baseSteel),extraHeight,extraConcrete,extraSteel,
+      concrete:f(f(pipe.baseConcrete)+extraConcrete),steel:f(f(pipe.baseSteel)+extraSteel),
+      grate:input.type === 'SS-3' ? 200 : 0,frame:input.type === 'SS-3' ? 244 : 0};
+    if (!Object.values(result).every(v => typeof v !== 'number' || Number.isFinite(v)))
+      throw new Error('Height exceeds the supported numerical range.');
+    return result;
+  }
+  // Project totals are a new report convenience; sum unrounded per-inlet results.
+  function totals(results) {
+    return results.reduce((t,r) => ({count:t.count+1,concrete:t.concrete+r.concrete,
+      steel:t.steel+r.steel,grate:t.grate+r.grate,frame:t.frame+r.frame}),
+    {count:0,concrete:0,steel:0,grate:0,frame:0});
+  }
+  return Object.freeze({pipes,calculate,totals});
+})();
+if (typeof module !== 'undefined' && module.exports) module.exports = SS3;
+</script>
+<script>'use strict';
+(() => {
+  const $ = id => document.getElementById(id);
+  const f = (value, digits = 3) => value.toLocaleString('en-US', { minimumFractionDigits: digits, maximumFractionDigits: digits });
+  const html = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const weight = value => value === null || value === undefined ? '—' : `${f(value)} lb`;
+  const minText = value => String(Number(value.toFixed(4)));
+  const newInlet = number => ({ id: String(number), station: '', type: 'SS-3', pipeId: 1, height: minText(SS3.pipes('SS-3')[0].minHeight) });
+  const now = new Date();
+  const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+  let project = { schema: 'ss3-project-v1', projectNumber: '', county: '', preparedBy: '', date, inlets: [newInlet(1)] };
+  let selected = 0;
+  let dirty = false;
+  let results = [];
+
+  function inletLabel(inlet, index) { return `Inlet ${inlet.id || index + 1}${inlet.station ? ` · ${inlet.station}` : ''}`; }
+  function fillPipes() {
+    const inlet = project.inlets[selected];
+    $('pipe-size').replaceChildren(...SS3.pipes(inlet.type).map(pipe => new Option(pipe.label, pipe.id, false, pipe.id === inlet.pipeId)));
+  }
+  function loadForm() {
+    const inlet = project.inlets[selected];
+    $('project-number').value = project.projectNumber;
+    $('county').value = project.county;
+    $('prepared-by').value = project.preparedBy;
+    $('report-date').value = project.date;
+    $('inlet-id').value = inlet.id;
+    $('station').value = inlet.station;
+    $('inlet-type').value = inlet.type;
+    fillPipes();
+    $('height').value = inlet.height;
+    render();
+  }
+  function markDirty() {
+    dirty = true;
+    $('file-status').textContent = 'Unsaved changes · save project to keep your work';
+  }
+  function readForm() {
+    Object.assign(project, { projectNumber: $('project-number').value, county: $('county').value, preparedBy: $('prepared-by').value, date: $('report-date').value });
+    Object.assign(project.inlets[selected], { id: $('inlet-id').value, station: $('station').value, type: $('inlet-type').value, pipeId: Number($('pipe-size').value), height: $('height').value });
+    markDirty();
+  }
+  function calculateAll() {
+    return project.inlets.map(inlet => {
+      try { return { value: SS3.calculate(inlet) }; }
+      catch (error) { return { error: error.message }; }
+    });
+  }
+  function breakdown(result) {
+    return `<tr><td>At listed minimum (${html(minText(result.minHeight))} ft)</td><td>${f(result.baseConcrete)}</td><td>${f(result.baseSteel)}</td></tr><tr><td>Additional height (${f(result.extraHeight, 4)} ft)</td><td>${f(result.extraConcrete)}</td><td>${f(result.extraSteel)}</td></tr><tr><td>Inlet quantity</td><td>${f(result.concrete)}</td><td>${f(result.steel)}</td></tr>`;
+  }
+  function tableRow(inlet, result, index, interactive = false) {
+    const label = `<strong>${html(inlet.id || index + 1)}</strong><span>${html(inlet.station || 'Station not entered')}</span>`;
+    return `<tr><td>${interactive ? `<button data-inlet="${index}" aria-label="Edit inlet ${html(inlet.id || index + 1)}">${label}</button>` : label}</td><td>${html(inlet.type)}</td><td>${html(result?.pipeLabel || SS3.pipes(inlet.type).find(p => p.id === inlet.pipeId)?.label || 'Invalid pipe')}</td><td>${result ? html(inlet.height) : 'Check input'}</td><td>${result ? f(result.concrete) : '—'}</td><td>${result ? f(result.steel) : '—'}</td><td>${!result || result.type === 'SS-4' ? '—' : f(result.grate)}</td><td>${!result || result.type === 'SS-4' ? '—' : f(result.frame)}</td></tr>`;
+  }
+  function totalRow(total) {
+    return `<tr class="report-total"><td colspan="4">Project total · ${project.inlets.length} inlet${project.inlets.length === 1 ? '' : 's'}</td><td>${f(total.concrete)}</td><td>${f(total.steel)}</td><td>${f(total.grate)}</td><td>${f(total.frame)}</td></tr>`;
+  }
+  function calculationNote(result) {
+    return result.type === 'SS-3' ? 'Additional height uses 0.184 yd³/ft of concrete and 17 lb/ft of reinforcement. Grate and frame weights are fixed at 200 lb and 244 lb per SS-3 inlet.' : 'Additional height increases concrete by 0.185 yd³/ft only. Reinforcement stays at 31 lb in the original SS-4 calculation. Grate and frame weights are not reported for SS-4.';
+  }
+  function buildReport(total, valid) {
+    if (!valid) {
+      $('report').innerHTML = '<h1>Report unavailable</h1><p>Correct all inlet inputs before printing this project.</p>';
+      return;
+    }
+    const metadata = [['Project', project.projectNumber], ['County', project.county], ['Prepared by', project.preparedBy], ['Report date', project.date]];
+    $('report').innerHTML = `<p class="report-kicker">ROADWAY DESIGN UTILITIES · SS-3 / SS-4</p><h1>Storm sewer inlet quantities</h1><div class="report-meta">${metadata.map(([key, value]) => `<div><strong>${key}:</strong> ${html(value || 'Not entered')}</div>`).join('')}</div><h2>Project quantity schedule</h2><table><thead><tr><th>Inlet / station</th><th>Type</th><th>Pipe</th><th>Height (ft)</th><th>Concrete (yd³)</th><th>Steel (lb)</th><th>Grate (lb)</th><th>Frame (lb)</th></tr></thead><tbody>${project.inlets.map((inlet, i) => tableRow(inlet, results[i].value, i)).join('')}</tbody><tfoot>${totalRow(total)}</tfoot></table><p class="report-footnote">One pipe-opening deduction per inlet is included. SS-4 grate and frame weights are not reported; project grate/frame totals include SS-3 inlets only. Totals use unrounded inlet quantities; displayed values are rounded to three decimals.</p><h2>Inlet calculation details</h2>${project.inlets.map((inlet, i) => {
+      const result = results[i].value;
+      return `<section class="report-inlet"><h2>Inlet ${html(inlet.id || i + 1)} · ${html(result.type)}</h2><div class="report-details"><div><strong>Station:</strong> ${html(inlet.station || 'Not entered')}</div><div><strong>Pipe:</strong> ${html(result.pipeLabel)}</div><div><strong>Entered height:</strong> ${html(inlet.height)} ft</div><div><strong>Listed minimum:</strong> ${html(minText(result.minHeight))} ft</div><div><strong>Grate:</strong> ${result.type === 'SS-4' ? '—' : weight(result.grate)}</div><div><strong>Frame:</strong> ${result.type === 'SS-4' ? '—' : weight(result.frame)}</div></div><table><thead><tr><th>Component</th><th>Concrete (yd³)</th><th>Reinforcing steel (lb)</th></tr></thead><tbody>${breakdown(result)}</tbody></table><p>${calculationNote(result)}</p></section>`;
+    }).join('')}<div class="report-notes"><strong>Calculation basis and limits</strong><p>Reconstructed from the supplied SS-3 executable, version 3.0, October 10, 2011. Original quantity tables, one-opening deductions, float32 calculation stores and height additions are retained. Heights below the listed minimum are blocked as a modern input safeguard.</p><p>This report is a quantity estimate. It does not check structural adequacy, pipe-opening conflicts or compliance with a current standard-drawing edition. Confirm applicability to the project before use.</p></div>`;
+  }
+  function render() {
+    const inlet = project.inlets[selected];
+    results = calculateAll();
+    const current = results[selected];
+    const valid = results.every(result => result.value);
+    $('inlet-select').replaceChildren(...project.inlets.map((item, i) => new Option(inletLabel(item, i), i, false, i === selected)));
+    $('remove-inlet').disabled = project.inlets.length === 1;
+    $('add-inlet').disabled = project.inlets.length >= 200;
+    $('results-heading').textContent = `Inlet ${inlet.id || selected + 1}`;
+    $('result-context').textContent = `${inlet.station ? `Station ${inlet.station}` : 'Station not entered'} · ${SS3.pipes(inlet.type).find(pipe => pipe.id === inlet.pipeId)?.label || 'Select a pipe'}`;
+    $('type-badge').textContent = inlet.type;
+    const minimum = SS3.pipes(inlet.type).find(pipe => pipe.id === inlet.pipeId)?.minHeight;
+    $('height-hint').textContent = minimum == null ? 'Select a pipe size.' : `Original listed minimum: ${minText(minimum)} ft. Higher inlets use the original height additions.`;
+    $('height').min = minimum == null ? '0' : minText(minimum);
+    $('height').setAttribute('aria-invalid', current.error ? 'true' : 'false');
+    $('input-error').hidden = !current.error;
+    $('input-error').textContent = current.error || '';
+    $('result-content').hidden = !current.value;
+    $('invalid-result').hidden = !!current.value;
+    if (current.value) {
+      const result = current.value;
+      $('concrete').textContent = f(result.concrete);
+      $('steel').textContent = f(result.steel);
+      $('grate').textContent = result.type === 'SS-4' ? '—' : weight(result.grate);
+      $('frame').textContent = result.type === 'SS-4' ? '—' : weight(result.frame);
+      $('breakdown-rows').innerHTML = breakdown(result);
+      $('calculation-note').textContent = calculationNote(result);
+    }
+    $('inlet-count').textContent = `${project.inlets.length} inlet${project.inlets.length === 1 ? '' : 's'}`;
+    $('schedule-rows').innerHTML = project.inlets.map((item, i) => tableRow(item, results[i].value, i, true)).join('');
+    const total = valid ? SS3.totals(results.map(result => result.value)) : null;
+    $('schedule-total').innerHTML = total ? totalRow(total) : '';
+    $('project-error').textContent = valid ? 'Totals use unrounded quantities. Grate and frame totals include SS-3 inlets only; a dash means not reported for SS-4.' : results.map((result, i) => result.error ? `${inletLabel(project.inlets[i], i)}: ${result.error}` : '').filter(Boolean).join(' ');
+    $('save-project').disabled = !valid;
+    $('print-report').disabled = !valid;
+    buildReport(total, valid);
+  }
+  function resetHeight() {
+    const inlet = project.inlets[selected];
+    const minimum = SS3.pipes(inlet.type).find(pipe => pipe.id === inlet.pipeId).minHeight;
+    inlet.height = minText(minimum);
+    $('height').value = inlet.height;
+  }
+  for (const id of ['project-number', 'county', 'prepared-by', 'report-date', 'inlet-id', 'station', 'height']) {
+    $(id).addEventListener('input', () => { readForm(); render(); });
+  }
+  $('inlet-type').addEventListener('change', () => {
+    readForm();
+    project.inlets[selected].pipeId = 1;
+    fillPipes(); resetHeight(); render();
+  });
+  $('pipe-size').addEventListener('change', () => { readForm(); resetHeight(); render(); });
+  $('use-minimum').addEventListener('click', () => { resetHeight(); markDirty(); render(); });
+  $('inlet-select').addEventListener('change', () => { selected = Number($('inlet-select').value); loadForm(); });
+  $('schedule-rows').addEventListener('click', event => {
+    const button = event.target.closest('button[data-inlet]');
+    if (!button) return;
+    selected = Number(button.dataset.inlet); loadForm(); $('inlet-id').focus();
+  });
+  $('add-inlet').addEventListener('click', () => {
+    if (project.inlets.length >= 200) return;
+    const used = new Set(project.inlets.map(inlet => inlet.id));
+    let number = 1;
+    while (used.has(String(number))) number++;
+    project.inlets.push(newInlet(number)); selected = project.inlets.length - 1; markDirty(); loadForm(); $('inlet-id').focus();
+  });
+  $('remove-inlet').addEventListener('click', () => {
+    if (project.inlets.length < 2 || !confirm(`Remove ${inletLabel(project.inlets[selected], selected)} from this project?`)) return;
+    project.inlets.splice(selected, 1); selected = Math.min(selected, project.inlets.length - 1); markDirty(); loadForm();
+  });
+  $('save-project').addEventListener('click', () => {
+    if (results.some(result => result.error)) return;
+    const blob = new Blob([JSON.stringify(project, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a'); link.href = url;
+    link.download = `SS-3-${(project.projectNumber || 'project').replace(/[^a-z0-9_-]/gi, '_')}.json`;
+    document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 10000);
+    dirty = false; $('file-status').textContent = 'Project file downloaded · save again after editing';
+  });
+  function validateProject(input) {
+    if (!input || input.schema !== 'ss3-project-v1' || !Array.isArray(input.inlets) || input.inlets.length < 1 || input.inlets.length > 200) throw Error('Choose an SS-3 project JSON file containing 1–200 inlets.');
+    const text = (value, label, max = 160) => {
+      if (typeof value !== 'string' || value.length > max) throw Error(`${label} must be text of at most ${max} characters.`);
+      return value;
+    };
+    const reportDate = text(input.date, 'Report date', 10);
+    if (reportDate && (!/^\d{4}-\d{2}-\d{2}$/.test(reportDate) || !Number.isFinite(Date.parse(reportDate)) || new Date(reportDate).toISOString().slice(0, 10) !== reportDate)) throw Error('Report date must be a valid YYYY-MM-DD date.');
+    const inlets = input.inlets.map((inlet, i) => {
+      if (!inlet || typeof inlet !== 'object' || (inlet.type !== 'SS-3' && inlet.type !== 'SS-4') || !Number.isInteger(inlet.pipeId) || !['number', 'string'].includes(typeof inlet.height)) throw Error(`Inlet ${i + 1} has invalid calculation inputs.`);
+      if (String(inlet.height).length > 80) throw Error(`Inlet ${i + 1} height is too long.`);
+      const clean = { id: text(inlet.id, `Inlet ${i + 1} ID`, 80), station: text(inlet.station, `Inlet ${i + 1} station`, 80), type: inlet.type, pipeId: inlet.pipeId, height: inlet.height };
+      SS3.calculate(clean);
+      return clean;
+    });
+    return { schema: 'ss3-project-v1', projectNumber: text(input.projectNumber, 'Project number'), county: text(input.county, 'County'), preparedBy: text(input.preparedBy, 'Prepared by'), date: reportDate, inlets };
+  }
+  $('open-project').addEventListener('click', () => $('open-file').click());
+  $('open-file').addEventListener('change', async () => {
+    const file = $('open-file').files[0];
+    if (!file) return;
+    try {
+      if (file.size > 1024 * 1024) throw Error('Project file is too large (maximum 1 MB).');
+      const loaded = validateProject(JSON.parse(await file.text()));
+      if (dirty && !confirm('Replace the unsaved project with this file? Save your current project first if you need to keep it.')) return;
+      project = loaded; selected = 0; dirty = false; loadForm();
+      $('file-status').textContent = `Opened ${file.name} · inputs restored`;
+    } catch (error) { alert(`Could not open project. ${error.message}`); }
+    finally { $('open-file').value = ''; }
+  });
+  $('print-report').addEventListener('click', () => { if (results.every(result => result.value)) window.print(); });
+  window.addEventListener('beforeprint', () => render());
+  window.addEventListener('beforeunload', event => { if (dirty) { event.preventDefault(); event.returnValue = ''; } });
+  loadForm();
+})();
+</script>
+</body>
+</html>

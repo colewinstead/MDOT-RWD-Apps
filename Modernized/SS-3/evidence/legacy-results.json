@@ -1,0 +1,1577 @@
+{
+  "cases": [
+    {
+      "type": "SS-3",
+      "choice": 1,
+      "height": 3.5,
+      "observed": {
+        "values": {
+          "minimum": 3.5,
+          "concrete": 0.869,
+          "steel": 76,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 3.5,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "00006040",
+          "concrete": "c9765e3f",
+          "steel": "00009842",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "00006040",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "3.5"
+    },
+    {
+      "type": "SS-3",
+      "choice": 1,
+      "height": 4.7345,
+      "observed": {
+        "values": {
+          "minimum": 3.5,
+          "concrete": 1.096148,
+          "steel": 96.986496,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 4.7345,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "00006040",
+          "concrete": "944e8c3f",
+          "steel": "16f9c142",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "06819740",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "4.7345"
+    },
+    {
+      "type": "SS-3",
+      "choice": 2,
+      "height": 4.084,
+      "observed": {
+        "values": {
+          "minimum": 4.084,
+          "concrete": 1.117,
+          "steel": 87,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 4.084,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "21b08240",
+          "concrete": "dbf98e3f",
+          "steel": "0000ae42",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "21b08240",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "4.084"
+    },
+    {
+      "type": "SS-3",
+      "choice": 2,
+      "height": 5.318499999999999,
+      "observed": {
+        "values": {
+          "minimum": 4.084,
+          "concrete": 1.34414792,
+          "steel": 107.986496,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 5.3185,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "21b08240",
+          "concrete": "0a0dac3f",
+          "steel": "16f9d742",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "2731aa40",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "5.318499999999999"
+    },
+    {
+      "type": "SS-3",
+      "choice": 3,
+      "height": 4.667,
+      "observed": {
+        "values": {
+          "minimum": 4.667,
+          "concrete": 1.385,
+          "steel": 94,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 4.667,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "10589540",
+          "concrete": "ae47b13f",
+          "steel": "0000bc42",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "10589540",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "4.667"
+    },
+    {
+      "type": "SS-3",
+      "choice": 3,
+      "height": 5.9015,
+      "observed": {
+        "values": {
+          "minimum": 4.667,
+          "concrete": 1.612148,
+          "steel": 114.986511,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 5.9015,
+          "delta": 1.23450041,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "10589540",
+          "concrete": "de5ace3f",
+          "steel": "18f9e542",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "17d9bc40",
+          "delta": "1c049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "captureRetry": 1,
+      "typedHeight": "5.9015"
+    },
+    {
+      "type": "SS-3",
+      "choice": 4,
+      "height": 5.25,
+      "observed": {
+        "values": {
+          "minimum": 5.25,
+          "concrete": 1.671,
+          "steel": 105,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 5.25,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "0000a840",
+          "concrete": "54e3d53f",
+          "steel": "0000d242",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "0000a840",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "5.25"
+    },
+    {
+      "type": "SS-3",
+      "choice": 4,
+      "height": 6.4845,
+      "observed": {
+        "values": {
+          "minimum": 5.25,
+          "concrete": 1.898148,
+          "steel": 125.986496,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 6.4845,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "0000a840",
+          "concrete": "83f6f23f",
+          "steel": "16f9fb42",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "0681cf40",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "6.4845"
+    },
+    {
+      "type": "SS-3",
+      "choice": 5,
+      "height": 5.834,
+      "observed": {
+        "values": {
+          "minimum": 5.834,
+          "concrete": 1.978,
+          "steel": 116,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 5.834,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "21b0ba40",
+          "concrete": "1b2ffd3f",
+          "steel": "0000e842",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "21b0ba40",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "5.834"
+    },
+    {
+      "type": "SS-3",
+      "choice": 5,
+      "height": 7.068499999999999,
+      "observed": {
+        "values": {
+          "minimum": 5.834,
+          "concrete": 2.205148,
+          "steel": 136.9865,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 7.0685,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "21b0ba40",
+          "concrete": "25210d40",
+          "steel": "8bfc0843",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "2731e240",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "7.068499999999999"
+    },
+    {
+      "type": "SS-3",
+      "choice": 6,
+      "height": 6.417,
+      "observed": {
+        "values": {
+          "minimum": 6.417,
+          "concrete": 2.305,
+          "steel": 123,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 6.417,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "1058cd40",
+          "concrete": "1f851340",
+          "steel": "0000f642",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "1058cd40",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "6.417"
+    },
+    {
+      "type": "SS-3",
+      "choice": 6,
+      "height": 7.6515,
+      "observed": {
+        "values": {
+          "minimum": 6.417,
+          "concrete": 2.53214812,
+          "steel": 143.986511,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 7.6515,
+          "delta": 1.23450041,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "1058cd40",
+          "concrete": "b70e2240",
+          "steel": "8cfc0f43",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "17d9f440",
+          "delta": "1c049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "captureRetry": 2,
+      "typedHeight": "7.6515"
+    },
+    {
+      "type": "SS-3",
+      "choice": 7,
+      "height": 7.0,
+      "observed": {
+        "values": {
+          "minimum": 7,
+          "concrete": 2.65,
+          "steel": 135,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 7,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "0000e040",
+          "concrete": "9a992940",
+          "steel": "00000743",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "0000e040",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "captureRetry": 1,
+      "typedHeight": "7.0"
+    },
+    {
+      "type": "SS-3",
+      "choice": 7,
+      "height": 8.2345,
+      "observed": {
+        "values": {
+          "minimum": 7,
+          "concrete": 2.87714815,
+          "steel": 155.9865,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 8.2345,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "0000e040",
+          "concrete": "32233840",
+          "steel": "8bfc1b43",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "83c00341",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "8.2345"
+    },
+    {
+      "type": "SS-3",
+      "choice": 8,
+      "height": 7.583,
+      "observed": {
+        "values": {
+          "minimum": 7.583,
+          "concrete": 3.016,
+          "steel": 146,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 7.583,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "f0a7f240",
+          "concrete": "25064140",
+          "steel": "00001243",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "f0a7f240",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "7.583"
+    },
+    {
+      "type": "SS-3",
+      "choice": 8,
+      "height": 8.8175,
+      "observed": {
+        "values": {
+          "minimum": 7.583,
+          "concrete": 3.243148,
+          "steel": 166.9865,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 8.8175,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "f0a7f240",
+          "concrete": "bd8f4f40",
+          "steel": "8bfc2643",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "7b140d41",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "8.8175"
+    },
+    {
+      "type": "SS-3",
+      "choice": 9,
+      "height": 8.167,
+      "observed": {
+        "values": {
+          "minimum": 8.167,
+          "concrete": 3.402,
+          "steel": 153,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 8.167,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "08ac0241",
+          "concrete": "5eba5940",
+          "steel": "00001943",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "08ac0241",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "8.167"
+    },
+    {
+      "type": "SS-3",
+      "choice": 9,
+      "height": 9.4015,
+      "observed": {
+        "values": {
+          "minimum": 8.167,
+          "concrete": 3.629148,
+          "steel": 173.9865,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 9.4015,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "08ac0241",
+          "concrete": "f6436840",
+          "steel": "8bfc2d43",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "8b6c1641",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "9.4015"
+    },
+    {
+      "type": "SS-3",
+      "choice": 10,
+      "height": 8.75,
+      "observed": {
+        "values": {
+          "minimum": 8.75,
+          "concrete": 3.806,
+          "steel": 164,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 8.75,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "00000c41",
+          "concrete": "81957340",
+          "steel": "00002443",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "00000c41",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "8.75"
+    },
+    {
+      "type": "SS-3",
+      "choice": 10,
+      "height": 9.9845,
+      "observed": {
+        "values": {
+          "minimum": 8.75,
+          "concrete": 4.033148,
+          "steel": 184.9865,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 9.9845,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "00000c41",
+          "concrete": "8c0f8140",
+          "steel": "8bfc3843",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "83c01f41",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "captureRetry": 1,
+      "typedHeight": "9.9845"
+    },
+    {
+      "type": "SS-3",
+      "choice": 11,
+      "height": 3.125,
+      "observed": {
+        "values": {
+          "minimum": 3.125,
+          "concrete": 0.855,
+          "steel": 76,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 3.125,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "00004840",
+          "concrete": "48e15a3f",
+          "steel": "00009842",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "00004840",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "3.125"
+    },
+    {
+      "type": "SS-3",
+      "choice": 11,
+      "height": 4.3595,
+      "observed": {
+        "values": {
+          "minimum": 3.125,
+          "concrete": 1.082148,
+          "steel": 96.986496,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 4.3595,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "00004840",
+          "concrete": "d3838a3f",
+          "steel": "16f9c142",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "06818b40",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "4.3595"
+    },
+    {
+      "type": "SS-3",
+      "choice": 12,
+      "height": 3.583,
+      "observed": {
+        "values": {
+          "minimum": 3.583,
+          "concrete": 1.085,
+          "steel": 83,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 3.583,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "df4f6540",
+          "concrete": "48e18a3f",
+          "steel": "0000a642",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "df4f6540",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "3.583"
+    },
+    {
+      "type": "SS-3",
+      "choice": 12,
+      "height": 4.8175,
+      "observed": {
+        "values": {
+          "minimum": 3.583,
+          "concrete": 1.31214809,
+          "steel": 103.9865,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 4.8175,
+          "delta": 1.23450017,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "df4f6540",
+          "concrete": "78f4a73f",
+          "steel": "17f9cf42",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "f6289a40",
+          "delta": "1a049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "4.8175"
+    },
+    {
+      "type": "SS-3",
+      "choice": 13,
+      "height": 4.042,
+      "observed": {
+        "values": {
+          "minimum": 4.042,
+          "concrete": 1.358,
+          "steel": 94,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 4.042,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "10588140",
+          "concrete": "f2d2ad3f",
+          "steel": "0000bc42",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "10588140",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "4.042"
+    },
+    {
+      "type": "SS-3",
+      "choice": 13,
+      "height": 5.2765,
+      "observed": {
+        "values": {
+          "minimum": 4.042,
+          "concrete": 1.5851481,
+          "steel": 114.986511,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 5.2765,
+          "delta": 1.23450041,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "10588140",
+          "concrete": "22e6ca3f",
+          "steel": "18f9e542",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "17d9a840",
+          "delta": "1c049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "captureRetry": 1,
+      "typedHeight": "5.2765"
+    },
+    {
+      "type": "SS-3",
+      "choice": 14,
+      "height": 4.468,
+      "observed": {
+        "values": {
+          "minimum": 4.468,
+          "concrete": 1.631,
+          "steel": 101,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 4.468,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "dbf98e40",
+          "concrete": "9cc4d03f",
+          "steel": "0000ca42",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "dbf98e40",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "captureRetry": 1,
+      "typedHeight": "4.468"
+    },
+    {
+      "type": "SS-3",
+      "choice": 14,
+      "height": 5.7025,
+      "observed": {
+        "values": {
+          "minimum": 4.468,
+          "concrete": 1.858148,
+          "steel": 121.986496,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 5.7025,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "dbf98e40",
+          "concrete": "cbd7ed3f",
+          "steel": "16f9f342",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "e17ab640",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "5.7025"
+    },
+    {
+      "type": "SS-3",
+      "choice": 15,
+      "height": 4.943,
+      "observed": {
+        "values": {
+          "minimum": 4.943,
+          "concrete": 1.942,
+          "steel": 113,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 4.943,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "0e2d9e40",
+          "concrete": "7593f83f",
+          "steel": "0000e242",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "0e2d9e40",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "4.943"
+    },
+    {
+      "type": "SS-3",
+      "choice": 15,
+      "height": 6.177499999999999,
+      "observed": {
+        "values": {
+          "minimum": 4.943,
+          "concrete": 2.169148,
+          "steel": 133.9865,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 6.1775,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "0e2d9e40",
+          "concrete": "52d30a40",
+          "steel": "8bfc0543",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "14aec540",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "6.177499999999999"
+    },
+    {
+      "type": "SS-3",
+      "choice": 16,
+      "height": 5.417,
+      "observed": {
+        "values": {
+          "minimum": 5.417,
+          "concrete": 2.269,
+          "steel": 120,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 5.417,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "1058ad40",
+          "concrete": "4c371140",
+          "steel": "0000f042",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "1058ad40",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "5.417"
+    },
+    {
+      "type": "SS-3",
+      "choice": 16,
+      "height": 6.6515,
+      "observed": {
+        "values": {
+          "minimum": 5.417,
+          "concrete": 2.496148,
+          "steel": 140.986511,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 6.6515,
+          "delta": 1.23450041,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "1058ad40",
+          "concrete": "e4c01f40",
+          "steel": "8cfc0c43",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "17d9d440",
+          "delta": "1c049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "captureRetry": 1,
+      "typedHeight": "6.6515"
+    },
+    {
+      "type": "SS-3",
+      "choice": 17,
+      "height": 5.833,
+      "observed": {
+        "values": {
+          "minimum": 5.833,
+          "concrete": 2.575,
+          "steel": 130,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 5.833,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "f0a7ba40",
+          "concrete": "cdcc2440",
+          "steel": "00000243",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "f0a7ba40",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "5.833"
+    },
+    {
+      "type": "SS-3",
+      "choice": 17,
+      "height": 7.0675,
+      "observed": {
+        "values": {
+          "minimum": 5.833,
+          "concrete": 2.802148,
+          "steel": 150.9865,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 7.0675,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "f0a7ba40",
+          "concrete": "65563340",
+          "steel": "8bfc1643",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "f628e240",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "captureRetry": 2,
+      "typedHeight": "7.0675"
+    },
+    {
+      "type": "SS-3",
+      "choice": 18,
+      "height": 6.333,
+      "observed": {
+        "values": {
+          "minimum": 6.333,
+          "concrete": 2.966,
+          "steel": 139,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 6.333,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "f0a7ca40",
+          "concrete": "f2d23d40",
+          "steel": "00000b43",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "f0a7ca40",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "6.333"
+    },
+    {
+      "type": "SS-3",
+      "choice": 18,
+      "height": 7.5675,
+      "observed": {
+        "values": {
+          "minimum": 6.333,
+          "concrete": 3.19314814,
+          "steel": 159.9865,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 7.5675,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "f0a7ca40",
+          "concrete": "8a5c4c40",
+          "steel": "8bfc1f43",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "f628f240",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "7.5675"
+    },
+    {
+      "type": "SS-3",
+      "choice": 19,
+      "height": 7.25,
+      "observed": {
+        "values": {
+          "minimum": 7.25,
+          "concrete": 3.765,
+          "steel": 156,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 7.25,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "0000e840",
+          "concrete": "c3f57040",
+          "steel": "00001c43",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "0000e840",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "7.25"
+    },
+    {
+      "type": "SS-3",
+      "choice": 19,
+      "height": 8.4845,
+      "observed": {
+        "values": {
+          "minimum": 7.25,
+          "concrete": 3.99214816,
+          "steel": 176.9865,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 8.4845,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "0000e840",
+          "concrete": "5b7f7f40",
+          "steel": "8bfc3043",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "83c00741",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "8.4845"
+    },
+    {
+      "type": "SS-4",
+      "choice": 1,
+      "height": 3.125,
+      "observed": {
+        "values": {
+          "minimum": 3.125,
+          "concrete": 0.64,
+          "steel": 31,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 3.125,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "00004840",
+          "concrete": "0ad7233f",
+          "steel": "0000f841",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "00004840",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "3.125"
+    },
+    {
+      "type": "SS-4",
+      "choice": 1,
+      "height": 4.3595,
+      "observed": {
+        "values": {
+          "minimum": 3.125,
+          "concrete": 0.868382454,
+          "steel": 31,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 4.3595,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "00004840",
+          "concrete": "504e5e3f",
+          "steel": "0000f841",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "06818b40",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "4.3595"
+    },
+    {
+      "type": "SS-4",
+      "choice": 2,
+      "height": 3.4167,
+      "observed": {
+        "values": {
+          "minimum": 3.4167,
+          "concrete": 0.67,
+          "steel": 31,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 3.4167,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "36ab5a40",
+          "concrete": "1f852b3f",
+          "steel": "0000f841",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "36ab5a40",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "captureRetry": 1,
+      "typedHeight": "3.4167"
+    },
+    {
+      "type": "SS-4",
+      "choice": 2,
+      "height": 4.6512,
+      "observed": {
+        "values": {
+          "minimum": 3.4167,
+          "concrete": 0.8983825,
+          "steel": 31,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 4.6512,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "36ab5a40",
+          "concrete": "65fc653f",
+          "steel": "0000f841",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "a1d69440",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "4.6512"
+    },
+    {
+      "type": "SS-4",
+      "choice": 3,
+      "height": 4,
+      "observed": {
+        "values": {
+          "minimum": 4,
+          "concrete": 0.74,
+          "steel": 31,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 4,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "00008040",
+          "concrete": "a4703d3f",
+          "steel": "0000f841",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "00008040",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "4"
+    },
+    {
+      "type": "SS-4",
+      "choice": 3,
+      "height": 5.2345,
+      "observed": {
+        "values": {
+          "minimum": 4,
+          "concrete": 0.9683825,
+          "steel": 31,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 5.2345,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "00008040",
+          "concrete": "eae7773f",
+          "steel": "0000f841",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "0681a740",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "5.2345"
+    },
+    {
+      "type": "SS-4",
+      "choice": 4,
+      "height": 3,
+      "observed": {
+        "values": {
+          "minimum": 3,
+          "concrete": 0.62,
+          "steel": 31,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 3,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "00004040",
+          "concrete": "52b81e3f",
+          "steel": "0000f841",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "00004040",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "3"
+    },
+    {
+      "type": "SS-4",
+      "choice": 4,
+      "height": 4.2345,
+      "observed": {
+        "values": {
+          "minimum": 3,
+          "concrete": 0.8483825,
+          "steel": 31,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 4.2345,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "00004040",
+          "concrete": "982f593f",
+          "steel": "0000f841",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "06818740",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "4.2345"
+    }
+  ],
+  "pageBreakCaptures": [
+    {
+      "type": "SS-3",
+      "choice": 3,
+      "height": 5.9014999999999995,
+      "observed": {
+        "values": {
+          "minimum": 0,
+          "concrete": 0,
+          "steel": 0,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 5.90149975,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "00000000",
+          "concrete": "00000000",
+          "steel": "00000000",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "16d9bc40",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "5.9014999999999995"
+    },
+    {
+      "type": "SS-3",
+      "choice": 7,
+      "height": 7,
+      "observed": {
+        "values": {
+          "minimum": 0,
+          "concrete": 0,
+          "steel": 0,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 7,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "00000000",
+          "concrete": "00000000",
+          "steel": "00000000",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "0000e040",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "7"
+    },
+    {
+      "type": "SS-3",
+      "choice": 10,
+      "height": 9.9845,
+      "observed": {
+        "values": {
+          "minimum": 0,
+          "concrete": 0,
+          "steel": 0,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 9.9845,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "00000000",
+          "concrete": "00000000",
+          "steel": "00000000",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "83c01f41",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "9.9845"
+    },
+    {
+      "type": "SS-3",
+      "choice": 14,
+      "height": 4.468,
+      "observed": {
+        "values": {
+          "minimum": 0,
+          "concrete": 0,
+          "steel": 0,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 4.468,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "00000000",
+          "concrete": "00000000",
+          "steel": "00000000",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "dbf98e40",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "4.468"
+    },
+    {
+      "type": "SS-3",
+      "choice": 17,
+      "height": 7.0675,
+      "observed": {
+        "values": {
+          "minimum": 0,
+          "concrete": 0,
+          "steel": 0,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 7.0675,
+          "delta": 1.23449993,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "00000000",
+          "concrete": "00000000",
+          "steel": "00000000",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "f628e240",
+          "delta": "18049e3f",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "7.0675"
+    },
+    {
+      "type": "SS-4",
+      "choice": 2,
+      "height": 3.4167,
+      "observed": {
+        "values": {
+          "minimum": 0,
+          "concrete": 0,
+          "steel": 0,
+          "concreteExtra": 0,
+          "steelExtra": 0,
+          "height": 3.4167,
+          "delta": 0,
+          "grate": 200,
+          "frame": 244
+        },
+        "rawHex": {
+          "minimum": "00000000",
+          "concrete": "00000000",
+          "steel": "00000000",
+          "concreteExtra": "00000000",
+          "steelExtra": "00000000",
+          "height": "36ab5a40",
+          "delta": "00000000",
+          "grate": "00004843",
+          "frame": "00007443"
+        }
+      },
+      "typedHeight": "3.4167"
+    }
+  ],
+  "sourceSha256": "130e6e3abf1e01bc355617641b11e3dc98062d9c8f2398ab85b318b1c913f00b",
+  "probeSha256": "39f04ac3751e923527df69f9f5a4051583a5ad8a080e1a5037035616fc591355"
+}

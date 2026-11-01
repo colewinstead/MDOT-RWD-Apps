@@ -1,0 +1,8 @@
+{
+  "originalSha256": "130e6e3abf1e01bc355617641b11e3dc98062d9c8f2398ab85b318b1c913f00b",
+  "probeSha256": "39f04ac3751e923527df69f9f5a4051583a5ad8a080e1a5037035616fc591355",
+  "onlyChangedByteOffset": 563257,
+  "originalReportPath": "C:\\Q\\SS-3.TXT",
+  "probeReportPath": "C:\\S\\SS-3.TXT",
+  "change": "Q to S in ASCII report filename only; no code or numeric table change"
+}
