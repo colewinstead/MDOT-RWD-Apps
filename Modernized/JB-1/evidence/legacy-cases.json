@@ -1,0 +1,130 @@
+[
+  {
+    "name": "single circular outflow",
+    "input": {
+      "pipes": [
+        {
+          "span": 24,
+          "rise": 24,
+          "skew": 0,
+          "thickness": 3
+        },
+        {
+          "span": 0,
+          "rise": 0,
+          "skew": 0,
+          "thickness": 0
+        },
+        {
+          "span": 0,
+          "rise": 0,
+          "skew": 0,
+          "thickness": 0
+        },
+        {
+          "span": 0,
+          "rise": 0,
+          "skew": 0,
+          "thickness": 0
+        }
+      ],
+      "height": null
+    }
+  },
+  {
+    "name": "unequal skewed circular pipes",
+    "input": {
+      "pipes": [
+        {
+          "span": 36,
+          "rise": 36,
+          "skew": 10,
+          "thickness": 4
+        },
+        {
+          "span": 0,
+          "rise": 0,
+          "skew": 0,
+          "thickness": 0
+        },
+        {
+          "span": 48,
+          "rise": 48,
+          "skew": 15,
+          "thickness": 5
+        },
+        {
+          "span": 0,
+          "rise": 0,
+          "skew": 0,
+          "thickness": 0
+        }
+      ],
+      "height": null
+    }
+  },
+  {
+    "name": "noncircular lookup pipes",
+    "input": {
+      "pipes": [
+        {
+          "span": 29,
+          "rise": 18,
+          "skew": 0,
+          "thickness": 3
+        },
+        {
+          "span": 22,
+          "rise": 14,
+          "skew": 0,
+          "thickness": 2.5
+        },
+        {
+          "span": 0,
+          "rise": 0,
+          "skew": 0,
+          "thickness": 0
+        },
+        {
+          "span": 0,
+          "rise": 0,
+          "skew": 0,
+          "thickness": 0
+        }
+      ],
+      "height": null
+    }
+  },
+  {
+    "name": "manual height and opposing circular pipes",
+    "input": {
+      "pipes": [
+        {
+          "span": 36,
+          "rise": 36,
+          "skew": 0,
+          "thickness": 4
+        },
+        {
+          "span": 0,
+          "rise": 0,
+          "skew": 0,
+          "thickness": 0
+        },
+        {
+          "span": 36,
+          "rise": 36,
+          "skew": 0,
+          "thickness": 4
+        },
+        {
+          "span": 0,
+          "rise": 0,
+          "skew": 0,
+          "thickness": 0
+        }
+      ],
+      "height": 6
+    }
+  }
+]

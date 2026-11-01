@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' file:; script-src 'self' file:; style-src 'self' file:; img-src 'self' file: data:; connect-src 'none'; object-src 'none'; base-uri 'none'">
+  <title>JB-1 · Junction box quantities</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="calculations.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="identity"><span class="app-mark" aria-hidden="true">JB</span><div><h1>JB-1</h1><p>Junction box quantities</p></div></div>
+    <nav aria-label="Project files">
+      <button id="open-project" type="button">Open project</button>
+      <button id="save-project" type="button">Save project</button>
+      <button id="print-project" class="primary" type="button">Print report</button>
+    </nav>
+    <input id="project-file" type="file" accept=".json,application/json" hidden>
+  </header>
+  <div class="project-status"><span id="file-status">Example inputs · not saved</span><span>Runs entirely on this computer</span></div>
+  <main class="workspace">
+    <aside class="inputs" aria-label="Project and box inputs">
+      <details class="project-details" open>
+        <summary>Project information</summary>
+        <div class="project-fields">
+          <label>Project number<input id="project-number" type="text" maxlength="120" placeholder="Enter project number"></label>
+          <label>County<input id="county" type="text" maxlength="120" placeholder="Enter county"></label>
+          <label>Report date<input id="report-date" type="date"></label>
+        </div>
+      </details>
+      <div class="box-picker"><label for="box-select">Junction box</label><div><select id="box-select"></select><button id="add-box" type="button">Add box</button></div></div>
+      <form id="box-form" novalidate>
+        <div class="box-identifiers">
+          <label>Box number<input id="box-number" type="text" maxlength="80"></label>
+          <label>Station<input id="station" type="text" maxlength="80" placeholder="e.g. 100+00"></label>
+          <label>Side<select id="road-side"><option value="L">Left</option><option value="R">Right</option></select></label>
+        </div>
+        <div class="section-title"><h2>Pipe connections</h2><span>Dimensions in inches</span></div>
+        <p class="input-note">Side 1 is the outflow. Clear a connection to omit its pipe.</p>
+        <div class="table-scroll"><table class="pipe-inputs"><thead><tr><th scope="col">Side</th><th scope="col">Span</th><th scope="col">Rise</th><th scope="col">Skew (°)</th><th scope="col">Wall</th></tr></thead><tbody id="pipe-rows"></tbody></table></div>
+        <p class="input-note">Wall = pipe wall thickness. A changed span supplies the legacy thickness; you can edit it.</p>
+        <div class="height-input"><label for="height">Box height <span>ft, decimal</span></label><input id="height" type="number" step="any" min="0" placeholder="Use calculated minimum"><p id="height-help">Leave blank to use the calculated minimum.</p></div>
+        <button id="remove-box" class="text-button danger" type="button">Remove this box</button>
+      </form>
+      <p class="basis-note">Calculation basis: supplied JB-1 v5.0, revised October 10, 2011. Reproduces the legacy program; current MDOT compliance is not evaluated.</p>
+    </aside>
+    <section class="results" aria-labelledby="results-heading">
+      <div class="results-title"><div><h2 id="results-heading">Box 1</h2><p id="result-context">Example inputs</p></div><span class="unit-note">ft · yd³ · lb</span></div>
+      <div id="calculation-error" class="error-message" role="alert" hidden></div>
+      <div id="current-results">
+        <div class="drawing-panel"><svg id="box-diagram" viewBox="100 0 540 390" role="img" aria-labelledby="diagram-title diagram-description"><title id="diagram-title">Junction box plan</title><desc id="diagram-description">Schematic plan of the current box with numbered pipe connections.</desc></svg><p>Plan schematic · centered openings shown; not a construction drawing</p></div>
+        <div class="section-title"><h3>Box quantities</h3><span id="height-mode">Minimum height</span></div>
+        <dl class="quantity-list" id="quantity-list"></dl>
+        <div id="calculation-notes" class="calculation-notes"></div>
+        <div class="section-title"><h3>Reinforcing bar list</h3><span>Lengths in inches</span></div>
+        <div class="table-scroll"><table class="bar-table"><thead><tr><th scope="col">Mark</th><th scope="col">Quantity</th><th scope="col">Length (in.)</th><th scope="col">Total (ft)</th></tr></thead><tbody id="bar-rows"></tbody></table></div>
+      </div>
+      <section class="project-summary" aria-labelledby="summary-heading"><div class="section-title"><h3 id="summary-heading">Project totals</h3><span id="box-count"></span></div><div id="project-totals"></div></section>
+    </section>
+  </main>
+  <section id="print-report" aria-label="Printable project report"></section>
+  <footer>JB-1 · Mississippi roadway design utility <a href="README.md">Instructions &amp; calculation basis</a></footer>
+  <noscript>This calculator needs JavaScript enabled in your browser. It does not need an internet connection.</noscript>
+</body>
+</html>
