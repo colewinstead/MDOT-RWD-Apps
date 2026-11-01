@@ -1,6 +1,6 @@
 # JB-1 · Junction box quantities
 
-Open **index.html** in a current browser. Keep `index.html`, `styles.css`, `calculations.js`, and `app.js` together in this folder. No hosting, installation, internet connection, account, or build step is required.
+Open **JB-1.html** in the parent `Modernized` folder in a current browser. That single file includes all styling, calculations, instructions, and interface code. You can move or copy it by itself. No hosting, installation, internet connection, account, or build step is required to use it. Saved project JSON files contain your work and are kept separately.
 
 This is a reconstruction of the supplied Mississippi MDOT JB-1 v5.0 executable, revised October 10, 2011. The original EXE and its DLLs are unchanged.
 
@@ -43,3 +43,5 @@ node --test calculations.test.cjs
 ```
 
 No dependencies are required by the app or calculation tests. The `evidence` folder contains static recovery notes and synthetic Windows verification artifacts; the app does not load those files.
+
+The files in this development folder remain the editable sources. After changing them, run `node build-standalone.cjs` to regenerate `../JB-1.html`. The build checks that no companion-file references remain and creates exact content hashes for the embedded scripts and stylesheet. `index.html` is the source preview and still uses the separate source files.

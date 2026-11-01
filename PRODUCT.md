@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Plain HTML, CSS, and JavaScript, approved by the user. Open index.html directly in a browser on Mac or Windows. No hosting, account, network dependency, or installation.
+Plain HTML, CSS, and JavaScript, approved by the user. The user requested one portable file: open Modernized/JB-1.html in a browser on Mac or Windows. Styles and scripts are embedded; no companion assets, hosting, account, network dependency, or installation. Project inputs are explicitly saved in separate JSON files.
 
 ## Product Purpose
 

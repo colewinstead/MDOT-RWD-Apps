@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-6LJ3HM3Kd+8e/lJJKjXijqh+3HV5mS+7gvyqMmc0iJs=' 'sha256-fCGO4uM2wgVTdIp6aRWTxfj1GqVkPBVz9PNAdkO4BCs='; style-src 'sha256-3xGAqIVv8y9W/2hqNcDyH9txo7WJRIoeYxZfUCn90l8='; img-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>JB-1 · Junction box quantities</title>
+  <style>:root { color-scheme: light dark; --ground:#f3f4f4; --surface:#fff; --subtle:#f7f8f8; --ink:#20292e; --muted:#57656c; --line:#d6dddf; --accent:#a74613; --accent-hover:#85350c; --accent-soft:#fff1e7; --error:#a22424; --error-bg:#fff1ef; --focus:#247b9a; --pipe:#627f8c; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; font-size:16px; }
+* { box-sizing:border-box; }
+body { margin:0; color:var(--ink); background:var(--ground); line-height:1.5; }
+h1,h2,h3,p { margin:0; }
+h1 { font-size:1.6rem; letter-spacing:-.025em; line-height:1.1; }
+h2 { font-size:1.2rem; font-weight:650; }
+h3 { font-size:1rem; font-weight:650; }
+button,input,select { font:inherit; }
+button,select { cursor:pointer; }
+button { border:1px solid var(--line); border-radius:6px; background:var(--surface); color:var(--ink); padding:8px 13px; font-weight:600; white-space:nowrap; }
+button:hover { background:var(--subtle); border-color:var(--muted); }
+button:active { transform:translateY(1px); }
+button:disabled { cursor:default; opacity:.5; transform:none; }
+button.primary { color:#fff; background:var(--accent); border-color:var(--accent); }
+button.primary:hover { background:var(--accent-hover); }
+:focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
+::selection { background:var(--accent); color:#fff; }
+input,select { min-width:0; width:100%; border:1px solid var(--line); border-radius:5px; padding:8px 9px; color:var(--ink); background:var(--surface); caret-color:var(--accent); }
+input::placeholder { color:var(--muted); opacity:1; }
+input[type="checkbox"] { width:17px; height:17px; accent-color:var(--accent); margin:0; padding:0; }
+input[type="number"] { font-variant-numeric:tabular-nums; }
+input:disabled { background:var(--ground); color:var(--muted); opacity:.7; }
+input[aria-invalid="true"] { border-color:var(--error); }
+label { display:grid; gap:5px; font-size:.83rem; font-weight:600; }
+a { color:var(--accent); text-underline-offset:3px; }
+.app-header { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:22px 32px; background:var(--surface); border-bottom:1px solid var(--line); }
+.identity { display:flex; align-items:center; gap:12px; }
+.identity p { color:var(--muted); font-size:.9rem; margin-top:3px; }
+.app-mark { display:grid; place-items:center; width:43px; height:43px; background:var(--accent); color:#fff; font-size:1rem; font-weight:750; border-radius:5px; }
+nav { display:flex; gap:8px; }
+.project-status { display:flex; justify-content:space-between; gap:16px; color:var(--muted); font-size:.8rem; padding:9px 32px; }
+.workspace { display:grid; grid-template-columns:minmax(370px,430px) minmax(0,1fr); max-width:1540px; margin:8px auto 30px; padding:0 24px; align-items:start; gap:24px; }
+.inputs,.results { background:var(--surface); border:1px solid var(--line); border-radius:10px; }
+.inputs { padding:22px; }
+.project-details { padding-bottom:22px; border-bottom:1px solid var(--line); }
+summary { font-weight:650; cursor:pointer; }
+.project-fields { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px; }
+.project-fields label:first-child { grid-column:1 / -1; }
+.box-picker { margin:22px 0 18px; }
+.box-picker>div { display:flex; gap:8px; margin-top:5px; }
+.box-picker select { flex:1; }
+.box-identifiers { display:grid; grid-template-columns:.85fr 1.2fr .8fr; gap:10px; }
+.section-title { display:flex; justify-content:space-between; align-items:baseline; gap:15px; margin:26px 0 10px; }
+.section-title span { font-size:.8rem; color:var(--muted); }
+.input-note { color:var(--muted); font-size:.8rem; margin:7px 0 12px; }
+.table-scroll { overflow-x:auto; scrollbar-color:var(--line) transparent; }
+table { border-collapse:collapse; width:100%; font-variant-numeric:tabular-nums; }
+th { text-align:left; font-size:.8rem; color:var(--muted); font-weight:600; border-bottom:1px solid var(--line); padding:8px 5px; }
+td { border-bottom:1px solid var(--line); padding:9px 5px; }
+.pipe-inputs { table-layout:fixed; min-width:340px; }
+.pipe-inputs th:first-child { width:56px; }
+.pipe-inputs td:first-child { font-weight:600; }
+.pipe-inputs td { padding:9px 3px; }
+.pipe-inputs td>label { display:flex; align-items:center; gap:8px; font-size:.9rem; }
+.pipe-inputs input[type="number"] { padding:8px 4px; font-size:.87rem; -moz-appearance:textfield; }
+.pipe-inputs input::-webkit-inner-spin-button { -webkit-appearance:none; }
+.height-input { margin-top:23px; }
+.height-input label { display:flex; justify-content:space-between; margin-bottom:6px; }
+.height-input label span { color:var(--muted); font-weight:400; }
+.height-input p { font-size:.8rem; color:var(--muted); margin-top:7px; }
+.text-button { padding:4px 0; background:none; border:0; font-size:.8rem; }
+.text-button:hover { background:none; text-decoration:underline; }
+.danger { color:var(--error); margin-top:18px; }
+.basis-note { border-top:1px solid var(--line); padding-top:17px; margin-top:20px; color:var(--muted); font-size:.8rem; }
+.results { padding:24px 28px; }
+.results-title { display:flex; align-items:center; justify-content:space-between; gap:15px; }
+.results-title h2 { font-size:1.35rem; }
+.results-title p { font-size:.85rem; color:var(--muted); margin-top:2px; }
+.unit-note { color:var(--muted); font-size:.8rem; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.drawing-panel { background:var(--subtle); margin-top:20px; border-radius:6px; padding:14px 8px 12px; }
+.drawing-panel svg { width:100%; max-height:350px; display:block; color:var(--ink); }
+.drawing-panel p { text-align:center; font-size:.8rem; color:var(--muted); }
+.box-wall { fill:var(--line); stroke:var(--muted); stroke-width:1.5; }
+.box-interior { fill:var(--surface); stroke:var(--muted); stroke-width:1.3; }
+.pipe { fill:var(--surface); stroke:var(--pipe); stroke-width:2; }
+.pipe-axis { stroke:var(--pipe); stroke-width:1; stroke-dasharray:5 4; }
+.dim-line { stroke:var(--muted); stroke-width:1; fill:none; }
+.diagram-dim { fill:var(--ink); font-size:16px; font-weight:600; }
+.diagram-side { fill:var(--muted); font-size:13px; }
+.flow-line { stroke:var(--accent); stroke-width:2; }
+.flow-label { fill:var(--accent); font-size:12px; font-weight:650; }
+.quantity-list { display:grid; grid-template-columns:1fr 1fr; margin:0; }
+.quantity-list>div { display:flex; align-items:baseline; justify-content:space-between; gap:10px; padding:12px 0; border-bottom:1px solid var(--line); }
+.quantity-list>div:nth-child(odd) { padding-right:24px; }
+.quantity-list>div:nth-child(even) { padding-left:24px; border-left:1px solid var(--line); }
+dt { color:var(--muted); font-size:.84rem; }
+dd { margin:0; font-weight:650; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.calculation-notes { color:var(--muted); font-size:.8rem; margin-top:12px; }
+.calculation-notes p+p { margin-top:6px; }
+.bar-table th:not(:first-child),.bar-table td:not(:first-child) { text-align:right; }
+.bar-table td { font-size:.86rem; }
+.bar-table td:first-child { font-weight:600; }
+.project-summary { border-top:1px solid var(--line); margin-top:26px; }
+.project-summary .section-title { margin-top:18px; }
+#project-totals { display:flex; flex-wrap:wrap; gap:8px 25px; color:var(--muted); font-size:.85rem; }
+#project-totals strong { color:var(--ink); font-variant-numeric:tabular-nums; }
+.error-message { border:1px solid var(--error); border-radius:6px; color:var(--error); background:var(--error-bg); padding:14px 16px; margin-top:20px; font-size:.9rem; }
+[hidden] { display:none !important; }
+#print-report { display:none; }
+footer { max-width:1540px; margin:0 auto; padding:0 26px 25px; font-size:.8rem; color:var(--muted); display:flex; justify-content:space-between; gap:12px; }
+footer details { max-width:70ch; }
+footer summary { color:var(--accent); }
+footer details p { margin-top:12px; }
+@media (prefers-color-scheme:dark) { :root { --ground:#171d21; --surface:#20282d; --subtle:#1a2227; --ink:#e3e9ec; --muted:#b1bec5; --line:#425058; --accent:#ffb178; --accent-hover:#ffc99f; --accent-soft:#3f2c20; --error:#ffaaa3; --error-bg:#3b2525; --focus:#79c6e7; --pipe:#94b3c2; } button.primary,.app-mark { color:#24170f; } }
+@media (max-width:1050px) { .workspace { grid-template-columns:minmax(350px,390px) minmax(0,1fr); gap:16px; padding:0 16px; } .inputs { padding:18px; } .results { padding:22px 18px; } .quantity-list { grid-template-columns:1fr; } .quantity-list>div:nth-child(n) { padding:10px 0; border-left:0; } }
+@media (max-width:820px) { .workspace { grid-template-columns:1fr; max-width:720px; } .app-header { padding:18px 20px; flex-wrap:wrap; gap:18px; } nav { flex-wrap:wrap; } .project-status { padding:9px 20px; flex-wrap:wrap; gap:2px; } .inputs { padding:22px; } .quantity-list { grid-template-columns:1fr 1fr; } .quantity-list>div:nth-child(odd) { padding-right:18px; } .quantity-list>div:nth-child(even) { padding-left:18px; border-left:1px solid var(--line); } footer { max-width:720px; flex-wrap:wrap; } }
+@media (max-width:460px) { .diagram-dim,.diagram-side { font-size:22px; } .flow-label { font-size:20px; } .app-header { padding:16px; } nav { width:100%; gap:6px; } nav button { flex:1; padding:8px 7px; font-size:.8rem; } .workspace { padding:0 10px; } .inputs,.results { padding:18px 14px; } .project-status { padding:8px 16px; font-size:.8rem; } .quantity-list { grid-template-columns:1fr; } .quantity-list>div:nth-child(n) { padding:10px 0; border-left:0; } .section-title { gap:8px; } .section-title span { font-size:.8rem; } .unit-note { display:none; } }
+@media print { :root { color-scheme:light; } body { background:#fff; color:#000; font-size:10pt; } body>*:not(#print-report) { display:none !important; } #print-report { display:block; } #print-report h1 { font-size:19pt; margin-bottom:5mm; } #print-report h2 { font-size:13pt; margin:6mm 0 2mm; } #print-report p { margin:2mm 0; } #print-report th,#print-report td { border-color:#aaa; color:#000; padding:2mm; font-size:9pt; } #print-report .report-box { break-inside:avoid; padding-top:4mm; } #print-report .report-note { font-size:8pt; color:#333; } #print-report .report-pipes { margin-top:3mm; } @page { margin:16mm; } }
+</style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="identity"><span class="app-mark" aria-hidden="true">JB</span><div><h1>JB-1</h1><p>Junction box quantities</p></div></div>
+    <nav aria-label="Project files">
+      <button id="open-project" type="button">Open project</button>
+      <button id="save-project" type="button">Save project</button>
+      <button id="print-project" class="primary" type="button">Print report</button>
+    </nav>
+    <input id="project-file" type="file" accept=".json,application/json" hidden>
+  </header>
+  <div class="project-status"><span id="file-status">Example inputs · not saved</span><span>Runs entirely on this computer</span></div>
+  <main class="workspace">
+    <aside class="inputs" aria-label="Project and box inputs">
+      <details class="project-details" open>
+        <summary>Project information</summary>
+        <div class="project-fields">
+          <label>Project number<input id="project-number" type="text" maxlength="120" placeholder="Enter project number"></label>
+          <label>County<input id="county" type="text" maxlength="120" placeholder="Enter county"></label>
+          <label>Report date<input id="report-date" type="date"></label>
+        </div>
+      </details>
+      <div class="box-picker"><label for="box-select">Junction box</label><div><select id="box-select"></select><button id="add-box" type="button">Add box</button></div></div>
+      <form id="box-form" novalidate>
+        <div class="box-identifiers">
+          <label>Box number<input id="box-number" type="text" maxlength="80"></label>
+          <label>Station<input id="station" type="text" maxlength="80" placeholder="e.g. 100+00"></label>
+          <label>Side<select id="road-side"><option value="L">Left</option><option value="R">Right</option></select></label>
+        </div>
+        <div class="section-title"><h2>Pipe connections</h2><span>Dimensions in inches</span></div>
+        <p class="input-note">Side 1 is the outflow. Clear a connection to omit its pipe.</p>
+        <div class="table-scroll"><table class="pipe-inputs"><thead><tr><th scope="col">Side</th><th scope="col">Span</th><th scope="col">Rise</th><th scope="col">Skew (°)</th><th scope="col">Wall</th></tr></thead><tbody id="pipe-rows"></tbody></table></div>
+        <p class="input-note">Wall = pipe wall thickness. A changed span supplies the legacy thickness; you can edit it.</p>
+        <div class="height-input"><label for="height">Box height <span>ft, decimal</span></label><input id="height" type="number" step="any" min="0" placeholder="Use calculated minimum"><p id="height-help">Leave blank to use the calculated minimum.</p></div>
+        <button id="remove-box" class="text-button danger" type="button">Remove this box</button>
+      </form>
+      <p class="basis-note">Calculation basis: supplied JB-1 v5.0, revised October 10, 2011. Reproduces the legacy program; current MDOT compliance is not evaluated.</p>
+    </aside>
+    <section class="results" aria-labelledby="results-heading">
+      <div class="results-title"><div><h2 id="results-heading">Box 1</h2><p id="result-context">Example inputs</p></div><span class="unit-note">ft · yd³ · lb</span></div>
+      <div id="calculation-error" class="error-message" role="alert" hidden></div>
+      <div id="current-results">
+        <div class="drawing-panel"><svg id="box-diagram" viewBox="100 0 540 390" role="img" aria-labelledby="diagram-title diagram-description"><title id="diagram-title">Junction box plan</title><desc id="diagram-description">Schematic plan of the current box with numbered pipe connections.</desc></svg><p>Plan schematic · centered openings shown; not a construction drawing</p></div>
+        <div class="section-title"><h3>Box quantities</h3><span id="height-mode">Minimum height</span></div>
+        <dl class="quantity-list" id="quantity-list"></dl>
+        <div id="calculation-notes" class="calculation-notes"></div>
+        <div class="section-title"><h3>Reinforcing bar list</h3><span>Lengths in inches</span></div>
+        <div class="table-scroll"><table class="bar-table"><thead><tr><th scope="col">Mark</th><th scope="col">Quantity</th><th scope="col">Length (in.)</th><th scope="col">Total (ft)</th></tr></thead><tbody id="bar-rows"></tbody></table></div>
+      </div>
+      <section class="project-summary" aria-labelledby="summary-heading"><div class="section-title"><h3 id="summary-heading">Project totals</h3><span id="box-count"></span></div><div id="project-totals"></div></section>
+    </section>
+  </main>
+  <section id="print-report" aria-label="Printable project report"></section>
+  <footer><span>JB-1 · Mississippi roadway design utility</span><details><summary>Instructions &amp; calculation basis</summary><p>Enter pipe dimensions and wall thickness in inches, skew in degrees, and box height in decimal feet. Side 1 is outflow. Leave height blank for the calculated minimum. Save project downloads your inputs as a JSON file; Open project restores it. Keep that project file to retain your work. Print report includes all boxes and project totals.</p><p>Calculation basis: supplied JB-1 v5.0, revised October 10, 2011. Noncircular opening deductions use the original span-only lookup. Steel includes the original 4 lb allowance. Bar lengths retain calculation precision and display two decimals. Current MDOT compliance, structural adequacy, and opening conflicts are not evaluated.</p></details></footer>
+  <noscript>This calculator needs JavaScript enabled in your browser. It does not need an internet connection.</noscript>
+<script>(function (root, factory) {
+  const api = factory();
+  if (typeof module === "object" && module.exports) module.exports = api;
+  else root.JB1 = api;
+})(typeof globalThis !== "undefined" ? globalThis : this, function () {
+  "use strict";
+
+  // Recovered JB-1 v5.0 rules; see evidence/RECOVERY.md for addresses and limits.
+  const f32 = Math.fround;
+  const pi = 3.141593;
+  const noncircular = new Map([
+    [22, [2.5, 0.053]], [29, [3, 0.087]], [36, [3.5, 0.129]],
+    [44, [4, 0.195]], [51, [4.5, 0.245]], [58, [5, 0.318]],
+    [65, [5.5, 0.394]], [73, [6, 0.489]], [88, [7, 0.688]],
+  ]);
+  const supportedNoncircularSpans = Object.freeze(Array.from(noncircular.keys()));
+
+  function requireNumber(value, label) {
+    if (typeof value !== "number" || !Number.isFinite(value)) {
+      throw new Error(`${label} must be a finite number.`);
+    }
+    const result = f32(value);
+    if (!Number.isFinite(result) || (result === 0 && value !== 0)) {
+      throw new Error(`${label} is outside the original calculator's numeric range.`);
+    }
+    return result;
+  }
+
+  function defaultThickness(span, rise) {
+    span = requireNumber(span, "Pipe span");
+    rise = requireNumber(rise, "Pipe rise");
+    if (span < 0 || rise < 0 || (span === 0) !== (rise === 0)) {
+      throw new Error("Pipe span and rise must both be positive, or both zero for no pipe.");
+    }
+    if (span === 0) return 0;
+    if (span === rise) return f32((span / 6) * 0.5 + 1);
+    if (!noncircular.has(span)) {
+      throw new Error(`Noncircular span ${span} in. has no recovered JB-1 lookup value.`);
+    }
+    return noncircular.get(span)[0];
+  }
+
+  function calculateBox(input) {
+    if (!input || !Array.isArray(input.pipes) || input.pipes.length !== 4) {
+      throw new Error("Enter exactly four pipe sides; side 1 is the outflow.");
+    }
+    const pipes = Array.from(input.pipes, (pipe, index) => {
+      const label = `Side ${index + 1}`;
+      if (!pipe || typeof pipe !== "object" || Array.isArray(pipe)) {
+        throw new Error(`${label}: enter span, rise, skew, and thickness.`);
+      }
+      const span = requireNumber(pipe.span, `${label} span`);
+      const rise = requireNumber(pipe.rise, `${label} rise`);
+      const skew = requireNumber(pipe.skew, `${label} skew`);
+      const thickness = requireNumber(pipe.thickness, `${label} thickness`);
+      if (span === 0 && rise === 0 && skew === 0 && thickness === 0) {
+        return { span, rise, skew, thickness };
+      }
+      if (span <= 0 || rise <= 0 || thickness <= 0) {
+        throw new Error(`${label}: span, rise, and thickness must be positive. Use all zeros for no pipe.`);
+      }
+      if (Math.abs(pipe.skew) >= 90 || Math.abs(skew) >= 90) {
+        throw new Error(`${label}: skew must be between -90 and 90 degrees, excluding the endpoints.`);
+      }
+      if (span !== rise && !noncircular.has(span)) {
+        throw new Error(`${label}: noncircular span ${span} in. has no recovered JB-1 lookup value.`);
+      }
+      return { span, rise, skew, thickness };
+    });
+    if (pipes[0].span === 0) throw new Error("Side 1 must contain the outflow pipe.");
+
+    const widthsInches = pipes.map(({ span, skew, thickness }) => {
+      const radians = f32((skew * pi) / 180);
+      return Math.max(30, f32((span + 2 * thickness) / Math.cos(radians) + 21));
+    });
+    widthsInches[0] = widthsInches[2] = Math.max(widthsInches[0], widthsInches[2]);
+    widthsInches[1] = widthsInches[3] = Math.max(widthsInches[1], widthsInches[3]);
+    const heightsInches = pipes.map(({ rise, thickness }, index) => {
+      const extra = index !== 0 && rise !== pipes[0].rise ? pipes[0].thickness : 0;
+      return f32(rise + 2 * thickness + 12 + extra);
+    });
+    const minimumHeightFeet = f32(Math.max(...heightsInches) / 12);
+    const heightFeet = input.height == null
+      ? minimumHeightFeet
+      : requireNumber(input.height, "Box height");
+    if (heightFeet < minimumHeightFeet) {
+      throw new Error(`Box height must be at least ${minimumHeightFeet.toFixed(6)} ft.`);
+    }
+
+    const [w1, w2] = widthsInches;
+    const maximumThickness = Math.max(...pipes.map(pipe => pipe.thickness));
+    // Original x87 temporaries store selected intermediates as single precision.
+    const top = w2 * f32(w1 * 5) + (w1 - 12.5) * (w2 - 12.5);
+    const baseThickness = f32(maximumThickness + 6);
+    const baseAndTop = w2 * f32(w1 * baseThickness) + top;
+    const wallFactor = f32((f32(heightFeet * 12) - baseThickness) * 12);
+    const grossInches = f32((w2 + f32(w1 - 12)) * wallFactor + baseAndTop);
+    const grossConcreteCubicYards = f32(grossInches / 46656);
+    let openingDeductionCubicYards = 0;
+    for (const { span, rise, thickness } of pipes) {
+      if (span === rise) {
+        const radius = f32(span / 2) + thickness;
+        openingDeductionCubicYards = f32(
+          openingDeductionCubicYards + (radius ** 2 * pi * 6) / 46656,
+        );
+      } else {
+        openingDeductionCubicYards = f32(
+          openingDeductionCubicYards + f32(noncircular.get(span)[1]),
+        );
+      }
+    }
+    const concreteCubicYards = f32(grossConcreteCubicYards - openingDeductionCubicYards);
+    const widthsFeet = widthsInches.map(width => f32(width / 12));
+    const bars = widthsFeet.map((width, index) => ({
+      mark: `A${index + 1}`,
+      count: pipes[index].span === 0 ? 0 : 2,
+      lengthInches: pipes[index].span === 0 ? 0 : f32(Math.sqrt((width * 6 + 2) ** 2 + 196)),
+    }));
+    bars.push(
+      { mark: "B", count: 2, lengthInches: f32(widthsFeet[0] * 12 - 6) },
+      { mark: "C", count: 2, lengthInches: f32(widthsFeet[1] * 12 - 6) },
+      { mark: "D", count: 4, lengthInches: f32(heightFeet * 12 - 6) },
+      { mark: "E", count: 2 * (Math.floor((widthsFeet[0] * 12) / 9 + 0.5) + 1), lengthInches: f32(widthsFeet[1] * 12 - 4) },
+      { mark: "F", count: 2 * (Math.floor((widthsFeet[1] * 12) / 9 + 0.5) + 1), lengthInches: f32(widthsFeet[0] * 12 - 4) },
+    );
+    const barInches = f32(bars.reduce((sum, bar) => sum + f32(bar.count * bar.lengthInches), 0));
+    const steelPounds = f32(barInches * 0.055663 + 4);
+    if (![...widthsFeet, heightFeet, concreteCubicYards, grossConcreteCubicYards,
+      openingDeductionCubicYards, steelPounds, ...bars.flatMap(bar => [bar.count, bar.lengthInches])]
+      .every(Number.isFinite) || concreteCubicYards <= 0) {
+      throw new Error("These dimensions do not produce finite, positive JB-1 quantities. Check the inputs.");
+    }
+    const warnings = [];
+    if (pipes.some(pipe => pipe.span !== pipe.rise)) {
+      warnings.push("Noncircular opening deductions use the original span lookup, independent of entered rise, thickness, and skew.");
+    }
+    return { widthsFeet, heightFeet, minimumHeightFeet, concreteCubicYards,
+      grossConcreteCubicYards, openingDeductionCubicYards, steelPounds, bars, warnings };
+  }
+
+  function totalQuantities(results) {
+    return {
+      concreteCubicYards: results.reduce((sum, box) => f32(sum + box.concreteCubicYards), 0),
+      steelPounds: results.reduce((sum, box) => f32(sum + box.steelPounds), 0),
+    };
+  }
+
+  return Object.freeze({ calculateBox, defaultThickness, supportedNoncircularSpans, totalQuantities });
+});
+</script>
+<script>'use strict';
+(() => {
+  const $ = id => document.getElementById(id);
+  const f = (number, digits = 3) => number.toLocaleString('en-US', { minimumFractionDigits: digits, maximumFractionDigits: digits });
+  const emptyPipe = () => ({ span: 0, rise: 0, skew: 0, thickness: 0 });
+  const newPipe = () => ({ span: 24, rise: 24, skew: 0, thickness: 3 });
+  const newBox = number => ({ number: String(number), station: '', side: 'L', height: null, pipes: [newPipe(), emptyPipe(), newPipe(), emptyPipe()] });
+  const today = new Date();
+  const date = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+  let project = { schema: 'jb1-project-v1', projectNumber: '', county: '', date, boxes: [newBox(1)] };
+  let selected = 0;
+  let dirty = false;
+  let results = [];
+  const escapeHTML = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  function makePipeRows() {
+    $('pipe-rows').innerHTML = [0, 1, 2, 3].map(i => `<tr data-side="${i}"><td><label><input type="checkbox" id="pipe-${i}-enabled" aria-label="Pipe on side ${i + 1}${i === 0 ? ', required outflow' : ''}" ${i === 0 ? 'disabled' : ''}><span>${i + 1}</span></label></td>${['span', 'rise', 'skew', 'thickness'].map(key => `<td><input id="pipe-${i}-${key}" aria-label="Side ${i + 1} ${key}${key === 'skew' ? ' in degrees' : ' in inches'}" type="number" step="any"${key !== 'skew' ? ' min="0"' : ''}></td>`).join('')}</tr>`).join('');
+  }
+  function loadForm() {
+    const box = project.boxes[selected];
+    $('project-number').value = project.projectNumber;
+    $('county').value = project.county;
+    $('report-date').value = project.date;
+    $('box-number').value = box.number;
+    $('station').value = box.station;
+    $('road-side').value = box.side;
+    $('height').value = box.height ?? '';
+    box.pipes.forEach((pipe, i) => {
+      const enabled = i === 0 || pipe.span !== 0;
+      $(`pipe-${i}-enabled`).checked = enabled;
+      for (const key of ['span', 'rise', 'skew', 'thickness']) {
+        const input = $(`pipe-${i}-${key}`);
+        input.value = enabled ? (pipe[key] ?? '') : '';
+        input.disabled = !enabled;
+      }
+    });
+    render();
+  }
+  function readNumber(input, allowEmpty = false) {
+    if (input.validity.badInput || (input.value === '' && !allowEmpty)) return null;
+    return input.value === '' ? null : Number(input.value);
+  }
+  function readForm() {
+    const previous = project.boxes[selected];
+    const box = { number: $('box-number').value, station: $('station').value, side: $('road-side').value, height: readNumber($('height'), true), pipes: [] };
+    for (let i = 0; i < 4; i++) {
+      const enabled = $(`pipe-${i}-enabled`).checked;
+      box.pipes.push(enabled ? Object.fromEntries(['span', 'rise', 'skew', 'thickness'].map(key => [key, readNumber($(`pipe-${i}-${key}`))])) : emptyPipe());
+    }
+    // A bad numeric height is distinct from the deliberately blank automatic-height field.
+    if ($('height').validity.badInput) box.height = NaN;
+    project.boxes[selected] = box;
+    project.projectNumber = $('project-number').value;
+    project.county = $('county').value;
+    project.date = $('report-date').value;
+    dirty = true;
+    $('file-status').textContent = 'Unsaved changes · save a project file to keep them';
+    return previous;
+  }
+  function boxLabel(box, i) { return `Box ${box.number || i + 1}${box.station ? ` · ${box.station}` : ''}`; }
+  function render() {
+    const box = project.boxes[selected];
+    const picker = $('box-select');
+    picker.replaceChildren(...project.boxes.map((b, i) => new Option(boxLabel(b, i), i, false, i === selected)));
+    $('remove-box').disabled = project.boxes.length === 1;
+    $('add-box').disabled = project.boxes.length === 50;
+    $('results-heading').textContent = `Box ${box.number || selected + 1}`;
+    $('result-context').textContent = [box.station ? `Station ${box.station}` : 'Station not entered', box.side === 'L' ? 'Left' : 'Right'].join(' · ');
+    results = project.boxes.map(b => {
+      try { return { value: JB1.calculateBox(b) }; }
+      catch (error) { return { error: error.message }; }
+    });
+    const current = results[selected];
+    $('calculation-error').hidden = !current.error;
+    $('current-results').hidden = !!current.error;
+    $('calculation-error').textContent = current.error ? `${current.error} Correct the inputs to calculate this box.` : '';
+    for (const input of $('box-form').querySelectorAll('input[type="number"]')) input.removeAttribute('aria-invalid');
+    if (current.error) {
+      for (const input of $('box-form').querySelectorAll('input[type="number"]:not(:disabled)')) {
+        if (input.validity.badInput || (input.id !== 'height' && input.value === '')) input.setAttribute('aria-invalid', 'true');
+      }
+      $('height-help').textContent = 'Leave blank to use the calculated minimum.';
+    } else {
+      const r = current.value;
+      $('height-help').textContent = `Calculated minimum: ${f(r.minimumHeightFeet)} ft. Leave blank to use it.`;
+      $('height-mode').textContent = box.height === null ? 'Calculated minimum height' : 'Entered height';
+      const quantities = [ ['W1–3', `${f(r.widthsFeet[0])} ft`], ['W2–4', `${f(r.widthsFeet[1])} ft`], ['Height', `${f(r.heightFeet)} ft`], ['Concrete, net', `${f(r.concreteCubicYards)} yd³`], ['Reinforcing steel', `${f(r.steelPounds, 2)} lb`], ['Opening deductions', `${f(r.openingDeductionCubicYards)} yd³`] ];
+      $('quantity-list').innerHTML = quantities.map(([label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`).join('');
+      $('bar-rows').innerHTML = r.bars.map(bar => `<tr><td>${bar.mark}</td><td>${bar.count}</td><td>${f(bar.lengthInches, 2)}</td><td>${f(bar.count * bar.lengthInches / 12, 2)}</td></tr>`).join('');
+      const notes = [`Gross concrete ${f(r.grossConcreteCubicYards)} yd³, less ${f(r.openingDeductionCubicYards)} yd³ of pipe openings. Steel includes the legacy 4 lb allowance.`, ...(r.warnings || [])];
+      $('calculation-notes').innerHTML = notes.map(note => `<p>${escapeHTML(note)}</p>`).join('');
+      drawDiagram(box, r);
+    }
+    const invalid = results.flatMap((r, i) => r.error ? [boxLabel(project.boxes[i], i)] : []);
+    $('print-project').disabled = invalid.length > 0;
+    $('save-project').disabled = invalid.length > 0;
+    $('box-count').textContent = `${project.boxes.length} ${project.boxes.length === 1 ? 'box' : 'boxes'}`;
+    $('project-totals').textContent = '';
+    if (invalid.length) $('project-totals').textContent = `Totals unavailable: correct ${invalid.join(', ')}.`;
+    else {
+      const totals = JB1.totalQuantities(results.map(r => r.value));
+      $('project-totals').innerHTML = `<span>Net concrete <strong>${f(totals.concreteCubicYards)} yd³</strong></span><span>Reinforcing steel <strong>${f(totals.steelPounds, 2)} lb</strong></span>`;
+    }
+  }
+
+  function drawDiagram(box, r) {
+    const svg = $('box-diagram');
+    const w = r.widthsFeet[0] * 12;
+    const h = r.widthsFeet[1] * 12;
+    const scale = Math.min(290 / w, 190 / h);
+    const dw = w * scale, dh = h * scale;
+    const x = 360 - dw / 2, y = 190 - dh / 2;
+    const wall = 6 * scale;
+    let shapes = `<title id="diagram-title">Junction box plan</title><desc id="diagram-description">Box ${escapeHTML(box.number)}. W1–3 ${f(r.widthsFeet[0])} feet; W2–4 ${f(r.widthsFeet[1])} feet. Side 1 is outflow. Openings are shown centered for illustration.</desc><rect class="box-wall" x="${x}" y="${y}" width="${dw}" height="${dh}"/><rect class="box-interior" x="${x + wall}" y="${y + wall}" width="${Math.max(0, dw - 2 * wall)}" height="${Math.max(0, dh - 2 * wall)}"/>`;
+    box.pipes.forEach((pipe, i) => {
+      const horizontal = i === 1 || i === 3;
+      const connectionWidth = horizontal ? dh : dw;
+      const size = pipe.span ? Math.min((pipe.span + 2 * pipe.thickness) / Math.cos(pipe.skew * 3.141593 / 180) * scale, connectionWidth - 2 * wall) : 0;
+      const cx = i === 1 ? x : i === 3 ? x + dw : 360;
+      const cy = i === 0 ? y + dh : i === 2 ? y : 190;
+      if (pipe.span) {
+        shapes += horizontal ? `<rect class="pipe" x="${i === 1 ? cx - 45 : cx - wall}" y="${cy - size / 2}" width="${45 + wall}" height="${size}"/><path class="pipe-axis" d="M${cx - 48},${cy}h${48 + wall}"/>` : `<rect class="pipe" x="${cx - size / 2}" y="${i === 2 ? cy - 45 : cy - wall}" width="${size}" height="${45 + wall}"/><path class="pipe-axis" d="M${cx},${cy - 48}v${48 + wall}"/>`;
+      }
+      const labelX = i === 1 ? cx - 65 : i === 3 ? cx + 24 : i === 2 ? cx + size / 2 + 14 : 360;
+      const labelY = i === 0 ? cy + 65 : i === 2 ? cy - 22 : i === 3 ? cy - size / 2 - 14 : 194;
+      shapes += `<text class="diagram-side" x="${labelX}" y="${labelY}" text-anchor="${i === 2 || i === 3 ? 'start' : 'middle'}">${i + 1}</text>`;
+    });
+    shapes += `<path class="dim-line" d="M${x},${y - 20}v-30 M${x + dw},${y - 20}v-30 M${x},${y - 42}h${dw} M${x - 4},${y - 46}l8,8 M${x + dw - 4},${y - 46}l8,8"/><text class="diagram-dim" x="360" y="${y - 63}" text-anchor="middle">W1–3 · ${f(r.widthsFeet[0])} ft</text><path class="dim-line" d="M${x + dw + 52},${y}h37 M${x + dw + 52},${y + dh}h37 M${x + dw + 80},${y}v${dh} M${x + dw + 76},${y - 4}l8,8 M${x + dw + 76},${y + dh - 4}l8,8"/><text class="diagram-dim" transform="translate(${x + dw + 105},190) rotate(90)" text-anchor="middle">W2–4 · ${f(r.widthsFeet[1])} ft</text><path class="flow-line" d="M360,${y + dh + 78}v20 m-5,-6 l5,6 5,-6"/><text class="flow-label" x="378" y="${y + dh + 96}">OUTFLOW</text>`;
+    svg.innerHTML = shapes;
+  }
+
+  function reportHTML() {
+    if (results.some(r => r.error)) return '<h1>Report unavailable</h1><p>Correct all box inputs before printing quantities.</p>';
+    const totals = JB1.totalQuantities(results.map(r => r.value));
+    const heading = `<h1>JB-1 · Junction box quantities</h1><p>Project: ${escapeHTML(project.projectNumber || 'Not entered')} · County: ${escapeHTML(project.county || 'Not entered')} · Date: ${escapeHTML(project.date || 'Not entered')}</p><p class="report-note">Calculation engine basis: MDOT JB-1 v5.0, revised October 10, 2011. User App revised October 31, 2026. Dimensions in decimal feet unless labeled.</p>`;
+    const boxes = project.boxes.map((box, i) => {
+      const r = results[i].value;
+      return `<section class="report-box"><h2>${escapeHTML(boxLabel(box, i))} · ${box.side === 'L' ? 'Left' : 'Right'}</h2><table><thead><tr><th>W1–3 (ft)</th><th>W2–4 (ft)</th><th>H (ft)</th><th>Net concrete (yd³)</th><th>Steel (lb)</th></tr></thead><tbody><tr><td>${f(r.widthsFeet[0])}</td><td>${f(r.widthsFeet[1])}</td><td>${f(r.heightFeet)}</td><td>${f(r.concreteCubicYards)}</td><td>${f(r.steelPounds, 2)}</td></tr></tbody></table><p class="report-note">${box.height === null ? 'Calculated minimum' : 'Entered'} height; minimum ${f(r.minimumHeightFeet)} ft. Gross concrete ${f(r.grossConcreteCubicYards)} yd³ less opening deductions ${f(r.openingDeductionCubicYards)} yd³. Steel includes legacy 4 lb allowance.</p><table class="report-pipes"><thead><tr><th>Pipe side</th><th>Span (in.)</th><th>Rise (in.)</th><th>Skew (°)</th><th>Wall (in.)</th></tr></thead><tbody>${box.pipes.map((p, n) => `<tr><td>${n + 1}${n === 0 ? ' · outflow' : ''}</td><td>${p.span ? f(p.span, 2) : 'None'}</td><td>${f(p.rise, 2)}</td><td>${f(p.skew, 2)}</td><td>${f(p.thickness, 2)}</td></tr>`).join('')}</tbody></table><table class="report-pipes"><thead><tr><th>Bar mark</th>${r.bars.map(b => `<th>${b.mark}</th>`).join('')}</tr></thead><tbody><tr><th>Number</th>${r.bars.map(b => `<td>${b.count}</td>`).join('')}</tr><tr><th>Length (in.)</th>${r.bars.map(b => `<td>${f(b.lengthInches, 2)}</td>`).join('')}</tr></tbody></table>${(r.warnings || []).map(note => `<p class="report-note">${escapeHTML(note)}</p>`).join('')}</section>`;
+    }).join('');
+    return heading + boxes + `<h2>Project totals · ${project.boxes.length} ${project.boxes.length === 1 ? 'box' : 'boxes'}</h2><p>Net concrete: <strong>${f(totals.concreteCubicYards)} yd³</strong> · Reinforcing steel: <strong>${f(totals.steelPounds, 2)} lb</strong></p>`;
+  }
+  function validateProject(data) {
+    const text = (value, max) => typeof value === 'string' && value.length <= max;
+    if (!data || data.schema !== 'jb1-project-v1' || !text(data.projectNumber, 120) || !text(data.county, 120) || !text(data.date, 10) || !Array.isArray(data.boxes) || data.boxes.length < 1 || data.boxes.length > 50) throw new Error('Choose a JB-1 project file containing between 1 and 50 boxes.');
+    const boxes = data.boxes.map((box, i) => {
+      if (!box || !text(box.number, 80) || !text(box.station, 80) || !['L', 'R'].includes(box.side)) throw new Error(`Box ${i + 1} has invalid identification fields.`);
+      JB1.calculateBox(box);
+      return { number: box.number, station: box.station, side: box.side, height: box.height ?? null, pipes: box.pipes.map(p => ({ span: p.span, rise: p.rise, skew: p.skew, thickness: p.thickness })) };
+    });
+    if (data.date !== '' && (!/^\d{4}-\d{2}-\d{2}$/.test(data.date) || !Number.isFinite(Date.parse(data.date)) || new Date(data.date).toISOString().slice(0, 10) !== data.date)) throw new Error('The project report date is invalid.');
+    return { schema: 'jb1-project-v1', projectNumber: data.projectNumber, county: data.county, date: data.date, boxes };
+  }
+
+  makePipeRows();
+  for (let i = 0; i < 4; i++) {
+    $(`pipe-${i}-enabled`).addEventListener('change', () => {
+      const enabled = $(`pipe-${i}-enabled`).checked;
+      for (const [key, value] of Object.entries(enabled ? newPipe() : emptyPipe())) {
+        const input = $(`pipe-${i}-${key}`); input.disabled = !enabled; input.value = enabled ? value : '';
+      }
+      readForm(); render();
+    });
+    for (const key of ['span', 'rise']) $(`pipe-${i}-${key}`).addEventListener('input', () => {
+      const old = project.boxes[selected].pipes[i];
+      const span = readNumber($(`pipe-${i}-span`));
+      const riseInput = $(`pipe-${i}-rise`);
+      if (key === 'span' && old.span === old.rise && span !== null) riseInput.value = span;
+      const rise = readNumber(riseInput);
+      const thickness = $(`pipe-${i}-thickness`);
+      try {
+        if (span !== null && rise !== null && (old.thickness === JB1.defaultThickness(old.span, old.rise) || thickness.value === '')) {
+          thickness.value = JB1.defaultThickness(span, rise);
+        }
+      } catch { /* Unsupported sizes are explained by the calculation's input error. */ }
+    });
+  }
+  $('box-form').addEventListener('submit', event => event.preventDefault());
+  for (const input of [...$('box-form').querySelectorAll('input[type="number"],input[type="text"],select'), $('project-number'), $('county'), $('report-date')]) input.addEventListener('input', () => { readForm(); render(); });
+  $('box-select').addEventListener('change', () => { selected = Number($('box-select').value); loadForm(); });
+  $('add-box').addEventListener('click', () => { if (project.boxes.length >= 50) return; project.boxes.push(newBox(project.boxes.length + 1)); selected = project.boxes.length - 1; dirty = true; $('file-status').textContent = 'Unsaved changes'; loadForm(); $('box-number').focus(); });
+  $('remove-box').addEventListener('click', () => {
+    if (project.boxes.length <= 1 || !confirm(`Remove ${boxLabel(project.boxes[selected], selected)} from this project?`)) return;
+    project.boxes.splice(selected, 1); selected = Math.min(selected, project.boxes.length - 1); dirty = true; $('file-status').textContent = 'Unsaved changes'; loadForm();
+  });
+  $('save-project').addEventListener('click', () => {
+    try {
+      validateProject(project);
+      const url = URL.createObjectURL(new Blob([JSON.stringify(project, null, 2) + '\n'], { type: 'application/json' }));
+      const link = document.createElement('a'); link.href = url; link.download = 'JB-1-project.json'; link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      dirty = false; $('file-status').textContent = 'Project download requested · keep the JSON file';
+    } catch (error) { alert(error.message); }
+  });
+  $('open-project').addEventListener('click', () => { $('project-file').value = ''; $('project-file').click(); });
+  $('project-file').addEventListener('change', async () => {
+    const file = $('project-file').files[0]; if (!file) return;
+    try {
+      if (file.size > 1024 * 1024) throw new Error('This file is too large. Choose a JB-1 project JSON file smaller than 1 MB.');
+      const restored = validateProject(JSON.parse(await file.text()));
+      if (dirty && !confirm('Replace the unsaved inputs with this project? Save a project file first if you need to keep them.')) return;
+      project = restored; selected = 0; dirty = false; loadForm(); $('file-status').textContent = `Opened ${file.name}`;
+    } catch (error) { alert(`Could not open the project: ${error.message}`); }
+  });
+  window.addEventListener('beforeprint', () => { $('print-report').innerHTML = reportHTML(); });
+  $('print-project').addEventListener('click', () => { $('print-report').innerHTML = reportHTML(); window.print(); });
+  window.addEventListener('beforeunload', event => { if (dirty) { event.preventDefault(); event.returnValue = ''; } });
+  loadForm();
+})();
+</script>
+</body>
+</html>
