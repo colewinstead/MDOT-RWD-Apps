@@ -1,4 +1,4 @@
-# SS-2A initial recovery
+# SS-2A recovery history
 
 Target `ss-2a(64).exe`, SHA-256 `31b10c65b0f06e9d8e9c4c46e3236759842b2613af5166e3c6a68fb8b5ca9b0b`; x86 PE32. REA/Hopper evidence is retained in `rea-evidence.json` and `analysis-snapshot.json`; Xcode llvm-objdump output is in `native-disassembly.txt`.
 
@@ -11,3 +11,7 @@ The SS-2 workflow can plausibly share project metadata, inlet schedule, and repo
 ## Windows selector and first observed result
 
 The selector accepts Page Up when its key event is posted to the window from the interactive probe with the extended-key flag. Roadway side and pavement choices consume a single key without Enter; sending Enter after these answers shifted subsequent inputs. A corrected synthetic case entered station 10000, left side, length 5 ft, width 4 ft, height 4 ft, no concrete pavement, and one 15-inch circular opening. The original screen showed 2.614 yd³ concrete and 219 lb steel (caseok2.png). This is one screen-rounded observation, not proof of the calculation equations, bar schedules, other sizes, pavement branches, or numeric identity. No report was written. The probe task and process were removed after capture.
+
+## Completed static reconstruction
+
+The initial unresolved calculation questions above are superseded by formulas.md, which records the complete recovered quantity expressions, all19pipe deductions, pavement additions and grand-total accumulation. The modern application is delivered separately as ../SS-2A.html (relative to its development folder). The original saved report confirms no bar schedule, as documented in VALIDATION.md. Current test outcomes and runtime coverage are recorded there.

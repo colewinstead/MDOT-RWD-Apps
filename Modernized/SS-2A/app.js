@@ -30,7 +30,7 @@
  }
  const openingText=inlet=>inlet.openings.length?inlet.openings.map(o=>`${o.count} × ${pipes.find(p=>p.id===o.pipeId)?.label||o.pipeId}`).join('; '):'None';
  function scheduleRow(inlet,r,i,edit=false){return `<tr><td>${edit?`<button data-inlet="${i}">`:''}<strong>${esc(inlet.id||i+1)}</strong><span>${esc(inlet.station||'Station not entered')}</span>${edit?'</button>':''}</td><td>${esc(inlet.side)}</td><td>${esc(inlet.length)}</td><td>${esc(inlet.width)}</td><td>${esc(inlet.height)}</td><td>${inlet.pavement?'Yes':'No'}</td><td>${r?f(r.concrete):'—'}</td><td>${r?f(r.steel):'—'}</td></tr>`;}
- const totalRow=t=>`<tr class="report-total"><td colspan="6">Project total · ${project.inlets.length} inlets</td><td>${f(t.concrete)}</td><td>${f(t.steel)}</td></tr>`;
+ const totalRow=t=>`<tr class="report-total"><td colspan="6">Project total · ${project.inlets.length} inlet${project.inlets.length===1?'':'s'}</td><td>${f(t.concrete)}</td><td>${f(t.steel)}</td></tr>`;
  function report(total,valid){
   if(!valid){$('report').innerHTML='<h1>Report unavailable</h1><p>Correct all inlet inputs before printing this project.</p>';return;}
   const metadata=[['Project',project.projectNumber],['County',project.county],['Prepared by',project.preparedBy],['Report date',project.date]];

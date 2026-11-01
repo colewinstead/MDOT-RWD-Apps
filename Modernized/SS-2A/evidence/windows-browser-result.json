@@ -1,0 +1,12 @@
+{
+    "htmlSha256":  "4DEBCC76AEFCCB528E6D6CFAA9ADD3C0DCCAFE3AE89A75A1B443712234E80B82",
+    "browser":  "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "version":  "156.0.4314.58",
+    "url":  "file:///C:/Users/colew/SS2PilotTest/standalone/SS-2A.html",
+    "standaloneFiles":  [
+                            "SS-2A.html"
+                        ],
+    "concretePresent":  true,
+    "steelPresent":  true,
+    "domBytes":  34462
+}

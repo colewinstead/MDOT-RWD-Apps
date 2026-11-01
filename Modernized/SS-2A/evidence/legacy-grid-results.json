@@ -1,6 +1,7 @@
 {
   "cases": [
     {
+      "resultIndex": 1,
       "length": 5,
       "width": 4,
       "height": 4,
@@ -27,6 +28,229 @@
         },
         "rawHex": {
           "concrete": "0000000079492740",
+          "steel": "00000000b9be5a43"
+        }
+      }
+    },
+    {
+      "resultIndex": 1,
+      "length": 5,
+      "width": 4,
+      "height": 4,
+      "pavement": true,
+      "openings": [
+        [
+          2,
+          2,
+          0
+        ]
+      ],
+      "observed": {
+        "sourceSha256": "a11965cd84bdd325fe7a1279b0f8bc7f056f1c2ce0ea873f047c2847df99dbbb",
+        "basicLine": 1380,
+        "arrays": {
+          "concrete": [
+            0,
+            2.47025943
+          ],
+          "steel": [
+            0,
+            291.745
+          ]
+        },
+        "rawHex": {
+          "concrete": "00000000bb181e40",
+          "steel": "000000005cdf9143"
+        }
+      }
+    },
+    {
+      "resultIndex": 1,
+      "length": 10,
+      "width": 5,
+      "height": 6,
+      "pavement": false,
+      "openings": [
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "observed": {
+        "sourceSha256": "a11965cd84bdd325fe7a1279b0f8bc7f056f1c2ce0ea873f047c2847df99dbbb",
+        "basicLine": 1380,
+        "arrays": {
+          "concrete": [
+            0,
+            4.6374073
+          ],
+          "steel": [
+            0,
+            375.055
+          ]
+        },
+        "rawHex": {
+          "concrete": "00000000a4659440",
+          "steel": "000000000a87bb43"
+        }
+      }
+    },
+    {
+      "resultIndex": 1,
+      "length": 10,
+      "width": 5,
+      "height": 6,
+      "pavement": true,
+      "openings": [
+        [
+          2,
+          2,
+          1
+        ]
+      ],
+      "observed": {
+        "sourceSha256": "a11965cd84bdd325fe7a1279b0f8bc7f056f1c2ce0ea873f047c2847df99dbbb",
+        "basicLine": 1380,
+        "arrays": {
+          "concrete": [
+            0,
+            4.43240738
+          ],
+          "steel": [
+            0,
+            475.055
+          ]
+        },
+        "rawHex": {
+          "concrete": "0000000048d68d40",
+          "steel": "000000000a87ed43"
+        }
+      }
+    },
+    {
+      "resultIndex": 1,
+      "length": 15,
+      "width": 6,
+      "height": 7,
+      "pavement": false,
+      "openings": [
+        [
+          1,
+          10,
+          0
+        ]
+      ],
+      "observed": {
+        "sourceSha256": "a11965cd84bdd325fe7a1279b0f8bc7f056f1c2ce0ea873f047c2847df99dbbb",
+        "basicLine": 1380,
+        "arrays": {
+          "concrete": [
+            0,
+            5.685259
+          ],
+          "steel": [
+            0,
+            514.445
+          ]
+        },
+        "rawHex": {
+          "concrete": "00000000a4edb540",
+          "steel": "000000007b9c0044"
+        }
+      }
+    },
+    {
+      "resultIndex": 1,
+      "length": 15,
+      "width": 6,
+      "height": 7,
+      "pavement": true,
+      "openings": [
+        [
+          3,
+          7,
+          1
+        ]
+      ],
+      "observed": {
+        "sourceSha256": "a11965cd84bdd325fe7a1279b0f8bc7f056f1c2ce0ea873f047c2847df99dbbb",
+        "basicLine": 1380,
+        "arrays": {
+          "concrete": [
+            0,
+            4.965259
+          ],
+          "steel": [
+            0,
+            641.445
+          ]
+        },
+        "rawHex": {
+          "concrete": "0000000067e39e40",
+          "steel": "000000007b5c2044"
+        }
+      }
+    },
+    {
+      "resultIndex": 1,
+      "length": 5,
+      "width": 3,
+      "height": 3,
+      "pavement": false,
+      "openings": [],
+      "observed": {
+        "sourceSha256": "a11965cd84bdd325fe7a1279b0f8bc7f056f1c2ce0ea873f047c2847df99dbbb",
+        "basicLine": 1380,
+        "arrays": {
+          "concrete": [
+            0,
+            1.9855926
+          ],
+          "steel": [
+            0,
+            189.355
+          ]
+        },
+        "rawHex": {
+          "concrete": "00000000e627fe3f",
+          "steel": "00000000e15a3d43"
+        }
+      }
+    },
+    {
+      "resultIndex": 1,
+      "length": 5,
+      "width": 4,
+      "height": 4,
+      "pavement": false,
+      "openings": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          1
+        ]
+      ],
+      "observed": {
+        "sourceSha256": "a11965cd84bdd325fe7a1279b0f8bc7f056f1c2ce0ea873f047c2847df99dbbb",
+        "basicLine": 1380,
+        "arrays": {
+          "concrete": [
+            0,
+            2.50785923
+          ],
+          "steel": [
+            0,
+            218.74501
+          ]
+        },
+        "rawHex": {
+          "concrete": "00000000c4802040",
           "steel": "00000000b9be5a43"
         }
       }
