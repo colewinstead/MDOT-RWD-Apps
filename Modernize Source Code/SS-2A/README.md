@@ -24,8 +24,8 @@ The calculation engine uses the supplied executable's recovered legacy rules, wi
 The editable source files, tests and evidence live in this development folder. Users need only the generated `SS-2A.html` file. With an existing Node.js installation:
 
 ```sh
-node --test Modernized/SS-2A/calculations.test.cjs
-node Modernized/SS-2A/build-standalone.cjs
+node --test "Modernize Source Code/SS-2A/calculations.test.cjs"
+node "Modernize Source Code/SS-2A/build-standalone.cjs"
 ```
 
 Regenerate the HTML after changing sources. The builder embeds CSS and JavaScript, generates exact CSP content hashes and rejects companion-file references. No runtime dependencies or build steps are required for the delivered app.

@@ -1,8 +1,8 @@
 ---
 version: 1
 slug: "modernized-jb-1-index-html"
-primary_target: "Modernized/JB-1/index.html"
-related_targets: ["Modernized/JB-1/app.js","Modernized/JB-1/styles.css"]
+primary_target: "Modernize Source Code/JB-1/index.html"
+related_targets: ["Modernize Source Code/JB-1/app.js","Modernize Source Code/JB-1/styles.css"]
 ---
 
 # JB-1 working screen

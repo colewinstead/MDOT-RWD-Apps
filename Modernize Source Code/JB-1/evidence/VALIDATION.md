@@ -58,6 +58,6 @@ No independent structural/design-standard certification, current MDOT drawing ad
 
 ## Single-file packaging, November 1, 2026
 
-At the user's request, `Modernized/JB-1.html` embeds the existing stylesheet and both scripts, with exact SHA-256 content hashes in its CSP. Instructions are included in the page. The deterministic `build-standalone.cjs` asserts the expected embedded asset counts and rejects remaining companion-file references. The editable source files remain in the development folder; users only need the single generated HTML file.
+At the user's request, `Modernize Source Code/JB-1.html` embeds the existing stylesheet and both scripts, with exact SHA-256 content hashes in its CSP. Instructions are included in the page. The deterministic `build-standalone.cjs` asserts the expected embedded asset counts and rejects remaining companion-file references. The editable source files remain in the development folder; users only need the single generated HTML file.
 
 The generated HTML was copied into an isolated temporary directory containing no other app files and served over loopback for the test browser. It rendered, recalculated the single 24-inch pipe case to0.968yd³ and64.32lb, and downloaded a project JSON successfully. No browser console errors were observed. All9calculation tests passed. This checks self-contained packaging and CSP execution over HTTP; the previously documented direct-file browser-policy and native-print limitations remain.
