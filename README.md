@@ -25,4 +25,4 @@ node Modernized/SS-3/build-standalone.cjs
 node --test Modernized/JB-1/calculations.test.cjs Modernized/JB-1/jb2.test.cjs Modernized/SS-2A/calculations.test.cjs Modernized/SS-3/calculations.test.cjs
 ```
 
-These apps reproduce recovered legacy calculations. Read each app's documented limits before using its quantities.
+The app guides document the recovered legacy calculations and the JB-2 drawing-based calculation. Read each app's documented limits before using its quantities.

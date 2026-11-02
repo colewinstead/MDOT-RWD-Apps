@@ -172,7 +172,7 @@
     const w1 = Math.max(widths[0], widths[2]), w2 = Math.max(widths[1], widths[3]);
     if (w1 > 111 || w2 > 111) throw new Error('JB-2 exceeds the drawing\'s maximum width of 9 ft 3 in. Reduce the pipe size or skew.');
     const t1 = pipes[0].thickness;
-    const minimumHeightFeet = Math.max(...pipes.filter(Boolean).map((pipe, i) => pipe.rise + 2 * pipe.thickness + 12 + (pipe.rise !== pipes[0].rise ? t1 : 0))) / 12;
+    const minimumHeightFeet = Math.max(...pipes.filter(Boolean).map(pipe => pipe.rise + 2 * pipe.thickness + 12 + (pipe.rise !== pipes[0].rise ? t1 : 0))) / 12;
     const heightFeet = input.height == null ? minimumHeightFeet : input.height;
     if (typeof heightFeet !== 'number' || !Number.isFinite(heightFeet) || heightFeet < minimumHeightFeet) {
       throw new Error(`Box height must be at least ${minimumHeightFeet.toFixed(6)} ft.`);
@@ -200,7 +200,7 @@
     );
     const poundsPerFoot = {4: .668, 6: 1.502, 7: 2.044};
     const steelPounds = bars.reduce((sum, bar) => sum + bar.count * bar.lengthInches / 12 * poundsPerFoot[bar.size], 0) + 3.3;
-    if (![h, concreteCubicYards, steelPounds, ...bars.flatMap(bar => [bar.count, bar.lengthInches])].every(Number.isFinite) || concreteCubicYards <= 0) {
+    if (![h, concreteCubicYards, steelPounds, ...bars.flatMap(bar => [bar.count, bar.lengthInches])].every(Number.isFinite) || bars.some(bar => !Number.isSafeInteger(bar.count)) || concreteCubicYards <= 0) {
       throw new Error('These dimensions do not produce finite, positive JB-2 quantities. Check the inputs.');
     }
     const warnings = [];

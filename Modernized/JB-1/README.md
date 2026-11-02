@@ -34,7 +34,7 @@ The engine reproduces the formulas and selected float32 stores recovered from th
 See [the recovery ledger](evidence/RECOVERY.md) for machine-code addresses, equations, defaults, fixed lookup tables, rounding, and distinctions between recovered behavior and modern input validation. [Validation](evidence/VALIDATION.md) records the actual checks and their limits.
 
 - JB-1 reproduces the legacy calculation rules. Drawing applicability, structural adequacy, pipe conflicts, cover, and project suitability require separate review. The exact governing drawing edition for the original executable was not supplied.
-- Noncircular spans are limited to the recovered table: **22, 29, 36, 44, 51, 58, 65, 73, and 88 inches**. Its opening deductions depend only on span, regardless of entered rise, thickness, or skew; the app states that limit when applicable. No other size is silently substituted.
+- Imported JB-1 noncircular spans are limited to the recovered table: **22, 29, 36, 44, 51, 58, 65, 73, and 88 inches**. New pipe choices use the supplied common-size list. JB-1 opening deductions depend only on span, regardless of entered rise, thickness, or skew; the app states that limit when applicable. No other size is silently substituted.
 - Pipe skew must be strictly between −90° and +90°. This numerical input gate is not an agency acceptance limit. Pipe-layout applicability remains a separate review.
 - The original steel equation includes a fixed **4 lb** allowance. It is preserved, not reinterpreted as a current standard.
 - Calculation precision is retained internally. The new bar list shows lengths to two decimals instead of the original whole-inch display. Steel uses unrounded lengths, as in the original; displayed rounding is not a fabrication tolerance.
