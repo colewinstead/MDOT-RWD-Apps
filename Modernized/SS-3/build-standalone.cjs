@@ -4,7 +4,7 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const assert = require('node:assert/strict');
 
-const read = name => fs.readFileSync(path.join(__dirname, name), 'utf8');
+const read = name => fs.readFileSync(path.join(__dirname, name), 'utf8').replace(/\r\n/g, '\n');
 const css = read('styles.css');
 const scripts = [read('calculations.js'), read('app.js')];
 assert.ok(!/<\/style/i.test(css), 'Stylesheet must not contain a closing style tag.');
@@ -23,6 +23,6 @@ assert.equal((html.match(/<script>/g) || []).length, 2);
 assert.ok(!/\b(?:src|href)="(?!#|data:)[^"]+"/.test(html), 'Standalone HTML still references another file.');
 assert.ok(html.includes(`style-src ${hash(css)}`));
 for (const script of scripts) assert.ok(html.includes(hash(script)));
-const output = path.join(__dirname, '..', 'SS-3.html');
+const output = path.join(__dirname, '..', '..', 'SS-3.html');
 fs.writeFileSync(output, html);
 console.log(`Built ${output} (${Buffer.byteLength(html)} bytes; no companion files).`);

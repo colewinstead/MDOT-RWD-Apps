@@ -7,7 +7,7 @@ const calc = require('./calculations.js');
 const f = Math.fround;
 test('all 23 baseline choices match float32 immediates from native instructions', () => {
   const asm = fs.readFileSync(path.join(__dirname,'evidence/native-disassembly.txt'),'utf8');
-  const entries = [...asm.matchAll(/([0-9a-f]+):[^\n]*mov\s+eax, dword ptr \[0x5b2b(4c|50|54)\]\n[^\n]*mov\s+edx, (0x[0-9a-f]+)/g)]
+  const entries = [...asm.matchAll(/([0-9a-f]+):[^\n]*mov\s+eax, dword ptr \[0x5b2b(4c|50|54)\]\r?\n[^\n]*mov\s+edx, (0x[0-9a-f]+)/g)]
     .filter(m => parseInt(m[1],16)>=0x40d770 && parseInt(m[1],16)<=0x41555b)
     .map(m => {const b=Buffer.alloc(4);b.writeUInt32LE(Number(m[3]));return {address:parseInt(m[1],16),field:m[2],value:b.readFloatLE()};});
   const native3 = entries.filter(e=>e.address<0x413979);

@@ -1,8 +1,8 @@
 # SS-3 · Storm sewer inlet quantities
 
-Open **Modernized/SS-3.html** directly in a current browser on Mac or Windows. That one file contains the app, calculations, styles, instructions, and report. It needs no installation, internet connection, or companion files.
+Open [SS-3.html](../../SS-3.html) at the repository root directly in a current browser on Mac or Windows. That one file contains the app, calculations, styles, instructions, and report. It needs no installation, internet connection, or companion files.
 
-This modernization preserves the recovered SS-3 and SS-4 quantity calculations from the supplied version 3.0 executable dated October 10, 2011. The original executable and repository DLLs are unchanged. Impeccable was not used for this first pass.
+This modernization preserves the recovered SS-3 and SS-4 quantity calculations from the supplied version 3.0 executable dated October 10, 2011. The original executable and repository DLLs are preserved in `Legacy/` at the repository root. Impeccable was not used for this first pass.
 
 ## Working with a project
 

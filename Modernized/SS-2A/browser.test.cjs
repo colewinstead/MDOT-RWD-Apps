@@ -4,7 +4,7 @@ const fs=require('node:fs/promises'),os=require('node:os'),path=require('node:pa
 const {pathToFileURL}=require('node:url');
 (async()=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'ss2a-'));
- await fs.copyFile(path.join(__dirname,'../SS-2A.html'),path.join(dir,'SS-2A.html'));
+ await fs.copyFile(path.join(__dirname,'../../SS-2A.html'),path.join(dir,'SS-2A.html'));
  const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
  try{
   const page=await browser.newPage({viewport:{width:1440,height:1080},acceptDownloads:true}),errors=[],network=[];

@@ -9,7 +9,7 @@ const assert = require('node:assert/strict');
 (async()=>{
   const isolated = await fs.mkdtemp(path.join(os.tmpdir(),'ss3-standalone-'));
   const evidence = path.join(__dirname,'evidence');
-  await fs.copyFile(path.join(__dirname,'../SS-3.html'),path.join(isolated,'SS-3.html'));
+  await fs.copyFile(path.join(__dirname,'../../SS-3.html'),path.join(isolated,'SS-3.html'));
   const browser = await chromium.launch({executablePath:process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
   try {
     const page = await browser.newPage({viewport:{width:1440,height:1080},acceptDownloads:true});

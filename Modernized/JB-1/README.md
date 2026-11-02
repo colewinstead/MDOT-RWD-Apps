@@ -1,8 +1,8 @@
 # JB-1 · Junction box quantities
 
-Open **JB-1.html** in the parent `Modernized` folder in a current browser. That single file includes all styling, calculations, instructions, and interface code. You can move or copy it by itself. No hosting, installation, internet connection, account, or build step is required to use it. Saved project JSON files contain your work and are kept separately.
+Open [JB-1.html](../../JB-1.html) at the repository root in a current browser. That single file includes all styling, calculations, instructions, and interface code. You can move or copy it by itself. No hosting, installation, internet connection, account, or build step is required to use it. Saved project JSON files contain your work and are kept separately.
 
-This is a reconstruction of the supplied Mississippi MDOT JB-1 v5.0 executable, revised October 10, 2011. The original EXE and its DLLs are unchanged.
+This is a reconstruction of the supplied Mississippi MDOT JB-1 v5.0 executable, revised October 10, 2011. The original EXE and its DLLs are preserved in `Legacy/` at the repository root.
 
 ## Use
 
@@ -44,4 +44,4 @@ node --test calculations.test.cjs
 
 No dependencies are required by the app or calculation tests. The `evidence` folder contains static recovery notes and synthetic Windows verification artifacts; the app does not load those files.
 
-The files in this development folder remain the editable sources. After changing them, run `node build-standalone.cjs` to regenerate `../JB-1.html`. The build checks that no companion-file references remain and creates exact content hashes for the embedded scripts and stylesheet. `index.html` is the source preview and still uses the separate source files.
+The files in this development folder remain the editable sources. After changing them, run `node build-standalone.cjs` to regenerate `../../JB-1.html` at the repository root. The build checks that no companion-file references remain and creates exact content hashes for the embedded scripts and stylesheet. `index.html` is the source preview and still uses the separate source files.

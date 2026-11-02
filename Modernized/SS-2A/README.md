@@ -1,8 +1,8 @@
 # SS-2A · Storm sewer inlet quantities
 
-Open **Modernized/SS-2A.html** in a current browser on Mac or Windows. That single file includes the interface, calculations, instructions and printable reports. No installation, server, account, network connection or companion files are needed.
+Open [SS-2A.html](../../SS-2A.html) at the repository root in a current browser on Mac or Windows. That single file includes the interface, calculations, instructions and printable reports. No installation, server, account, network connection or companion files are needed.
 
-This is a separate app from SS-3/SS-4. It reconstructs the supplied MDOT SS-2A.exe, version 6.0, October 10, 2011. Original executable files are preserved.
+This is a separate app from SS-3/SS-4. It reconstructs the supplied MDOT SS-2A.exe, version 6.0, October 10, 2011. Original executable files and their DLLs are preserved in `Legacy/` at the repository root.
 
 ## Use
 
