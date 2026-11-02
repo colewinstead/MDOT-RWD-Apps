@@ -178,7 +178,7 @@ Input and result panels have a thin division-stroke border. Quantity rows align 
 
 ### Diagram
 
-An inline SVG uses the same ink and surface roles as the UI. Side numbers connect the input rows with the plan, and orange marks outflow. Keep its visible schematic disclaimer and accessible title/description. Geometry is centered for illustration; it is not a construction drawing.
+An inline SVG uses the same ink and surface roles as the UI. The shared JB app provides a per-box JB-1/JB-2 selector and listed pipe-size choices. Side numbers connect the input rows with the plan, and orange marks outflow. Pipes and the outflow arrow follow entered skew: zero points along the wall's outward normal, positive turns clockwise in plan, negative counterclockwise. Pipe widths use their actual width before rotation, with the inner end cut along the wall. JB-2 wall thickness follows the selected pipes' 6/8-inch requirement. The viewBox expands when needed to keep the drawing visible. Keep its visible schematic disclaimer and accessible title/description. Geometry is centered for illustration; it is not a construction drawing.
 
 ### Error feedback
 

@@ -23,6 +23,6 @@ assert.equal((html.match(/<script>/g) || []).length, 2);
 assert.ok(!/\b(?:src|href)="(?!#|data:)[^"]+"/.test(html), 'Standalone HTML still references another file.');
 assert.ok(html.includes(`style-src ${hash(css)}`));
 for (const script of scripts) assert.ok(html.includes(hash(script)));
-const output = path.join(__dirname, '..', '..', 'JB-1.html');
+const output = path.join(__dirname, '..', '..', 'JB.html');
 fs.writeFileSync(output, html);
 console.log(`Built ${output} (${Buffer.byteLength(html)} bytes; no companion files).`);

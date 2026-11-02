@@ -4,7 +4,7 @@ Open a modernized HTML file directly in a current browser on Mac or Windows. Eac
 
 | App | Purpose | Instructions and calculation limits |
 | --- | --- | --- |
-| [JB-1.html](JB-1.html) | Junction box quantities | [JB-1 guide](Modernized/JB-1/README.md) |
+| [JB.html](JB.html) | JB-1 and JB-2 junction box quantities | [JB guide](Modernized/JB-1/README.md) |
 | [SS-2A.html](SS-2A.html) | Storm sewer inlet quantities | [SS-2A guide](Modernized/SS-2A/README.md) |
 | [SS-3.html](SS-3.html) | SS-3 and SS-4 storm sewer inlet quantities | [SS-3 guide](Modernized/SS-3/README.md) |
 
@@ -22,7 +22,7 @@ To rebuild and check the apps with an existing Node.js installation, run from th
 node Modernized/JB-1/build-standalone.cjs
 node Modernized/SS-2A/build-standalone.cjs
 node Modernized/SS-3/build-standalone.cjs
-node --test Modernized/JB-1/calculations.test.cjs Modernized/SS-2A/calculations.test.cjs Modernized/SS-3/calculations.test.cjs
+node --test Modernized/JB-1/calculations.test.cjs Modernized/JB-1/jb2.test.cjs Modernized/SS-2A/calculations.test.cjs Modernized/SS-3/calculations.test.cjs
 ```
 
 These apps reproduce recovered legacy calculations. Read each app's documented limits before using its quantities.

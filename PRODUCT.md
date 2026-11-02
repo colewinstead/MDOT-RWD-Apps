@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Plain HTML, CSS, and JavaScript, approved by the user. The user requested one portable file: open JB-1.html at the repository root in a browser on Mac or Windows. Styles and scripts are embedded; no companion assets, hosting, account, network dependency, or installation. Project inputs are explicitly saved in separate JSON files.
+Plain HTML, CSS, and JavaScript, approved by the user. Open JB.html at the repository root in a browser on Mac or Windows, and select JB-1 or JB-2 for each box. Styles and scripts are embedded; no companion assets, hosting, account, network dependency, or installation. Project inputs are explicitly saved in separate JSON files.
 
 ## Product Purpose
 
@@ -24,7 +24,7 @@ The user identifies JB-1 as a Mississippi MDOT program. The supplied executable 
 
 ## Capabilities and Constraints
 
-The original accepts project information and pipe dimensions for four box sides. Its report includes box dimensions, concrete after pipe-opening deductions, reinforcing steel, and bar schedules A1 through F. Recover these rules from the executable; do not claim compliance with current MDOT drawings without separate verification. Preserve original files under Legacy/. Save editable sources and evidence under Modernized/JB-1 and deliver JB-1.html at the repository root. The agreed interface puts inputs beside a junction-box diagram and printable results.
+The app accepts project information and pipe choices for four box sides. Its report includes box dimensions, concrete after pipe-opening deductions, reinforcing steel, and bar schedules A1 through F. JB-1 preserves the executable calculations. JB-2 uses MDOT sheet 6506 dated August 1, 2017, and the user-confirmed convention for solid-wall infill bars. Pipe selection supplies listed span, rise and thickness. Large JB-2 pipes automatically require 8-inch walls throughout. Preserve original files under Legacy/. Save editable sources and evidence under Modernized/JB-1 and deliver JB.html at the repository root. The agreed interface puts inputs beside a junction-box diagram and printable results.
 
 ## Evidence on Hand
 
