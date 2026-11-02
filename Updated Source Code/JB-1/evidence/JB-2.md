@@ -1,6 +1,6 @@
 # JB-2 drawing basis and verification
 
-The shared portable app is `JB.html` at the repository root. Its editable sources remain in `Modernize Source Code/JB-1/`. Historical JB-1 recovery records are unchanged.
+The shared portable app is `JB.html` at the repository root. Its editable sources remain in `Updated Source Code/JB-1/`. Historical JB-1 recovery records are unchanged.
 
 ## Source and scope
 
@@ -76,7 +76,7 @@ Drawing note 5 requires breakback at the wall for skew above 15 degrees or confl
 
 ## Checks
 
-`node --test "Modernize Source Code/JB-1/calculations.test.cjs" "Modernize Source Code/JB-1/jb2.test.cjs"` runs nine JB-1 regression checks and six JB-2 tests. The JB-1 capture comparison verifies 88 unchanged geometry/concrete/bar values; steel is checked against the captured bar schedule without the original fixed add-on, as requested by the user. JB-2 checks include both concrete formula branches, both pipe thresholds, all 18 deductions in standalone and forced-8-inch configurations, solid-wall bar additions, unit-weight totals, width boundaries, skew symmetry, invalid input, immutability, and mixed-standard totals.
+`node --test "Updated Source Code/JB-1/calculations.test.cjs" "Updated Source Code/JB-1/jb2.test.cjs"` runs nine JB-1 regression checks and six JB-2 tests. The JB-1 capture comparison verifies 88 unchanged geometry/concrete/bar values; steel is checked against the captured bar schedule without the original fixed add-on, as requested by the user. JB-2 checks include both concrete formula branches, both pipe thresholds, all 18 deductions in standalone and forced-8-inch configurations, solid-wall bar additions, unit-weight totals, width boundaries, skew symmetry, invalid input, immutability, and mixed-standard totals.
 
 Two hand-calculated concrete cases:
 

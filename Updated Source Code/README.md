@@ -1,4 +1,4 @@
-# Modernize Source Code
+# Updated Source Code
 
 The portable apps are at the repository root: [JB (JB-1 and JB-2)](../JB.html), [SS-2A](../SS-2A.html), and [SS-3](../SS-3.html). Each HTML file works by itself. Junction-box editable sources remain in `JB-1/`.
 

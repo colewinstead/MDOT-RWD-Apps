@@ -9,6 +9,6 @@
 - Whenever source changes affect an app, regenerate its standalone HTML before handing off the work. Keep packaging reproducible with existing tools and no runtime dependencies.
 - Check that the standalone output contains no required companion-file references. Test it with only that HTML file available, along with the relevant calculation checks. State any browser or operating-system limitation that prevents direct-file verification.
 
-The junction-box app follows this convention: `JB.html` contains JB-1 and JB-2; `Modernize Source Code/JB-1/` contains its editable sources and development evidence.
+The junction-box app follows this convention: `JB.html` contains JB-1 and JB-2; `Updated Source Code/JB-1/` contains its editable sources and development evidence.
 
 Keep original EXEs, their DLLs, and legacy supporting files together under `Legacy/`. Preserve their contents when reorganizing the repository.

@@ -2,7 +2,7 @@
 
 Open [JB.html](../../JB.html) at the repository root in a current browser. That single file includes all styling, calculations, instructions, and interface code. You can move or copy it by itself. No hosting, installation, internet connection, account, or build step is required to use it. Saved project JSON files contain your work and are kept separately.
 
-JB-1 reconstructs the supplied Mississippi MDOT v5.0 executable, revised October 10, 2011. JB-2 implements the supplied traffic-load standard drawing, MDOT sheet 6506, August 1, 2017. The original EXE and its DLLs are preserved in `Legacy/` at the repository root. Editable sources remain in this `Modernize Source Code/JB-1/` folder.
+JB-1 reconstructs the supplied Mississippi MDOT v5.0 executable, revised October 10, 2011. JB-2 implements the supplied traffic-load standard drawing, MDOT sheet 6506, August 1, 2017. The original EXE and its DLLs are preserved in `Legacy/` at the repository root. Editable sources remain in this `Updated Source Code/JB-1/` folder.
 
 ## Use
 

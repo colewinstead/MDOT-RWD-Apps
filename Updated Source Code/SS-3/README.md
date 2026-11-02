@@ -25,8 +25,8 @@ The original BASIC input parser can round very long decimal strings differently 
 No runtime packages are needed. With an existing Node.js installation:
 
 ```sh
-node --test "Modernize Source Code/SS-3/calculations.test.cjs"
-node "Modernize Source Code/SS-3/build-standalone.cjs"
+node --test "Updated Source Code/SS-3/calculations.test.cjs"
+node "Updated Source Code/SS-3/build-standalone.cjs"
 ```
 
 Regenerate `SS-3.html` after source changes. The reproducible builder embeds all runtime files and rejects remaining companion-file references. Developer tests, evidence, and documentation are not required to run the delivered HTML.
