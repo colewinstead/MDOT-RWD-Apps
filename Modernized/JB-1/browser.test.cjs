@@ -1,0 +1,140 @@
+'use strict';
+// Optional developer check: requires an existing Playwright and Chrome installation.
+const {chromium} = require('playwright');
+const fs = require('node:fs/promises');
+const os = require('node:os');
+const path = require('node:path');
+const {pathToFileURL} = require('node:url');
+const assert = require('node:assert/strict');
+(async () => {
+  const isolated = await fs.mkdtemp(path.join(os.tmpdir(), 'jb1-skew-'));
+  let browser;
+  try {
+    const html = path.join(isolated, 'JB.html');
+    await fs.copyFile(path.join(__dirname, '../../JB.html'), html);
+    browser = await chromium.launch({executablePath: process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: true});
+    const page = await browser.newPage({viewport: {width: 1440, height: 1080}, acceptDownloads: true});
+    const errors = [], network = [];
+    page.on('pageerror', error => errors.push(error.message));
+    page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
+    page.on('request', request => { if (/^https?:/.test(request.url())) network.push(request.url()); });
+    page.on('dialog', dialog => dialog.accept());
+    await page.goto(pathToFileURL(html).href);
+    await page.locator('#pipe-1-enabled').check();
+    await page.locator('#pipe-3-enabled').check();
+    for (const skew of [0, 30, -30, 75, -75, 89.9, -89.9]) {
+      for (let side = 0; side < 4; side++) await page.locator(`#pipe-${side}-skew`).fill(String(skew));
+      assert.ok(await page.locator('#current-results').isVisible());
+      const geometry = await page.locator('#box-diagram').evaluate(svg => {
+        const view = svg.viewBox.baseVal;
+        const inner = svg.querySelector('.box-interior');
+        const walls = [inner.y.baseVal.value + inner.height.baseVal.value, inner.x.baseVal.value, inner.y.baseVal.value, inner.x.baseVal.value + inner.width.baseVal.value];
+        return [...svg.querySelectorAll('.pipe-connection')].map(group => {
+          const matrix = group.transform.baseVal.consolidate().matrix;
+          const axis = group.querySelector('.pipe-axis');
+          const start = axis.getPointAtLength(0).matrixTransform(matrix);
+          const end = axis.getPointAtLength(axis.getTotalLength()).matrixTransform(matrix);
+          const points = [...group.querySelector('.pipe').points].map(point => point.matrixTransform(matrix));
+          const side = Number(group.dataset.side);
+          return {side, dx: end.x - start.x, dy: end.y - start.y,
+            innerEnds: points.slice(0, 2).map(point => side % 2 ? point.y : point.x), wall: walls[side - 1],
+            inView: points.every(point => Number.isFinite(point.x) && Number.isFinite(point.y) && point.x >= view.x && point.x <= view.x + view.width && point.y >= view.y && point.y <= view.y + view.height)};
+        });
+      });
+      assert.equal(geometry.length, 4);
+      for (const pipe of geometry) {
+        const angle = ((pipe.side - 1) * 90 + skew) * Math.PI / 180;
+        const length = Math.hypot(pipe.dx, pipe.dy);
+        assert.ok(Math.abs(pipe.dx / length + Math.sin(angle)) < 1e-5, `Side ${pipe.side}, skew ${skew}: horizontal direction`);
+        assert.ok(Math.abs(pipe.dy / length - Math.cos(angle)) < 1e-5, `Side ${pipe.side}, skew ${skew}: vertical direction`);
+        assert.ok(pipe.innerEnds.every(value => Math.abs(value - pipe.wall) < 1e-4), 'Pipe ends meet the inner wall');
+        assert.ok(pipe.inView, 'Skewed pipe remains inside the diagram');
+      }
+      assert.equal(await page.locator('.flow-line').evaluate(arrow => arrow.parentElement.dataset.side), '1');
+      assert.ok((await page.locator('#diagram-description').textContent()).includes(`Side 1: ${skew} degrees skew.`));
+    }
+    await page.locator('#pipe-1-enabled').uncheck();
+    assert.equal(await page.locator('.pipe-connection[data-side="2"]').count(), 0);
+    await page.locator('#pipe-0-skew').fill('90');
+    assert.equal(await page.locator('#current-results').isVisible(), false);
+    assert.ok(await page.locator('#save-project').isDisabled());
+    await page.locator('#pipe-1-enabled').check();
+    for (const [side, skew] of [30, -25, 45, -35].entries()) await page.locator(`#pipe-${side}-skew`).fill(String(skew));
+    const [download] = await Promise.all([page.waitForEvent('download'), page.locator('#save-project').click()]);
+    const saved = await fs.readFile(await download.path());
+    await page.locator('#pipe-0-skew').fill('0');
+    await page.locator('#project-file').setInputFiles({name: 'skew-project.json', mimeType: 'application/json', buffer: saved});
+    await page.waitForFunction(() => document.querySelector('#file-status').textContent.startsWith('Opened'));
+    assert.equal(await page.locator('#pipe-0-skew').inputValue(), '30');
+    assert.match(await page.locator('.pipe-connection[data-side="1"]').getAttribute('transform'), /rotate\(30\)/);
+    assert.equal(await page.locator('#pipe-0-size option').count(), 18);
+    assert.equal(await page.locator('#pipe-0-span').count(), 0);
+    for (let side = 0; side < 4; side++) await page.locator(`#pipe-${side}-skew`).fill('0');
+    await page.locator('#box-type').selectOption('JB-2');
+    assert.ok((await page.locator('#calculation-notes').textContent()).includes('All walls: 6 in.'));
+    await page.locator('#pipe-0-size').selectOption('48x48');
+    assert.ok((await page.locator('#calculation-notes').textContent()).includes('All walls: 8 in.'));
+    assert.ok((await page.locator('#calculation-notes').textContent()).includes('0.816 yd³ of pipe openings'));
+    assert.equal(await page.locator('#pipe-0-thickness').textContent(), '5\u2033');
+    assert.equal(await page.locator('#bar-rows tr').nth(4).locator('td').nth(1).textContent(), '#7');
+    await page.locator('#pipe-0-size').selectOption('42x42');
+    assert.ok((await page.locator('#calculation-notes').textContent()).includes('All walls: 6 in.'));
+    await page.locator('#pipe-0-size').selectOption('51x31');
+    assert.ok((await page.locator('#calculation-notes').textContent()).includes('All walls: 8 in.'));
+    await page.locator('#pipe-0-size').selectOption('72x72');
+    await page.locator('#pipe-0-skew').fill('1');
+    assert.ok((await page.locator('#calculation-error').textContent()).includes('maximum width'));
+    assert.ok(await page.locator('#print-project').isDisabled());
+    await page.locator('#pipe-0-skew').fill('0');
+    await page.locator('#pipe-0-size').selectOption('48x48');
+    await page.locator('#add-box').click();
+    assert.equal(await page.locator('#box-type').inputValue(), 'JB-2');
+    await page.locator('#box-type').selectOption('JB-1');
+    const [mixedDownload] = await Promise.all([page.waitForEvent('download'), page.locator('#save-project').click()]);
+    const mixed = await fs.readFile(await mixedDownload.path());
+    const mixedData = JSON.parse(mixed);
+    assert.equal(mixedData.schema, 'jb-project-v1');
+    assert.deepEqual(mixedData.boxes.map(box => box.type), ['JB-2', 'JB-1']);
+    await page.evaluate(() => window.dispatchEvent(new Event('beforeprint')));
+    assert.ok((await page.locator('#print-report').textContent()).includes('JB-2 · Box 1'));
+    assert.ok((await page.locator('#print-report').textContent()).includes('JB-1 · Box 2'));
+    assert.ok((await page.locator('#print-report').textContent()).includes('All walls 8 in.'));
+    const legacy = {...JSON.parse(saved), schema: 'jb1-project-v1'};
+    delete legacy.boxes[0].type;
+    legacy.boxes[0].pipes[0] = {span: 88, rise: 55, thickness: 7, skew: 0};
+    await page.locator('#project-file').setInputFiles({name: 'legacy.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(legacy))});
+    await page.waitForFunction(() => document.querySelector('#file-status').textContent === 'Opened legacy.json');
+    assert.equal(await page.locator('#box-type').inputValue(), 'JB-1');
+    assert.equal(await page.locator('#pipe-0-size').inputValue(), 'imported');
+    assert.ok(await page.locator('#current-results').isVisible());
+    const [legacyDownload] = await Promise.all([page.waitForEvent('download'), page.locator('#save-project').click()]);
+    const migrated = JSON.parse(await fs.readFile(await legacyDownload.path()));
+    assert.deepEqual(migrated.boxes[0].pipes, legacy.boxes[0].pipes);
+    await page.locator('#box-type').selectOption('JB-2');
+    assert.ok((await page.locator('#calculation-error').textContent()).includes('common pipe table'));
+    assert.ok(await page.locator('#save-project').isDisabled());
+    await page.locator('#project-file').setInputFiles({name: 'mixed.json', mimeType: 'application/json', buffer: mixed});
+    await page.waitForFunction(() => document.querySelector('#file-status').textContent === 'Opened mixed.json');
+    assert.equal(await page.locator('#box-type').inputValue(), 'JB-2');
+    assert.equal(await page.locator('#pipe-0-size').inputValue(), '48x48');
+    const invalid = JSON.parse(mixed); invalid.boxes[0].type = 'JB-3';
+    await page.locator('#project-file').setInputFiles({name: 'invalid.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(invalid))});
+    await page.waitForTimeout(100);
+    assert.equal(await page.locator('#file-status').textContent(), 'Opened mixed.json');
+    assert.equal(await page.locator('#box-select option').count(), 2);
+    await page.locator('#pipe-0-skew').fill('10');
+    const output = path.join(__dirname, '../../output/playwright');
+    await fs.mkdir(output, {recursive: true});
+    await page.screenshot({path: path.join(output, 'jb-desktop.png'), fullPage: true});
+    await page.setViewportSize({width: 390, height: 844});
+    await page.locator('#pipe-0-skew').fill('10');
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    await page.screenshot({path: path.join(output, 'jb-mobile.png'), fullPage: true});
+    assert.deepEqual(errors, []);
+    assert.deepEqual(network, []);
+    console.log('PASS: isolated JB.html, skew geometry, 18 pipe choices, automatic 6/8-in walls and deductions, width limit, mixed standards, report, save/reopen, legacy custom-pipe migration, invalid import, mobile, no network or browser errors.');
+  } finally {
+    if (browser) await browser.close();
+    await fs.rm(isolated, {recursive: true, force: true});
+  }
+})().catch(error => { console.error(error); process.exitCode = 1; });
