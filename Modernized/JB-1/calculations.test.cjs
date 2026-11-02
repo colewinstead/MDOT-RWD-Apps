@@ -107,10 +107,10 @@ test("calculation does not mutate inputs and steel sums the displayed bar schedu
   assert.equal(JSON.stringify(input), before);
   const totalInches = Math.fround(result.bars.reduce((sum, bar) =>
     sum + Math.fround(bar.count * bar.lengthInches), 0));
-  assert.equal(result.steelPounds, Math.fround(totalInches * 0.055663 + 4));
+  assert.equal(result.steelPounds, Math.fround(totalInches * 0.055663));
 });
 
-test("92 float32 values match four cases run in the original Windows executable exactly", () => {
+test("88 recovered values match the original cases; steel uses captured bars without a fixed add-on", () => {
   const fs = require("node:fs");
   const path = require("node:path");
   const source = JSON.parse(fs.readFileSync(path.join(__dirname, "evidence/legacy-results.json"), "utf8"));
@@ -121,7 +121,7 @@ test("92 float32 values match four cases run in the original Windows executable 
     const result = calculateBox(input);
     const observed = {
       width13: result.widthsFeet[0], width24: result.widthsFeet[1],
-      height: result.heightFeet, concrete: result.concreteCubicYards, steel: result.steelPounds,
+      height: result.heightFeet, concrete: result.concreteCubicYards,
     };
     result.bars.forEach(bar => {
       observed[bar.mark.toLowerCase()] = bar.lengthInches;
@@ -132,8 +132,12 @@ test("92 float32 values match four cases run in the original Windows executable 
       assert.equal(actual, expected, `${name}: ${key}`);
       checked++;
     }
+    const captured = key => Buffer.from(source.rawHex[key], "hex").readFloatLE(4 * (index + 1));
+    const totalInches = Math.fround(['a1', 'a2', 'a3', 'a4', 'b', 'c', 'd', 'e', 'f'].reduce((sum, mark) =>
+      sum + Math.fround(captured(`n${mark}`) * captured(mark)), 0));
+    assert.equal(result.steelPounds, Math.fround(totalInches * 0.055663), `${name}: bar-only steel`);
   });
-  assert.equal(checked, 92);
+  assert.equal(checked, 88);
 });
 
 test("project totals preserve the original single-precision accumulation order", () => {

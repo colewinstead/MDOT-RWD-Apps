@@ -76,7 +76,7 @@ Drawing note 5 requires breakback at the wall for skew above 15 degrees or confl
 
 ## Checks
 
-`node --test Modernized/JB-1/calculations.test.cjs Modernized/JB-1/jb2.test.cjs` runs the nine original JB-1 regressions and six JB-2 tests. JB-2 checks include both concrete formula branches, both pipe thresholds, all 18 deductions in standalone and forced-8-inch configurations, solid-wall bar additions, unit-weight totals, width boundaries, skew symmetry, invalid input, immutability, and mixed-standard totals.
+`node --test Modernized/JB-1/calculations.test.cjs Modernized/JB-1/jb2.test.cjs` runs nine JB-1 regression checks and six JB-2 tests. The JB-1 capture comparison verifies 88 unchanged geometry/concrete/bar values; steel is checked against the captured bar schedule without the original fixed add-on, as requested by the user. JB-2 checks include both concrete formula branches, both pipe thresholds, all 18 deductions in standalone and forced-8-inch configurations, solid-wall bar additions, unit-weight totals, width boundaries, skew symmetry, invalid input, immutability, and mixed-standard totals.
 
 Two hand-calculated concrete cases:
 

@@ -166,7 +166,7 @@ Fields and the identity tile share the field radius; buttons, the diagram recess
 
 ### Buttons and file actions
 
-Primary Print uses action orange and on-accent ink; Open/Save/Add use surface with an outline. Hover changes fill/border, active shifts by one pixel, and disabled controls use half opacity without movement. The plain text removal action uses error ink. Keyboard focus is a three-pixel focus-colored outline offset by three pixels. File operations use the native file picker/download; removal and replacing unsaved state use native confirmation dialogs.
+Primary Print / PDF uses action orange and on-accent ink; Open/Save/Export Excel/Add use surface with an outline. The four file/report buttons use two columns on phones. Hover changes fill/border, active shifts by one pixel, and disabled controls use half opacity without movement. The plain text removal action uses error ink. Keyboard focus is a three-pixel focus-colored outline offset by three pixels. File operations use the native file picker/download; removal and replacing unsaved state use native confirmation dialogs.
 
 ### Inputs / Fields
 

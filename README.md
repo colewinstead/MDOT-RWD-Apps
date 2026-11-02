@@ -10,6 +10,8 @@ Open a modernized HTML file directly in a current browser on Mac or Windows. Eac
 
 **Save project** downloads your inputs as a separate JSON file. Keep that file and use **Open project** to reopen it. Save again after edits; closing the app does not save your work. Use the app's print action and your browser's Save as PDF destination for reports.
 
+JB also offers **Export Excel**, which downloads the main junction-box quantity schedule as a single-sheet `.xlsx` report with work sheet numbers, box IDs, LT/RT and formulas for steel/bar-length/project totals. Keep the JSON project to reopen app inputs; recalculate pipe or standard changes in the app before exporting again.
+
 Repository layout:
 
 - Root `*.html`: portable modernized apps.
@@ -23,6 +25,7 @@ node Modernized/JB-1/build-standalone.cjs
 node Modernized/SS-2A/build-standalone.cjs
 node Modernized/SS-3/build-standalone.cjs
 node --test Modernized/JB-1/calculations.test.cjs Modernized/JB-1/jb2.test.cjs Modernized/SS-2A/calculations.test.cjs Modernized/SS-3/calculations.test.cjs
+python Modernized/JB-1/xlsx.test.py
 ```
 
 The app guides document the recovered legacy calculations and the JB-2 drawing-based calculation. Read each app's documented limits before using its quantities.

@@ -4,7 +4,7 @@
   const f = (number, digits = 3) => number.toLocaleString('en-US', { minimumFractionDigits: digits, maximumFractionDigits: digits });
   const emptyPipe = () => ({ span: 0, rise: 0, skew: 0, thickness: 0 });
   const newPipe = () => ({ span: 24, rise: 24, skew: 0, thickness: 3 });
-  const newBox = (number, type = 'JB-1') => ({ type, number: String(number), station: '', side: 'L', height: null, pipes: [newPipe(), emptyPipe(), newPipe(), emptyPipe()] });
+  const newBox = (number, type = 'JB-1', worksheetNumber = '') => ({ type, worksheetNumber, number: String(number), station: '', side: 'L', height: null, pipes: [newPipe(), emptyPipe(), newPipe(), emptyPipe()] });
   const today = new Date();
   const date = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
   let project = { schema: 'jb-project-v1', projectNumber: '', county: '', date, boxes: [newBox(1)] };
@@ -35,6 +35,7 @@
     $('county').value = project.county;
     $('report-date').value = project.date;
     $('box-number').value = box.number;
+    $('worksheet-number').value = box.worksheetNumber;
     $('station').value = box.station;
     $('road-side').value = box.side;
     $('height').value = box.height ?? '';
@@ -48,7 +49,7 @@
   }
   function readForm() {
     const previous = project.boxes[selected];
-    const box = { type: $('box-type').value, number: $('box-number').value, station: $('station').value, side: $('road-side').value, height: readNumber($('height'), true), pipes: [] };
+    const box = { type: $('box-type').value, worksheetNumber: $('worksheet-number').value, number: $('box-number').value, station: $('station').value, side: $('road-side').value, height: readNumber($('height'), true), pipes: [] };
     for (let i = 0; i < 4; i++) {
       const enabled = $(`pipe-${i}-enabled`).checked;
       const size = JB1.pipeSizes.find(size => size.id === $(`pipe-${i}-size`).value) || previous.pipes[i];
@@ -65,7 +66,7 @@
     $('file-status').textContent = 'Unsaved changes · save a project file to keep them';
     return previous;
   }
-  function boxLabel(box, i) { return `${box.type} · Box ${box.number || i + 1}${box.station ? ` · ${box.station}` : ''}`; }
+  function boxLabel(box, i) { return `${box.type} · Box ${box.number || i + 1}${box.worksheetNumber ? ` · Sheet ${box.worksheetNumber}` : ''}${box.station ? ` · ${box.station}` : ''}`; }
   function render() {
     const box = project.boxes[selected];
     const picker = $('box-select');
@@ -73,7 +74,7 @@
     $('remove-box').disabled = project.boxes.length === 1;
     $('add-box').disabled = project.boxes.length === 50;
     $('results-heading').textContent = `${box.type} · Box ${box.number || selected + 1}`;
-    $('basis-note').textContent = box.type === 'JB-2' ? 'JB-2 traffic-load junction box · MDOT sheet 6506, August 1, 2017. Quantity calculation with the documented solid-wall bar-count convention.' : 'JB-1 calculation basis: supplied v5.0 executable, October 10, 2011. Preserves the recovered legacy calculations.';
+    $('basis-note').textContent = box.type === 'JB-2' ? 'JB-2 traffic-load junction box · MDOT sheet 6506, August 1, 2017. Quantity calculation with the documented solid-wall bar-count convention.' : 'JB-1 calculation basis: supplied v5.0 executable, October 10, 2011. Recovered geometry, concrete and bar schedule; steel from listed bars.';
     $('result-context').textContent = [box.station ? `Station ${box.station}` : 'Station not entered', box.side === 'L' ? 'Left' : 'Right'].join(' · ');
     results = project.boxes.map(b => {
       try { return { value: JB1.calculateBox(b) }; }
@@ -96,13 +97,14 @@
       const quantities = [ ['W1–3', `${f(r.widthsFeet[0])} ft`], ['W2–4', `${f(r.widthsFeet[1])} ft`], ['Height', `${f(r.heightFeet)} ft`], ['Concrete, net', `${f(r.concreteCubicYards)} yd³`], ['Reinforcing steel', `${f(r.steelPounds, 2)} lb`], ['Opening deductions', `${f(r.openingDeductionCubicYards)} yd³`] ];
       $('quantity-list').innerHTML = quantities.map(([label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`).join('');
       $('bar-rows').innerHTML = r.bars.map(bar => `<tr><td>${bar.mark}</td><td>#${bar.size || 4}</td><td>${bar.count}</td><td>${f(bar.lengthInches, 2)}</td><td>${f(bar.count * bar.lengthInches / 12, 2)}</td></tr>`).join('');
-      const notes = [`Gross concrete ${f(r.grossConcreteCubicYards)} yd³, less ${f(r.openingDeductionCubicYards)} yd³ of pipe openings. ${box.type === 'JB-2' ? `All walls: ${r.wallThicknessInches} in. Steel includes 3.3 lb for the two lift bars.` : 'Steel includes the legacy 4 lb allowance.'}`, ...(r.warnings || [])];
+      const notes = [`Gross concrete ${f(r.grossConcreteCubicYards)} yd³, less ${f(r.openingDeductionCubicYards)} yd³ of pipe openings. ${box.type === 'JB-2' ? `All walls: ${r.wallThicknessInches} in. Steel includes 3.3 lb for the two lift bars.` : ''}`, ...(r.warnings || [])];
       $('calculation-notes').innerHTML = notes.map(note => `<p>${escapeHTML(note)}</p>`).join('');
       drawDiagram(box, r);
     }
     const invalid = results.flatMap((r, i) => r.error ? [boxLabel(project.boxes[i], i)] : []);
     $('print-project').disabled = invalid.length > 0;
     $('save-project').disabled = invalid.length > 0;
+    $('export-excel').disabled = invalid.length > 0;
     $('box-count').textContent = `${project.boxes.length} ${project.boxes.length === 1 ? 'box' : 'boxes'}`;
     $('project-totals').textContent = '';
     if (invalid.length) $('project-totals').textContent = `Totals unavailable: correct ${invalid.join(', ')}.`;
@@ -153,10 +155,10 @@
   function reportHTML() {
     if (results.some(r => r.error)) return '<h1>Report unavailable</h1><p>Correct all box inputs before printing quantities.</p>';
     const totals = JB1.totalQuantities(results.map(r => r.value));
-    const heading = `<h1>JB · Junction box quantities</h1><p>Project: ${escapeHTML(project.projectNumber || 'Not entered')} · County: ${escapeHTML(project.county || 'Not entered')} · Date: ${escapeHTML(project.date || 'Not entered')}</p><p class="report-note">JB-1: recovered v5.0 calculations, October 10, 2011. JB-2: MDOT sheet 6506, August 1, 2017, with the documented solid-wall bar-count convention. Dimensions in decimal feet unless labeled.</p>`;
+    const heading = `<h1>JB · Junction box quantities</h1><p>Project: ${escapeHTML(project.projectNumber || 'Not entered')} · County: ${escapeHTML(project.county || 'Not entered')} · Date: ${escapeHTML(project.date || 'Not entered')}</p><p class="report-note">JB-1: recovered v5.0 geometry/concrete/bar rules; steel from listed bars. JB-2: MDOT sheet 6506, August 1, 2017, with the documented solid-wall bar-count convention. Dimensions in decimal feet unless labeled.</p>`;
     const boxes = project.boxes.map((box, i) => {
       const r = results[i].value;
-      return `<section class="report-box"><h2>${escapeHTML(boxLabel(box, i))} · ${box.side === 'L' ? 'Left' : 'Right'}</h2><table><thead><tr><th>W1–3 (ft)</th><th>W2–4 (ft)</th><th>H (ft)</th><th>Net concrete (yd³)</th><th>Steel (lb)</th></tr></thead><tbody><tr><td>${f(r.widthsFeet[0])}</td><td>${f(r.widthsFeet[1])}</td><td>${f(r.heightFeet)}</td><td>${f(r.concreteCubicYards)}</td><td>${f(r.steelPounds, 2)}</td></tr></tbody></table><p class="report-note">${box.height === null ? 'Calculated minimum' : 'Entered'} height; minimum ${f(r.minimumHeightFeet)} ft. Gross concrete ${f(r.grossConcreteCubicYards)} yd³ less opening deductions ${f(r.openingDeductionCubicYards)} yd³. ${box.type === 'JB-2' ? `All walls ${r.wallThicknessInches} in.; steel includes 3.3 lb for two lift bars.` : 'Steel includes the legacy 4 lb allowance.'}</p><table class="report-pipes"><thead><tr><th>Pipe side</th><th>Span (in.)</th><th>Rise (in.)</th><th>Skew (°)</th><th>Pipe wall (in.)</th></tr></thead><tbody>${box.pipes.map((p, n) => `<tr><td>${n + 1}${n === 0 ? ' · outflow' : ''}</td><td>${p.span ? f(p.span, 2) : 'None'}</td><td>${f(p.rise, 2)}</td><td>${f(p.skew, 2)}</td><td>${f(p.thickness, 2)}</td></tr>`).join('')}</tbody></table><table class="report-pipes"><thead><tr><th>Bar mark</th>${r.bars.map(b => `<th>${b.mark}</th>`).join('')}</tr></thead><tbody><tr><th>Size</th>${r.bars.map(b => `<td>#${b.size || 4}</td>`).join('')}</tr><tr><th>Number</th>${r.bars.map(b => `<td>${b.count}</td>`).join('')}</tr><tr><th>Length (in.)</th>${r.bars.map(b => `<td>${f(b.lengthInches, 2)}</td>`).join('')}</tr></tbody></table>${(r.warnings || []).map(note => `<p class="report-note">${escapeHTML(note)}</p>`).join('')}</section>`;
+      return `<section class="report-box"><h2>${escapeHTML(boxLabel(box, i))} · ${box.side === 'L' ? 'Left' : 'Right'}</h2><table><thead><tr><th>W1–3 (ft)</th><th>W2–4 (ft)</th><th>H (ft)</th><th>Net concrete (yd³)</th><th>Steel (lb)</th></tr></thead><tbody><tr><td>${f(r.widthsFeet[0])}</td><td>${f(r.widthsFeet[1])}</td><td>${f(r.heightFeet)}</td><td>${f(r.concreteCubicYards)}</td><td>${f(r.steelPounds, 2)}</td></tr></tbody></table><p class="report-note">${box.height === null ? 'Calculated minimum' : 'Entered'} height; minimum ${f(r.minimumHeightFeet)} ft. Gross concrete ${f(r.grossConcreteCubicYards)} yd³ less opening deductions ${f(r.openingDeductionCubicYards)} yd³. ${box.type === 'JB-2' ? `All walls ${r.wallThicknessInches} in.; steel includes 3.3 lb for two lift bars.` : ''}</p><table class="report-pipes"><thead><tr><th>Pipe side</th><th>Span (in.)</th><th>Rise (in.)</th><th>Skew (°)</th><th>Pipe wall (in.)</th></tr></thead><tbody>${box.pipes.map((p, n) => `<tr><td>${n + 1}${n === 0 ? ' · outflow' : ''}</td><td>${p.span ? f(p.span, 2) : 'None'}</td><td>${f(p.rise, 2)}</td><td>${f(p.skew, 2)}</td><td>${f(p.thickness, 2)}</td></tr>`).join('')}</tbody></table><table class="report-pipes"><thead><tr><th>Bar mark</th>${r.bars.map(b => `<th>${b.mark}</th>`).join('')}</tr></thead><tbody><tr><th>Size</th>${r.bars.map(b => `<td>#${b.size || 4}</td>`).join('')}</tr><tr><th>Number</th>${r.bars.map(b => `<td>${b.count}</td>`).join('')}</tr><tr><th>Length (in.)</th>${r.bars.map(b => `<td>${f(b.lengthInches, 2)}</td>`).join('')}</tr></tbody></table>${(r.warnings || []).map(note => `<p class="report-note">${escapeHTML(note)}</p>`).join('')}</section>`;
     }).join('');
     return heading + boxes + `<h2>Project totals · ${project.boxes.length} ${project.boxes.length === 1 ? 'box' : 'boxes'}</h2><p>Net concrete: <strong>${f(totals.concreteCubicYards)} yd³</strong> · Reinforcing steel: <strong>${f(totals.steelPounds, 2)} lb</strong></p>`;
   }
@@ -165,10 +167,12 @@
     if (!data || !['jb1-project-v1', 'jb-project-v1'].includes(data.schema) || !text(data.projectNumber, 120) || !text(data.county, 120) || !text(data.date, 10) || !Array.isArray(data.boxes) || data.boxes.length < 1 || data.boxes.length > 50) throw new Error('Choose a JB project file containing between 1 and 50 boxes.');
     const boxes = data.boxes.map((box, i) => {
       if (!box || !text(box.number, 80) || !text(box.station, 80) || !['L', 'R'].includes(box.side)) throw new Error(`Box ${i + 1} has invalid identification fields.`);
+      const worksheetNumber = box.worksheetNumber === undefined ? '' : box.worksheetNumber;
+      if (!text(worksheetNumber, 80)) throw new Error(`Box ${i + 1} has an invalid work sheet number.`);
       const type = data.schema === 'jb1-project-v1' ? 'JB-1' : box.type;
       if (!['JB-1', 'JB-2'].includes(type)) throw new Error(`Box ${i + 1}: choose JB-1 or JB-2.`);
       JB1.calculateBox({...box, type});
-      return { type, number: box.number, station: box.station, side: box.side, height: box.height ?? null, pipes: box.pipes.map(p => ({ span: p.span, rise: p.rise, skew: p.skew, thickness: p.thickness })) };
+      return { type, worksheetNumber, number: box.number, station: box.station, side: box.side, height: box.height ?? null, pipes: box.pipes.map(p => ({ span: p.span, rise: p.rise, skew: p.skew, thickness: p.thickness })) };
     });
     if (data.date !== '' && (!/^\d{4}-\d{2}-\d{2}$/.test(data.date) || !Number.isFinite(Date.parse(data.date)) || new Date(data.date).toISOString().slice(0, 10) !== data.date)) throw new Error('The project report date is invalid.');
     return { schema: 'jb-project-v1', projectNumber: data.projectNumber, county: data.county, date: data.date, boxes };
@@ -185,7 +189,7 @@
   $('box-form').addEventListener('submit', event => event.preventDefault());
   for (const input of [...$('box-form').querySelectorAll('input[type="number"],input[type="text"],select'), $('project-number'), $('county'), $('report-date')]) input.addEventListener('input', () => { readForm(); render(); });
   $('box-select').addEventListener('change', () => { selected = Number($('box-select').value); loadForm(); });
-  $('add-box').addEventListener('click', () => { if (project.boxes.length >= 50) return; project.boxes.push(newBox(project.boxes.length + 1, project.boxes[selected].type)); selected = project.boxes.length - 1; dirty = true; $('file-status').textContent = 'Unsaved changes'; loadForm(); $('box-number').focus(); });
+  $('add-box').addEventListener('click', () => { if (project.boxes.length >= 50) return; project.boxes.push(newBox(project.boxes.length + 1, project.boxes[selected].type, project.boxes[selected].worksheetNumber)); selected = project.boxes.length - 1; dirty = true; $('file-status').textContent = 'Unsaved changes'; loadForm(); $('box-number').focus(); });
   $('remove-box').addEventListener('click', () => {
     if (project.boxes.length <= 1 || !confirm(`Remove ${boxLabel(project.boxes[selected], selected)} from this project?`)) return;
     project.boxes.splice(selected, 1); selected = Math.min(selected, project.boxes.length - 1); dirty = true; $('file-status').textContent = 'Unsaved changes'; loadForm();
@@ -200,6 +204,16 @@
     } catch (error) { alert(error.message); }
   });
   $('open-project').addEventListener('click', () => { $('project-file').value = ''; $('project-file').click(); });
+  $('export-excel').addEventListener('click', () => {
+    try {
+      validateProject(project);
+      const bytes = JBExcel.createWorkbook(project, results.map(result => result.value));
+      const url = URL.createObjectURL(new Blob([bytes], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}));
+      const link = document.createElement('a'); link.href = url; link.download = 'JB-quantities.xlsx'; link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      $('file-status').textContent = 'Excel report download requested · save project JSON to keep editable inputs';
+    } catch (error) { alert(`Could not export Excel: ${error.message}`); }
+  });
   $('project-file').addEventListener('change', async () => {
     const file = $('project-file').files[0]; if (!file) return;
     try {

@@ -138,7 +138,7 @@
       { mark: "F", count: 2 * (Math.floor((widthsFeet[1] * 12) / 9 + 0.5) + 1), lengthInches: f32(widthsFeet[0] * 12 - 4) },
     );
     const barInches = f32(bars.reduce((sum, bar) => sum + f32(bar.count * bar.lengthInches), 0));
-    const steelPounds = f32(barInches * 0.055663 + 4);
+    const steelPounds = f32(barInches * 0.055663);
     if (![...widthsFeet, heightFeet, concreteCubicYards, grossConcreteCubicYards,
       openingDeductionCubicYards, steelPounds, ...bars.flatMap(bar => [bar.count, bar.lengthInches])]
       .every(Number.isFinite) || concreteCubicYards <= 0) {

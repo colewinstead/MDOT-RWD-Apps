@@ -8,6 +8,7 @@
   <title>JB · Junction box quantities</title>
   <link rel="stylesheet" href="styles.css">
   <script src="calculations.js" defer></script>
+  <script src="xlsx.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -16,7 +17,8 @@
     <nav aria-label="Project files">
       <button id="open-project" type="button">Open project</button>
       <button id="save-project" type="button">Save project</button>
-      <button id="print-project" class="primary" type="button">Print report</button>
+      <button id="export-excel" type="button">Export Excel</button>
+      <button id="print-project" class="primary" type="button">Print / PDF</button>
     </nav>
     <input id="project-file" type="file" accept=".json,application/json" hidden>
   </header>
@@ -34,8 +36,9 @@
       <div class="box-picker"><label for="box-select">Junction box</label><div><select id="box-select"></select><button id="add-box" type="button">Add box</button></div></div>
       <form id="box-form" novalidate>
         <label class="box-type">Junction box standard<select id="box-type"><option value="JB-1">JB-1 · Pipe culverts</option><option value="JB-2">JB-2 · Traffic load</option></select></label>
+        <label class="worksheet-number">WK. SH. NO.<input id="worksheet-number" type="text" maxlength="80" placeholder="Enter plan sheet number"></label>
         <div class="box-identifiers">
-          <label>Box number<input id="box-number" type="text" maxlength="80"></label>
+          <label>BOX ID<input id="box-number" type="text" maxlength="80"></label>
           <label>Station<input id="station" type="text" maxlength="80" placeholder="e.g. 100+00"></label>
           <label>Side<select id="road-side"><option value="L">Left</option><option value="R">Right</option></select></label>
         </div>
@@ -63,7 +66,7 @@
     </section>
   </main>
   <section id="print-report" aria-label="Printable project report"></section>
-  <footer><span>JB · Mississippi roadway design utility</span><details><summary>Instructions &amp; calculation basis</summary><p>Choose JB-1 or JB-2 for each box and select each pipe size. Enter skew in degrees and box height in decimal feet. Side 1 is outflow. Leave height blank for the calculated minimum. Save project downloads a JSON file; Open project restores it, including older JB-1 projects. Keep that file to retain your work. Print report includes every box and project totals.</p><p>JB-1 retains the recovered v5.0 calculations from October 10, 2011, including unrounded circular deductions, the original arch lookup and 4 lb allowance. These may differ from the rounded 2017 pipe-table deductions.</p><p>JB-2 uses MDOT drawing 6506, August 1, 2017. Circular pipes 48 inches and larger, or arch pipes 51 × 31 inches and larger, require all walls to be 8 inches; smaller pipes use the 8-inch deduction column whenever that happens. Otherwise walls are 6 inches. Maximum width is 9 ft 3 in. B/C/D bars are #6 for 6-inch walls and #7 for 8-inch walls; E/F are #6. Steel includes 3.3 lb for two lift bars.</p><p>JB-2 solid-wall counting convention: end bars are already included; add max(0, ceil(run / 12 inches) − 1) interior bars per solid wall. Use H for horizontal B/C bars and that wall's full width for vertical D bars. This is the user-confirmed interpretation of the 12-inch spacing note. Bar lengths retain precision. Unit weights: #4 = 0.668, #6 = 1.502, #7 = 2.044 lb/ft. Drawing applicability, structural adequacy, and opening conflicts require separate review.</p></details></footer>
+  <footer><span>JB · Mississippi roadway design utility</span><details><summary>Instructions &amp; calculation basis</summary><p>Choose JB-1 or JB-2 for each box and select each pipe size. Enter skew in degrees and box height in decimal feet. Side 1 is outflow. Leave height blank for the calculated minimum. Save project downloads a JSON file; Open project restores it, including older JB-1 projects. Keep that file to retain your work. WK. SH. NO. identifies the plan sheet; BOX ID identifies the individual box. Export Excel includes both fields. Its steel, bar-length totals and project totals use formulas for manual adjustments. Change pipe geometry or box standards here and export again. Print / PDF includes every box and project totals; choose Save as PDF in the print dialog.</p><p>JB-1 uses recovered v5.0 geometry, concrete and bar rules from October 10, 2011, including unrounded circular deductions and the original arch lookup. Steel uses only the listed bars. These may differ from the rounded 2017 pipe-table deductions.</p><p>JB-2 uses MDOT drawing 6506, August 1, 2017. Circular pipes 48 inches and larger, or arch pipes 51 × 31 inches and larger, require all walls to be 8 inches; smaller pipes use the 8-inch deduction column whenever that happens. Otherwise walls are 6 inches. Maximum width is 9 ft 3 in. B/C/D bars are #6 for 6-inch walls and #7 for 8-inch walls; E/F are #6. Steel includes 3.3 lb for two lift bars.</p><p>JB-2 solid-wall counting convention: end bars are already included; add max(0, ceil(run / 12 inches) − 1) interior bars per solid wall. Use H for horizontal B/C bars and that wall's full width for vertical D bars. This is the user-confirmed interpretation of the 12-inch spacing note. Bar lengths retain precision. Unit weights: #4 = 0.668, #6 = 1.502, #7 = 2.044 lb/ft. Drawing applicability, structural adequacy, and opening conflicts require separate review.</p></details></footer>
   <noscript>This calculator needs JavaScript enabled in your browser. It does not need an internet connection.</noscript>
 </body>
 </html>
