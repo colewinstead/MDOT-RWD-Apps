@@ -1,0 +1,14 @@
+
+           DATE        :11-01-2026
+           PROJECT NO. :test
+           COUNTY      :test
+
+=============================== SS-2 INLET ==================================
+
+        STA.      SIDE    C.Y.CONC.  LBS STEEL    L         W         H
+       10000        l      2.614      219       5.00      4.00      4.00
+ DEDUCTIONS  1 @ 15,
+------------------------------------------------------------------------------
+
+ GRAND TOTAL FOR STEEL =  218.75 lbs
+ GRAND TOTAL FOR CONCRETE =   2.614 c.y.

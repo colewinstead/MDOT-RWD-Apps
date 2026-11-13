@@ -101,7 +101,7 @@ components:
 
 Neutral surfaces, measured divisions, aligned quantity tables, and a keyed geometric diagram make the inherited calculation state inspectable. Orange identifies the main action and outflow, while subdued rules organize a dense working interface.
 
-This is a code-led, local HTML/CSS/JavaScript tool. System UI typography and light or dark colors follow the operating system; no external fonts or raster assets form part of the interface. The documented visual scope is Modernized/JB-1, not a brand system for unrelated utilities.
+This is a code-led, local HTML/CSS/JavaScript tool. System UI typography and light or dark colors follow the operating system; no external fonts or raster assets form part of the interface. The documented visual scope is Modernize Source Code/JB-1, not a brand system for unrelated utilities.
 
 **Key Characteristics:**
 - Inputs alongside a larger diagram and quantity workspace on desktop.
