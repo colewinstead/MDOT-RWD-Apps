@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' file:; script-src 'self' file:; style-src 'self' file:; img-src 'self' file: data:; connect-src 'none'; object-src 'none'; base-uri 'none'">
+  <title>Bridge end pavement · Roadway design</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="calculations.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="identity"><span class="app-mark" aria-hidden="true">BE</span><div><h1>Bridge end pavement</h1><p>Roadway design quantities</p></div></div>
+    <nav aria-label="Project files">
+      <button id="open-project" type="button">Open project</button>
+      <button id="save-project" type="button">Save project</button>
+      <button id="export-text" type="button">Export text</button>
+      <button id="print-report" class="primary" type="button">Print / PDF</button>
+    </nav>
+    <input id="open-file" type="file" accept=".json,application/json" hidden>
+  </header>
+  <div class="project-status"><span id="file-status" role="status">Example inputs · not saved</span><span>Offline · runs entirely on this computer</span></div>
+  <main class="workspace">
+    <aside class="inputs" aria-label="Project and bridge end inputs">
+      <details class="project-details" open>
+        <summary>Project information</summary>
+        <div class="project-fields">
+          <label>Project number<input id="project-number" type="text" maxlength="160" placeholder="Enter project number"></label>
+          <label>County<input id="county" type="text" maxlength="160" placeholder="Enter county"></label>
+          <label>Prepared by<input id="prepared-by" type="text" maxlength="160" placeholder="Enter name"></label>
+          <label>Report date<input id="report-date" type="date"></label>
+        </div>
+      </details>
+      <div class="end-picker"><label for="end-select">Bridge end</label><div><select id="end-select"></select><button id="add-end" type="button">Add end</button></div></div>
+      <form id="end-form" novalidate>
+        <div class="identifier-fields">
+          <label>End ID<input id="end-id" type="text" maxlength="80"></label>
+          <label>Abutment station<input id="station" type="text" maxlength="80" placeholder="e.g. 100+00.00"></label>
+        </div>
+        <div class="section-title"><h2>Geometry</h2><span>Decimal feet</span></div>
+        <div class="geometry-fields">
+          <label>W1 <span class="label-unit">ft</span><input id="w1" type="number" step="any" min="0" aria-describedby="width-help"></label>
+          <label>W2 <span class="label-unit">ft</span><input id="w2" type="number" step="any" min="0" aria-describedby="width-help"></label>
+          <label>Skew Z <span class="label-unit">degrees</span><input id="skew" type="number" step="any" min="0" max="89.999999" aria-describedby="skew-help"></label>
+          <label>Rail height <span class="label-unit">inches</span><select id="rail-height" aria-describedby="rail-help"><option value="0">0 · No rail</option><option value="32">32 in.</option><option value="42">42 in.</option></select></label>
+        </div>
+        <p id="rail-help" class="input-note rail-note">32/42 in. rail options follow SDBE-1A and the SDBEPR detail families. Other plan sets use different rails; confirm the project detail.</p>
+        <p id="width-help" class="input-note">W1 and W2 are the plan widths used in the original worksheet. WB = W1 + W2.</p>
+        <p id="skew-help" class="input-note">Enter skew as a nonnegative magnitude below 90°. The calculation holds side A to a 10 ft minimum.</p>
+        <button id="remove-end" class="text-button danger" type="button">Remove this end</button>
+      </form>
+      <div class="basis-note"><strong>One record per bridge end</strong><p>Add the other end separately. Changing inputs updates this record; project totals count each record once.</p></div>
+    </aside>
+    <section class="results" aria-labelledby="results-heading">
+      <div class="results-title"><div><h2 id="results-heading">Bridge end 1</h2><p id="result-context">Example inputs</p></div><span class="unit-note">ft · SY · LF</span></div>
+      <div id="input-error" class="error-message" role="alert" hidden></div>
+      <div id="result-content">
+        <div class="drawing-panel"><div class="drawing-heading"><h3>SDBE-1A calculation plan</h3><span id="geometry-mode"></span></div><div id="plan-container"></div><p>Plan schematic · dimensions govern; not a construction drawing</p></div>
+        <div class="section-title"><h3>Bridge end quantities</h3><span>For this end</span></div>
+        <dl class="quantity-list">
+          <div><dt>Bridge end pavement</dt><dd><span id="pavement"></span> <small>SY</small></dd></div>
+          <div><dt>Expansion joint</dt><dd><span id="expansion-joint"></span> <small>LF</small></dd></div>
+          <div><dt>Transverse grooving</dt><dd><span id="grooving"></span> <small>SY</small></dd></div>
+          <div><dt>32 in. rail</dt><dd><span id="rail32"></span> <small>LF</small></dd></div>
+          <div><dt>42 in. rail</dt><dd><span id="rail42"></span> <small>LF</small></dd></div>
+        </dl>
+        <p id="quantity-note" class="input-note"></p><p class="input-note rail-note">SDBE-1A shows a 1 in. bridge-end joint. BE-1 uses a different bridge-seat detail; confirm project applicability.</p>
+        <details class="calculation-details" open><summary>Width &amp; calculation breakdown</summary><div class="drawing-panel width-panel"><div id="width-container"></div><p>Arithmetic width breakdown · allowance placement is symbolic</p></div><dl id="breakdown" class="breakdown-list"></dl></details>
+        <details class="calculation-details" open><summary>Longitudinal section · SDBE-1A</summary><div class="drawing-panel"><svg id="section-diagram" viewBox="0 0 690 225" role="img" aria-labelledby="section-title section-description"><title id="section-title">SDBE-1A longitudinal section</title><desc id="section-description">Roadway leads to a bridge end concrete pavement slab with nine-inch minimum thickness, then the bridge deck. SDBE-1A shows a one-inch premolded expansion joint at the bridge, not doweled. No asphalt overlay or sleeper slab is shown in this arrangement. Reinforcing and complete construction details are omitted.</desc><path class="width-one" d="M35 105 H200 V155 H35 Z"/><path class="paving-shape" d="M200 105 H474 V155 H200 Z"/><path class="width-two" d="M486 105 H655 V155 H486 Z"/><line class="joint-line" x1="480" y1="99" x2="480" y2="164"/><text class="diagram-label" x="115" y="133" text-anchor="middle">Roadway</text><text class="diagram-label" x="338" y="133" text-anchor="middle">Bridge end pavement</text><text class="diagram-label" x="570" y="133" text-anchor="middle">Bridge deck</text><path class="dim-line" d="M480 91 L535 47 H625 M338 162 V187 H420"/><text class="joint-label" x="560" y="24" text-anchor="middle">1 in. expansion joint</text><text class="diagram-note" x="560" y="43" text-anchor="middle">Not doweled</text><text class="diagram-note" x="420" y="210" text-anchor="middle">9 in. minimum concrete slab</text></svg><p>SDBE-1A arrangement · not to scale; reinforcing and construction details omitted</p><p>BE-1 is a different overlay-and-sleeper arrangement. Use the applicable project detail.</p></div></details>
+      </div>
+      <section class="project-summary" aria-labelledby="schedule-heading"><div class="section-title"><h3 id="schedule-heading">Project quantity schedule</h3><span id="end-count"></span></div><div class="table-scroll"><table class="schedule"><thead><tr><th scope="col">End / station</th><th scope="col">Rail<br>in.</th><th scope="col">Pavement<br>SY</th><th scope="col">Joint<br>LF</th><th scope="col">Grooving<br>SY</th><th scope="col">32 in. rail<br>LF</th><th scope="col">42 in. rail<br>LF</th></tr></thead><tbody id="schedule-rows"></tbody><tfoot id="schedule-total"></tfoot></table></div><p id="project-note" class="input-note"></p></section>
+    </section>
+  </main>
+  <section id="report" aria-label="Printable project report"></section>
+  <footer><span>Bridge end pavement · Mississippi roadway design utility</span><details><summary>Instructions &amp; calculation basis</summary><p>Enter W1 and W2 in decimal feet, skew Z in degrees, and the rail height. Check the live quantities and plan dimensions. Add a record for each bridge end. In the SDBE-1A plan, the crown line divides W2 above and W1 below. Confirm widths and applicability against the project plans.</p><p><strong>Save project</strong> downloads a JSON file containing all inputs. Keep it separately and use <strong>Open project</strong> to continue later. Save again after editing; closing this page does not save your work. <strong>Export text</strong> downloads a quantity report. <strong>Print / PDF</strong> opens the browser print dialog; choose Save as PDF for a portable report.</p><p>Uses the recovered MDOT Bridge End Pavement, Version AI 1.2 calculation: W = W1 + W2 + 1 ft with no rail, + 2.833333 ft for 32 in. rail, or + 3 ft for 42 in. rail. Side A = max(10, 20 − W tan Z / 2). Side B follows the corresponding original branch. Rail options include the original paving and grooving deductions and 20 LF of the selected rail. Quantities round to two decimals for each end before summation. This app blocks negative widths, negative skew, skew at or above 90°, and invalid numerical results.</p><p>Drawing basis: SDBE-1A, Bridge End Pavement with Rail, and the SDBEPR detail families. SDBE-1A matches the 20 ft mid-length, 10 ft side-A minimum, rail width additions and 1 in. bridge-end joint used here. The supplied special drawing PDFs are marked PRELIMINARY / NOT FOR CONSTRUCTION. Other plan sets, including BE-1 and the current SDBE-1, use different arrangements; confirm the applicable project detail. Diagrams show the calculation geometry and section arrangement, not structural design, reinforcement quantities or complete construction details.</p></details></footer>
+  <noscript>This calculator needs JavaScript enabled. It does not need an internet connection.</noscript>
+</body>
+</html>

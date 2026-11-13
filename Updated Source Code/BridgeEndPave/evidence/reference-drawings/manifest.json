@@ -1,0 +1,63 @@
+{
+  "retrievedDate": "2026-11-12",
+  "sourceIndex": "https://mdot.ms.gov/portal/engineering_standards_guides_manuals",
+  "folder": "Special Design Sheets Active 2017 - PowerGeoPak Borders",
+  "files": [
+    {
+      "file": "SDBE-1.pdf",
+      "title": "SDBE-1 BRIDGE END PAVEMENT WITH RAIL.pdf",
+      "url": "https://mdot.ms.gov/documents/Roadway%20Design/Standards/Special%20Design%20Sheets%20Active%202017%20-%20PowerGeoPak%20Borders/SDBE-1%20BRIDGE%20END%20PAVEMENT%20WITH%20RAIL.pdf",
+      "bytes": 236267,
+      "sha256": "5978d48493757ce86c291500f0456f9232aa09540f16dfdfd2d219454830ad35"
+    },
+    {
+      "file": "SDBE-1A.pdf",
+      "title": "SDBE-1A BRIDGE END PAVEMENT WITH RAIL.pdf",
+      "url": "https://mdot.ms.gov/documents/Roadway%20Design/Standards/Special%20Design%20Sheets%20Active%202017%20-%20PowerGeoPak%20Borders/SDBE-1A%20BRIDGE%20END%20PAVEMENT%20WITH%20RAIL.pdf",
+      "bytes": 175067,
+      "sha256": "30887812f65850a11dd2680b0222c66392236bb1040a08082925e366b7d956b7"
+    },
+    {
+      "file": "SDBEPR-1-12.pdf",
+      "title": "SDBEPR-1-12 32in BRIDGE END PAVEMENT RAIL (12in PAVEMENT).pdf",
+      "url": "https://mdot.ms.gov/documents/Roadway%20Design/Standards/Special%20Design%20Sheets%20Active%202017%20-%20PowerGeoPak%20Borders/SDBEPR-1-12%2032in%20BRIDGE%20END%20PAVEMENT%20RAIL%20(12in%20PAVEMENT).pdf",
+      "bytes": 249768,
+      "sha256": "2e5fda67cb3b7b96e4b29f98a68eead367a52bbac4e7f0a3b799420ec0eed7c6"
+    },
+    {
+      "file": "SDBEPR-1-9.pdf",
+      "title": "SDBEPR-1-9 32in BRIDGE END PAVEMENT RAIL (9in PAVEMENT).pdf",
+      "url": "https://mdot.ms.gov/documents/Roadway%20Design/Standards/Special%20Design%20Sheets%20Active%202017%20-%20PowerGeoPak%20Borders/SDBEPR-1-9%2032in%20BRIDGE%20END%20PAVEMENT%20RAIL%20(9in%20PAVEMENT).pdf",
+      "bytes": 250195,
+      "sha256": "238aae8f3e66f31b9a46b32ef8758ed745399050464af49848c5c7a8b20a26a6"
+    },
+    {
+      "file": "SDBEPR-1A-12.pdf",
+      "title": "SDBEPR-1A-12 42in BRIDGE END PAVEMENT RAIL (12in PAVEMENT.pdf",
+      "url": "https://mdot.ms.gov/documents/Roadway%20Design/Standards/Special%20Design%20Sheets%20Active%202017%20-%20PowerGeoPak%20Borders/SDBEPR-1A-12%2042in%20BRIDGE%20END%20PAVEMENT%20RAIL%20(12in%20PAVEMENT.pdf",
+      "bytes": 319529,
+      "sha256": "bc438a9f95029911128c11798251e8e267e3266098011748fa03a81f5eff60b1"
+    },
+    {
+      "file": "SDBEPR-1A-9.pdf",
+      "title": "SDBEPR-1A-9 42in BRIDGE END PAVEMENT RAIL (9in PAVEMENT).pdf",
+      "url": "https://mdot.ms.gov/documents/Roadway%20Design/Standards/Special%20Design%20Sheets%20Active%202017%20-%20PowerGeoPak%20Borders/SDBEPR-1A-9%2042in%20BRIDGE%20END%20PAVEMENT%20RAIL%20(9in%20PAVEMENT).pdf",
+      "bytes": 319465,
+      "sha256": "2681c20aa2f299d4ad1806f452a21644ec92ab72f321edf6b88a701ef85a131c"
+    },
+    {
+      "file": "SDBER-1.pdf",
+      "title": "SDBER-1 BRIDGE END PAVEMENT RAIL (37.5 INCH).pdf",
+      "url": "https://mdot.ms.gov/documents/Roadway%20Design/Standards/Special%20Design%20Sheets%20Active%202017%20-%20PowerGeoPak%20Borders/SDBER-1%20BRIDGE%20END%20PAVEMENT%20RAIL%20%2837.5%20INCH%29.pdf",
+      "bytes": 190227,
+      "sha256": "650cf2e6dbd13a95acc4735c020123e3feaf1360b69c40d319a19681fdb2dd98"
+    },
+    {
+      "file": "SDBER-2.pdf",
+      "title": "SDBER-2 BRIDGE END PAVEMENT RAIL (43.5 INCH).pdf",
+      "url": "https://mdot.ms.gov/documents/Roadway%20Design/Standards/Special%20Design%20Sheets%20Active%202017%20-%20PowerGeoPak%20Borders/SDBER-2%20BRIDGE%20END%20PAVEMENT%20RAIL%20%2843.5%20INCH%29.pdf",
+      "bytes": 187423,
+      "sha256": "f7373a462f61479f9511ba16360fe50136055eec152946077ce5e81f0b557eb9"
+    }
+  ]
+}
