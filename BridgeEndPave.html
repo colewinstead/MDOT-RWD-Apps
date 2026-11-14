@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-m7uTmLCk3y9xiw0bmdOdE5iKLc271Iy/5hOYkd5xfHE=' 'sha256-+R3zbwfInYPLfn0yRO1IjKWYfxaff+T07W2qNT/w9iY='; style-src 'sha256-Z0nF1WSx7ZgVHZNg5xVXTvxWpzzHwkvBrp9FXkPT0GU='; img-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Bridge end pavement · Roadway design</title>
+  <style>:root { color-scheme:light dark; --ground:#f3f4f4; --surface:#fff; --subtle:#f7f8f8; --ink:#20292e; --muted:#57656c; --line:#d6dddf; --accent:#a74613; --accent-hover:#85350c; --accent-soft:#fff1e7; --error:#a22424; --error-bg:#fff1ef; --focus:#247b9a; --joint:#247b9a; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; font-size:16px; }
+* { box-sizing:border-box; }
+body { margin:0; color:var(--ink); background:var(--ground); line-height:1.5; }
+h1,h2,h3,p { margin:0; }
+h1 { font-size:1.5rem; letter-spacing:-.025em; line-height:1.2; }
+h2 { font-size:1.2rem; font-weight:650; }
+h3 { font-size:1rem; font-weight:650; }
+button,input,select { font:inherit; }
+button,select,summary { cursor:pointer; }
+button { border:1px solid var(--line); border-radius:6px; background:var(--surface); color:var(--ink); padding:8px 13px; font-weight:600; white-space:nowrap; }
+button:hover { background:var(--subtle); border-color:var(--muted); }
+button:disabled { cursor:default; opacity:.5; }
+button.primary { color:#fff; background:var(--accent); border-color:var(--accent); }
+button.primary:hover { background:var(--accent-hover); }
+:focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
+input,select { min-width:0; width:100%; border:1px solid var(--line); border-radius:5px; padding:8px 9px; color:var(--ink); background:var(--surface); caret-color:var(--accent); }
+input::placeholder { color:var(--muted); opacity:1; }
+input[type="number"] { font-variant-numeric:tabular-nums; }
+label { display:grid; gap:5px; font-size:.83rem; font-weight:600; }
+.app-header { background:var(--surface); border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; gap:24px; padding:21px 32px; }
+.identity { display:flex; gap:13px; align-items:center; }
+.identity p { font-size:.82rem; color:var(--muted); margin-top:3px; }
+.app-mark { background:var(--accent); color:#fff; width:44px; height:44px; border-radius:7px; display:grid; place-items:center; font-size:1rem; font-weight:700; flex-shrink:0; }
+nav { display:flex; gap:8px; }
+.project-status { display:flex; justify-content:space-between; gap:16px; color:var(--muted); font-size:.8rem; padding:9px 32px; }
+.workspace { display:grid; grid-template-columns:minmax(330px,390px) minmax(0,1fr); max-width:1540px; margin:8px auto 30px; padding:0 24px; align-items:start; gap:24px; }
+.inputs,.results { min-width:0; background:var(--surface); border:1px solid var(--line); border-radius:10px; }
+.inputs { padding:22px; }
+.project-details { padding-bottom:22px; border-bottom:1px solid var(--line); }
+summary { font-weight:650; }
+.project-fields { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px; }
+.project-fields label:first-child { grid-column:1/-1; }
+.end-picker { margin:22px 0 18px; }
+.end-picker>div { display:flex; gap:8px; margin-top:5px; }
+.end-picker select { flex:1; }
+.identifier-fields { display:grid; grid-template-columns:.7fr 1.3fr; gap:12px; }
+.geometry-fields { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.geometry-fields label { position:relative; }
+.label-unit { position:absolute; right:0; color:var(--muted); font-weight:400; }
+.section-title { display:flex; justify-content:space-between; align-items:baseline; gap:15px; margin:26px 0 10px; }
+.section-title span,.input-note { font-size:.8rem; color:var(--muted); }
+.input-note { margin:10px 0; }
+.rail-note { border-left:2px solid var(--accent); padding-left:10px; }
+.text-button { padding:4px 0; background:none; border:0; font-size:.8rem; }
+.text-button:hover { background:none; text-decoration:underline; }
+.danger { color:var(--error); margin-top:12px; }
+.basis-note { border-top:1px solid var(--line); padding-top:17px; margin-top:20px; color:var(--muted); font-size:.8rem; }
+.basis-note p { margin-top:5px; }
+.results { padding:24px 28px; }
+.results-title { display:flex; align-items:center; justify-content:space-between; gap:15px; }
+.results-title h2 { font-size:1.35rem; }
+.results-title p { font-size:.85rem; color:var(--muted); margin-top:2px; }
+.unit-note { color:var(--muted); font-size:.8rem; white-space:nowrap; }
+.drawing-panel { background:var(--subtle); margin-top:20px; border-radius:6px; padding:16px 14px 12px; overflow-x:auto; }
+.drawing-heading { display:flex; align-items:baseline; justify-content:space-between; gap:8px; padding:0 4px; }
+.drawing-heading span { color:var(--accent); font-size:.78rem; }
+.drawing-panel svg { width:100%; min-width:520px; display:block; color:var(--ink); max-height:340px; }
+.drawing-panel p { text-align:center; font-size:.75rem; color:var(--muted); margin-top:6px; }
+.paving-shape { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.8; }
+.joint-line { stroke:var(--joint); stroke-width:5; }
+.datum-line { stroke:var(--muted); stroke-width:1.2; stroke-dasharray:5 5; }
+.dim-line { stroke:var(--muted); stroke-width:1; fill:none; }
+.diagram-label { fill:var(--ink); font-size:15px; font-weight:600; }
+.diagram-note { fill:var(--muted); font-size:13px; }
+.joint-label { fill:var(--joint); font-size:13px; font-weight:600; }
+.width-one { fill:var(--line); stroke:var(--muted); }
+.width-two { fill:var(--surface); stroke:var(--muted); }
+.quantity-list { display:grid; grid-template-columns:1fr 1fr; margin:0; }
+.quantity-list>div { display:flex; align-items:baseline; justify-content:space-between; gap:10px; padding:12px 0; border-bottom:1px solid var(--line); }
+.quantity-list>div:nth-child(odd) { padding-right:24px; }
+.quantity-list>div:nth-child(even) { padding-left:24px; border-left:1px solid var(--line); }
+dt { color:var(--muted); font-size:.84rem; }
+dd { margin:0; font-weight:650; white-space:nowrap; font-variant-numeric:tabular-nums; }
+dd small { font-size:.75rem; color:var(--muted); font-weight:500; }
+.calculation-details { border-top:1px solid var(--line); padding-top:16px; margin-top:18px; font-size:.85rem; }
+.width-panel { margin-top:12px; }
+.breakdown-list { margin:14px 0 0; }
+.breakdown-list>div { display:flex; justify-content:space-between; gap:12px; padding:7px 0; border-bottom:1px solid var(--line); }
+.breakdown-list dt { font-size:.8rem; }
+.breakdown-list dd { font-size:.8rem; }
+.project-summary { border-top:1px solid var(--line); margin-top:26px; }
+.project-summary .section-title { margin-top:18px; }
+.table-scroll { overflow-x:auto; scrollbar-color:var(--line) transparent; }
+table { border-collapse:collapse; width:100%; font-variant-numeric:tabular-nums; }
+th { text-align:left; font-size:.72rem; color:var(--muted); font-weight:600; border-bottom:1px solid var(--line); padding:9px 6px; white-space:nowrap; }
+td { border-bottom:1px solid var(--line); padding:9px 6px; font-size:.8rem; }
+.schedule { min-width:620px; }
+.schedule th:not(:first-child),.schedule td:not(:first-child) { text-align:right; }
+.schedule td:first-child span { display:block; color:var(--muted); font-size:.75rem; }
+.schedule td button { border:0; padding:0; text-align:left; background:none; }
+.schedule td button:hover strong { text-decoration:underline; }
+tfoot td { border-top:2px solid var(--line); border-bottom:0; font-weight:650; }
+.error-message { border:1px solid var(--error); border-radius:6px; color:var(--error); background:var(--error-bg); padding:14px 16px; margin-top:20px; font-size:.9rem; }
+[hidden] { display:none !important; }
+#report { display:none; }
+#report td:first-child span { display:block; }
+footer { max-width:1540px; margin:0 auto; padding:0 26px 25px; font-size:.8rem; color:var(--muted); display:flex; justify-content:space-between; gap:20px; }
+footer details { max-width:75ch; }
+footer summary { color:var(--accent); }
+footer details p { margin-top:12px; }
+@media (prefers-color-scheme:dark) { :root { --ground:#171d21; --surface:#20282d; --subtle:#1a2227; --ink:#e3e9ec; --muted:#b1bec5; --line:#425058; --accent:#ffb178; --accent-hover:#ffc99f; --accent-soft:#3f2c20; --error:#ffaaa3; --error-bg:#3b2525; --focus:#79c6e7; --joint:#79c6e7; } button.primary,.app-mark { color:#24170f; } }
+@media (max-width:1100px) { .workspace { gap:16px; padding:0 16px; grid-template-columns:340px minmax(0,1fr); } .inputs,.results { padding:20px; } .quantity-list { grid-template-columns:1fr; } .quantity-list>div:nth-child(n) { padding:10px 0; border-left:0; } .app-header { flex-wrap:wrap; gap:16px; } }
+@media (max-width:820px) { .workspace { grid-template-columns:1fr; max-width:740px; } .project-status { flex-wrap:wrap; gap:2px; padding:9px 20px; } .app-header { padding:18px 20px; } footer { max-width:740px; flex-wrap:wrap; } .quantity-list { grid-template-columns:1fr 1fr; } .quantity-list>div:nth-child(odd) { padding-right:18px; } .quantity-list>div:nth-child(even) { padding-left:18px; border-left:1px solid var(--line); } }
+@media (max-width:460px) { h1 { font-size:1.25rem; } .app-header { padding:16px; } nav { width:100%; flex-wrap:wrap; gap:6px; } nav button { flex:1 1 calc(50% - 3px); padding:8px 7px; font-size:.8rem; } .workspace { padding:0 10px; } .inputs,.results { padding:18px 14px; } .project-status { padding:8px 16px; } .quantity-list { grid-template-columns:1fr; } .quantity-list>div:nth-child(n) { padding:10px 0; border-left:0; } .unit-note { display:none; } .drawing-panel { padding:12px 5px; } .drawing-heading { flex-wrap:wrap; } .diagram-label { font-size:18px; } .diagram-note,.joint-label { font-size:16px; } .project-fields { gap:10px; } }
+@media print { :root { color-scheme:light; --ground:#fff; --surface:#fff; --subtle:#f8f8f8; --ink:#000; --muted:#444; --line:#bbb; --accent:#8c3a10; --accent-soft:#fff1e7; --joint:#17647a; } body { background:#fff; color:#000; font-size:10pt; } body>*:not(#report) { display:none !important; } #report { display:block; } #report h1 { font-size:19pt; margin:3mm 0 4mm; } #report h2 { font-size:13pt; margin:5mm 0 2mm; } #report p { margin:2mm 0; } #report th,#report td { color:#000; border-color:#aaa; padding:2mm 1.5mm; font-size:8pt; } #report table { table-layout:fixed; } #report th { white-space:normal; } #report thead { display:table-header-group; } #report tfoot { display:table-row-group; } .report-end { break-inside:avoid; margin-top:6mm; } .report-end svg { display:block; width:100%; height:65mm; } .report-meta { display:grid; grid-template-columns:1fr 1fr; gap:1mm 6mm; } .report-end-details { display:grid; grid-template-columns:1fr 1fr; gap:1mm 6mm; } .report-note { font-size:8pt; color:#444; } @page { size:letter; margin:15mm; } }
+</style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="identity"><span class="app-mark" aria-hidden="true">BE</span><div><h1>Bridge end pavement</h1><p>Roadway design quantities</p></div></div>
+    <nav aria-label="Project files">
+      <button id="open-project" type="button">Open project</button>
+      <button id="save-project" type="button">Save project</button>
+      <button id="export-text" type="button">Export text</button>
+      <button id="print-report" class="primary" type="button">Print / PDF</button>
+    </nav>
+    <input id="open-file" type="file" accept=".json,application/json" hidden>
+  </header>
+  <div class="project-status"><span id="file-status" role="status">Example inputs · not saved</span><span>Offline · runs entirely on this computer</span></div>
+  <main class="workspace">
+    <aside class="inputs" aria-label="Project and bridge end inputs">
+      <details class="project-details" open>
+        <summary>Project information</summary>
+        <div class="project-fields">
+          <label>Project number<input id="project-number" type="text" maxlength="160" placeholder="Enter project number"></label>
+          <label>County<input id="county" type="text" maxlength="160" placeholder="Enter county"></label>
+          <label>Prepared by<input id="prepared-by" type="text" maxlength="160" placeholder="Enter name"></label>
+          <label>Report date<input id="report-date" type="date"></label>
+        </div>
+      </details>
+      <div class="end-picker"><label for="end-select">Bridge end</label><div><select id="end-select"></select><button id="add-end" type="button">Add end</button></div></div>
+      <form id="end-form" novalidate>
+        <div class="identifier-fields">
+          <label>End ID<input id="end-id" type="text" maxlength="80"></label>
+          <label>Abutment station<input id="station" type="text" maxlength="80" placeholder="e.g. 100+00.00"></label>
+        </div>
+        <div class="section-title"><h2>Geometry</h2><span>Decimal feet</span></div>
+        <div class="geometry-fields">
+          <label>W1 <span class="label-unit">ft</span><input id="w1" type="number" step="any" min="0" aria-describedby="width-help"></label>
+          <label>W2 <span class="label-unit">ft</span><input id="w2" type="number" step="any" min="0" aria-describedby="width-help"></label>
+          <label>Skew Z <span class="label-unit">degrees</span><input id="skew" type="number" step="any" min="0" max="89.999999" aria-describedby="skew-help"></label>
+          <label>Rail height <span class="label-unit">inches</span><select id="rail-height" aria-describedby="rail-help"><option value="0">0 · No rail</option><option value="32">32 in.</option><option value="42">42 in.</option></select></label>
+        </div>
+        <p id="rail-help" class="input-note rail-note">32/42 in. rail options follow SDBE-1A and the SDBEPR detail families. Other plan sets use different rails; confirm the project detail.</p>
+        <p id="width-help" class="input-note">W1 and W2 are the plan widths used in the original worksheet. WB = W1 + W2.</p>
+        <p id="skew-help" class="input-note">Enter skew as a nonnegative magnitude below 90°. The calculation holds side A to a 10 ft minimum.</p>
+        <button id="remove-end" class="text-button danger" type="button">Remove this end</button>
+      </form>
+      <div class="basis-note"><strong>One record per bridge end</strong><p>Add the other end separately. Changing inputs updates this record; project totals count each record once.</p></div>
+    </aside>
+    <section class="results" aria-labelledby="results-heading">
+      <div class="results-title"><div><h2 id="results-heading">Bridge end 1</h2><p id="result-context">Example inputs</p></div><span class="unit-note">ft · SY · LF</span></div>
+      <div id="input-error" class="error-message" role="alert" hidden></div>
+      <div id="result-content">
+        <div class="drawing-panel"><div class="drawing-heading"><h3>SDBE-1A calculation plan</h3><span id="geometry-mode"></span></div><div id="plan-container"></div><p>Plan schematic · dimensions govern; not a construction drawing</p></div>
+        <div class="section-title"><h3>Bridge end quantities</h3><span>For this end</span></div>
+        <dl class="quantity-list">
+          <div><dt>Bridge end pavement</dt><dd><span id="pavement"></span> <small>SY</small></dd></div>
+          <div><dt>Expansion joint</dt><dd><span id="expansion-joint"></span> <small>LF</small></dd></div>
+          <div><dt>Transverse grooving</dt><dd><span id="grooving"></span> <small>SY</small></dd></div>
+          <div><dt>32 in. rail</dt><dd><span id="rail32"></span> <small>LF</small></dd></div>
+          <div><dt>42 in. rail</dt><dd><span id="rail42"></span> <small>LF</small></dd></div>
+        </dl>
+        <p id="quantity-note" class="input-note"></p><p class="input-note rail-note">SDBE-1A shows a 1 in. bridge-end joint. BE-1 uses a different bridge-seat detail; confirm project applicability.</p>
+        <details class="calculation-details" open><summary>Width &amp; calculation breakdown</summary><div class="drawing-panel width-panel"><div id="width-container"></div><p>Arithmetic width breakdown · allowance placement is symbolic</p></div><dl id="breakdown" class="breakdown-list"></dl></details>
+        <details class="calculation-details" open><summary>Longitudinal section · SDBE-1A</summary><div class="drawing-panel"><svg id="section-diagram" viewBox="0 0 690 225" role="img" aria-labelledby="section-title section-description"><title id="section-title">SDBE-1A longitudinal section</title><desc id="section-description">Roadway leads to a bridge end concrete pavement slab with nine-inch minimum thickness, then the bridge deck. SDBE-1A shows a one-inch premolded expansion joint at the bridge, not doweled. No asphalt overlay or sleeper slab is shown in this arrangement. Reinforcing and complete construction details are omitted.</desc><path class="width-one" d="M35 105 H200 V155 H35 Z"/><path class="paving-shape" d="M200 105 H474 V155 H200 Z"/><path class="width-two" d="M486 105 H655 V155 H486 Z"/><line class="joint-line" x1="480" y1="99" x2="480" y2="164"/><text class="diagram-label" x="115" y="133" text-anchor="middle">Roadway</text><text class="diagram-label" x="338" y="133" text-anchor="middle">Bridge end pavement</text><text class="diagram-label" x="570" y="133" text-anchor="middle">Bridge deck</text><path class="dim-line" d="M480 91 L535 47 H625 M338 162 V187 H420"/><text class="joint-label" x="560" y="24" text-anchor="middle">1 in. expansion joint</text><text class="diagram-note" x="560" y="43" text-anchor="middle">Not doweled</text><text class="diagram-note" x="420" y="210" text-anchor="middle">9 in. minimum concrete slab</text></svg><p>SDBE-1A arrangement · not to scale; reinforcing and construction details omitted</p><p>BE-1 is a different overlay-and-sleeper arrangement. Use the applicable project detail.</p></div></details>
+      </div>
+      <section class="project-summary" aria-labelledby="schedule-heading"><div class="section-title"><h3 id="schedule-heading">Project quantity schedule</h3><span id="end-count"></span></div><div class="table-scroll"><table class="schedule"><thead><tr><th scope="col">End / station</th><th scope="col">Rail<br>in.</th><th scope="col">Pavement<br>SY</th><th scope="col">Joint<br>LF</th><th scope="col">Grooving<br>SY</th><th scope="col">32 in. rail<br>LF</th><th scope="col">42 in. rail<br>LF</th></tr></thead><tbody id="schedule-rows"></tbody><tfoot id="schedule-total"></tfoot></table></div><p id="project-note" class="input-note"></p></section>
+    </section>
+  </main>
+  <section id="report" aria-label="Printable project report"></section>
+  <footer><span>Bridge end pavement · Mississippi roadway design utility</span><details><summary>Instructions &amp; calculation basis</summary><p>Enter W1 and W2 in decimal feet, skew Z in degrees, and the rail height. Check the live quantities and plan dimensions. Add a record for each bridge end. In the SDBE-1A plan, the crown line divides W2 above and W1 below. Confirm widths and applicability against the project plans.</p><p><strong>Save project</strong> downloads a JSON file containing all inputs. Keep it separately and use <strong>Open project</strong> to continue later. Save again after editing; closing this page does not save your work. <strong>Export text</strong> downloads a quantity report. <strong>Print / PDF</strong> opens the browser print dialog; choose Save as PDF for a portable report.</p><p>Uses the recovered MDOT Bridge End Pavement, Version AI 1.2 calculation: W = W1 + W2 + 1 ft with no rail, + 2.833333 ft for 32 in. rail, or + 3 ft for 42 in. rail. Side A = max(10, 20 − W tan Z / 2). Side B follows the corresponding original branch. Rail options include the original paving and grooving deductions and 20 LF of the selected rail. Quantities round to two decimals for each end before summation. This app blocks negative widths, negative skew, skew at or above 90°, and invalid numerical results.</p><p>Drawing basis: SDBE-1A, Bridge End Pavement with Rail, and the SDBEPR detail families. SDBE-1A matches the 20 ft mid-length, 10 ft side-A minimum, rail width additions and 1 in. bridge-end joint used here. The supplied special drawing PDFs are marked PRELIMINARY / NOT FOR CONSTRUCTION. Other plan sets, including BE-1 and the current SDBE-1, use different arrangements; confirm the applicable project detail. Diagrams show the calculation geometry and section arrangement, not structural design, reinforcement quantities or complete construction details.</p></details></footer>
+  <noscript>This calculator needs JavaScript enabled. It does not need an internet connection.</noscript>
+<script>'use strict';
+const BridgeEndPave = (() => {
+  const quantityKeys = ['pavement', 'expansionJoint', 'grooving', 'rail32', 'rail42'];
+  const round2 = value => Math.round(value * 100) / 100;
+
+  function number(value, label) {
+    if (typeof value === 'string' && /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i.test(value.trim())) value = Number(value);
+    if (typeof value !== 'number' || !Number.isFinite(value)) throw Error(`${label} must be a finite decimal number.`);
+    return value;
+  }
+
+  function calculate(input) {
+    if (!input || typeof input !== 'object' || Array.isArray(input)) throw Error('Enter bridge end dimensions.');
+    const w1 = number(input.w1, 'W1');
+    const w2 = number(input.w2, 'W2');
+    const skew = number(input.skew, 'Skew');
+    const railHeight = number(input.railHeight, 'Rail height');
+    const widthBase = w1 + w2;
+    if (w1 < 0 || w2 < 0 || widthBase <= 0 || !Number.isFinite(widthBase)) throw Error('W1 and W2 must be nonnegative with a positive combined width.');
+    if (skew < 0 || skew >= 90) throw Error('Enter skew as a magnitude from 0 up to, but not including, 90 degrees.');
+    if (![0, 32, 42].includes(railHeight)) throw Error('Rail height must be 0, 32, or 42 inches.');
+
+    // Preserve the constants and operation order recovered from the supplied AI 1.2 script.
+    const radians = skew * 3.141593 / 180;
+    const width = widthBase + (railHeight === 0 ? 1 : railHeight === 32 ? 2.833333 : 3);
+    const unclampedA = 20 - (width / 2) * Math.tan(radians);
+    const sideA = Math.max(10, unclampedA);
+    const clamped = sideA === 10;
+    const sideB = clamped ? 10 + width * Math.tan(radians) : 20 + (width / 2) * Math.tan(radians);
+    const grossArea = ((sideA + sideB) / 2) * width / 9;
+    let railDeduction = 0;
+    let pavement = grossArea;
+    const grooveDeduction = railHeight === 32 ? 3.148148 : railHeight === 42 ? 3.333333 : 0;
+    if (railHeight !== 0) {
+      const railWidth = railHeight === 32 ? 0.916667 : 1;
+      const sideAM = (sideA - 10) * railWidth / 9;
+      const sideBM = (sideB - 10) * railWidth / 9;
+      railDeduction = sideAM + sideBM;
+      pavement = grossArea - railDeduction;
+    }
+    const expansionJoint = width / Math.cos(radians);
+    const grooving = pavement - grooveDeduction;
+    if ([width, sideA, sideB, grossArea, pavement, expansionJoint, grooving].some(value => !Number.isFinite(value) || value < 0)) throw Error('These dimensions produce an invalid quantity. Check the widths and skew.');
+    const result = { w1, w2, skew, railHeight, widthBase, width, sideA, sideB, grossArea, pavement: round2(pavement), expansionJoint: round2(expansionJoint), grooving: round2(grooving), rail32: railHeight === 32 ? 20 : 0, rail42: railHeight === 42 ? 20 : 0, clamped, railDeduction, grooveDeduction };
+    if (quantityKeys.some(key => !Number.isFinite(result[key]))) throw Error('The calculated quantities exceed the numeric range.');
+    return result;
+  }
+
+  function totals(results) {
+    if (!Array.isArray(results)) throw Error('Project quantities must be a list.');
+    const total = {};
+    for (const key of quantityKeys) {
+      let cents = 0;
+      for (const result of results) {
+        const value = result && result[key];
+        if (typeof value !== 'number' || !Number.isFinite(value) || value < 0) throw Error('Project totals require valid calculated quantities.');
+        cents += Math.round(value * 100);
+        if (!Number.isSafeInteger(cents)) throw Error('Project quantities are too large to total accurately.');
+      }
+      total[key] = cents / 100;
+    }
+    return total;
+  }
+
+  return { calculate, totals };
+})();
+if (typeof module === 'object' && module.exports) module.exports = BridgeEndPave;
+</script>
+<script>'use strict';
+(() => {
+  const $ = id => document.getElementById(id);
+  const f = value => value.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  const html = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const newEnd = id => ({id:String(id),station:'',w1:30,w2:25,skew:10,railHeight:32});
+  const now = new Date();
+  const date = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+  let project = {schema:'bridge-end-pave-project-v1',projectNumber:'',county:'',preparedBy:'',date,ends:[newEnd(1)]};
+  let selected = 0, dirty = false, results = [];
+  const label = (end, index) => `End ${end.id || index+1}${end.station ? ` · ${end.station}` : ''}`;
+  const jointNote = 'SDBE-1A shows a 1 in. bridge-end joint. BE-1 uses a different bridge-seat detail; confirm project applicability.';
+  const railNote = '32/42 in. rail options follow SDBE-1A and the SDBEPR detail families. Other plan sets use different rails; confirm the project detail.';
+  const quantityFields = [['pavement','Bridge end pavement','SY'],['expansionJoint','Expansion joint','LF'],['grooving','Transverse grooving','SY'],['rail32','32 in. rail','LF'],['rail42','42 in. rail','LF']];
+
+  function markDirty() {
+    dirty = true;
+    $('file-status').textContent = 'Unsaved changes · save project to keep your work';
+  }
+  function loadForm() {
+    const end = project.ends[selected];
+    for (const [id,key] of [['project-number','projectNumber'],['county','county'],['prepared-by','preparedBy'],['report-date','date']]) $(id).value = project[key];
+    for (const [id,key] of [['end-id','id'],['station','station'],['w1','w1'],['w2','w2'],['skew','skew'],['rail-height','railHeight']]) $(id).value = end[key];
+    render();
+  }
+  function readForm() {
+    Object.assign(project,{projectNumber:$('project-number').value,county:$('county').value,preparedBy:$('prepared-by').value,date:$('report-date').value});
+    Object.assign(project.ends[selected],{id:$('end-id').value,station:$('station').value,w1:$('w1').value,w2:$('w2').value,skew:$('skew').value,railHeight:Number($('rail-height').value)});
+    markDirty(); render();
+  }
+  function planDiagram(r, id) {
+    const left=165, top=85, bottom=290, scale=290/Math.max(r.sideA,r.sideB);
+    const endA=left+r.sideA*scale, endB=left+r.sideB*scale;
+    const crown=105+165*r.w2/r.widthBase;
+    return `<svg ${id==='plan'?'id="plan-diagram" ':''}viewBox="0 0 690 385" role="img" aria-labelledby="${id}-title ${id}-description"><title id="${id}-title">SDBE-1A calculation plan</title><desc id="${id}-description">Roadway is on the left and the bridge on the right. The crown line divides W2 above and W1 below. Gross trapezoid calculation envelope: width W ${f(r.width)} feet, side A ${f(r.sideA)} feet above, side B ${f(r.sideB)} feet below. Skewed bridge interface ${f(r.expansionJoint)} feet at skew ${f(r.skew)} degrees. SDBE-1A shows a one-inch bridge-end joint along this interface. Confirm applicability against the project detail. ${r.clamped?'Side A is held to its ten-foot minimum.':''}Proportions are schematic.</desc><text class="diagram-note" x="45" y="183" text-anchor="middle">ROADWAY</text><text class="diagram-note" x="555" y="65" text-anchor="middle">BRIDGE DECK</text><path class="paving-shape" d="M${left} ${top} H${endA} L${endB} ${bottom} H${left} Z"/><line class="joint-line" x1="${endA}" y1="${top}" x2="${endB}" y2="${bottom}"/><line class="datum-line" x1="100" y1="${crown}" x2="570" y2="${crown}"/><text class="diagram-note" x="260" y="${crown-9}" text-anchor="middle">Crown line</text><text class="diagram-note" x="275" y="${Math.min(bottom-18,crown+37)}" text-anchor="middle">Pavement envelope</text><line class="datum-line" x1="${endA}" y1="70" x2="${endA}" y2="155"/><text class="joint-label" x="${Math.min(endA+18,465)}" y="110">Z ${f(r.skew)}°</text><path class="dim-line" d="M${left} 73 V40 M${endA} 73 V40 M${left} 50 H${endA} M${left-4} 54 L${left+4} 46 M${endA-4} 54 L${endA+4} 46"/><text class="diagram-label" x="${(left+endA)/2}" y="32" text-anchor="middle">A = ${f(r.sideA)} ft</text><path class="dim-line" d="M${left} 303 V337 M${endB} 303 V337 M${left} 325 H${endB} M${left-4} 329 L${left+4} 321 M${endB-4} 329 L${endB+4} 321"/><text class="diagram-label" x="${(left+endB)/2}" y="350" text-anchor="middle">B = ${f(r.sideB)} ft</text><path class="dim-line" d="M145 ${top} H115 V${bottom} H145 M110 ${top+4} L120 ${top-4} M110 ${bottom+4} L120 ${bottom-4}"/><text class="diagram-label" transform="translate(102 185) rotate(-90)" text-anchor="middle">W = ${f(r.width)} ft</text><path class="dim-line" d="M485 105 H515 V270 H485 M485 ${crown} H515 M535 105 H560 V270 H535"/><text class="diagram-label" x="524" y="${(105+crown)/2}" dominant-baseline="middle">W2</text><text class="diagram-note" x="524" y="${(105+crown)/2+19}">${f(r.w2)} ft</text><text class="diagram-label" x="524" y="${(crown+270)/2}" dominant-baseline="middle">W1</text><text class="diagram-note" x="524" y="${(crown+270)/2+19}">${f(r.w1)} ft</text><text class="diagram-label" transform="translate(612 188) rotate(-90)" text-anchor="middle">WB = ${f(r.widthBase)} ft</text><text class="joint-label" x="345" y="378" text-anchor="middle">Skewed bridge interface = ${f(r.expansionJoint)} ft</text></svg>`;
+  }
+  function widthDiagram(r) {
+    const allowance=r.width-r.widthBase;
+    return `<svg id="width-diagram" viewBox="0 0 620 185" role="img" aria-labelledby="width-title width-description"><title id="width-title">Width calculation breakdown</title><desc id="width-description">W1 ${f(r.w1)} feet plus W2 ${f(r.w2)} feet makes WB ${f(r.widthBase)} feet. Add ${f(allowance)} feet for the selected rail option to get W ${f(r.width)} feet. Blocks are symbolic and not to scale.</desc><rect class="width-one" x="35" y="30" width="155" height="60" rx="3"/><rect class="width-two" x="225" y="30" width="155" height="60" rx="3"/><rect class="paving-shape" x="415" y="30" width="170" height="60" rx="3"/><text class="diagram-label" x="112" y="55" text-anchor="middle">W1</text><text class="diagram-note" x="112" y="77" text-anchor="middle">${f(r.w1)} ft</text><text class="diagram-label" x="207" y="67" text-anchor="middle">+</text><text class="diagram-label" x="302" y="55" text-anchor="middle">W2</text><text class="diagram-note" x="302" y="77" text-anchor="middle">${f(r.w2)} ft</text><text class="diagram-label" x="397" y="67" text-anchor="middle">+</text><text class="diagram-label" x="500" y="55" text-anchor="middle">Allowance</text><text class="diagram-note" x="500" y="77" text-anchor="middle">${f(allowance)} ft</text><path class="dim-line" d="M35 100 V113 H380 V100"/><text class="diagram-note" x="207" y="138" text-anchor="middle">WB = ${f(r.widthBase)} ft</text><text class="diagram-note" x="500" y="120" text-anchor="middle">${r.railHeight===0?'No rail':`${r.railHeight} in. rail`}</text><text class="diagram-label" x="310" y="170" text-anchor="middle">W = W1 + W2 + allowance = ${f(r.width)} ft</text></svg>`;
+  }
+  function tableRow(end,r,index,interactive=false) {
+    const name=`<strong>${html(end.id||index+1)}</strong><span>${html(end.station||'Station not entered')}</span>`;
+    return `<tr><td>${interactive?`<button type="button" data-end="${index}" aria-label="Edit end ${html(end.id||index+1)}">${name}</button>`:name}</td><td>${html(end.railHeight)}</td>${quantityFields.map(([key])=>`<td>${r?f(r[key]):'—'}</td>`).join('')}</tr>`;
+  }
+  function totalRow(total) {
+    return `<tr><td colspan="2">Total · ${project.ends.length} end${project.ends.length===1?'':'s'}</td>${quantityFields.map(([key])=>`<td>${f(total[key])}</td>`).join('')}</tr>`;
+  }
+  const scheduleHead='<tr><th>End / station</th><th>Rail (in.)</th><th>Pavement (SY)</th><th>Joint (LF)</th><th>Grooving (SY)</th><th>32 in. rail (LF)</th><th>42 in. rail (LF)</th></tr>';
+  function buildReport(total) {
+    if(!total) { $('report').innerHTML='<h1>Report unavailable</h1><p>Correct all bridge end inputs before printing.</p>'; return; }
+    const metadata=[['Project',project.projectNumber],['County',project.county],['Prepared by',project.preparedBy],['Report date',project.date]];
+    $('report').innerHTML=`<p class="report-note">MISSISSIPPI ROADWAY DESIGN UTILITIES</p><h1>Bridge end pavement quantities</h1><div class="report-meta">${metadata.map(([key,value])=>`<div><strong>${key}:</strong> ${html(value||'Not entered')}</div>`).join('')}</div><h2>Project quantity schedule</h2><table><thead>${scheduleHead}</thead><tbody>${project.ends.map((end,i)=>tableRow(end,results[i].value,i)).join('')}</tbody><tfoot>${totalRow(total)}</tfoot></table><p class="report-note">SY = square yards; LF = linear feet. Project totals sum the two-decimal quantities for each end. Each record is counted once.</p><p class="report-note">${jointNote}</p><p class="report-note">${railNote}</p>${project.ends.map((end,i)=>{
+      const r=results[i].value;
+      return `<section class="report-end"><h2>${html(label(end,i))}</h2><div class="report-end-details"><div><strong>W1 / W2:</strong> ${f(r.w1)} / ${f(r.w2)} ft</div><div><strong>Skew / rail:</strong> ${f(r.skew)}° / ${r.railHeight} in.</div><div><strong>WB / W:</strong> ${f(r.widthBase)} / ${f(r.width)} ft</div><div><strong>A / B:</strong> ${f(r.sideA)} / ${f(r.sideB)} ft</div>${quantityFields.map(([key,title,unit])=>`<div><strong>${title}:</strong> ${f(r[key])} ${unit}</div>`).join('')}</div>${planDiagram(r,`report-plan-${i}`)}<p class="report-note">Schematic; dimensions govern. ${r.clamped?'Side A uses the 10 ft minimum. ':''}Gross envelope ${f(r.grossArea)} SY; paving deduction ${f(r.railDeduction)} SY; additional grooving deduction ${f(r.grooveDeduction)} SY.</p></section>`;
+    }).join('')}<p class="report-note">Calculation basis: recovered MDOT Bridge End Pavement, Version AI 1.2; geometry matches SDBE-1A. Nonnegative skew magnitude below 90° is required. W1/W2 datum and applicability require project-plan review. Diagrams are not construction details.</p>`;
+  }
+  function render() {
+    results=project.ends.map(end=>{try{return {value:BridgeEndPave.calculate(end)};}catch(error){return {error:error.message};}});
+    const current=results[selected], end=project.ends[selected], valid=results.every(r=>r.value);
+    $('end-select').replaceChildren(...project.ends.map((item,i)=>new Option(label(item,i),i,false,i===selected)));
+    $('add-end').disabled=project.ends.length>=200;
+    $('remove-end').disabled=project.ends.length===1;
+    $('results-heading').textContent=`Bridge end ${end.id||selected+1}`;
+    $('result-context').textContent=`${end.station?`Abutment station ${end.station}`:'Abutment station not entered'} · ${end.railHeight===0?'No rail':`${end.railHeight} in. rail`}`;
+    $('input-error').hidden=!current.error;
+    $('input-error').textContent=current.error||'';
+    $('result-content').hidden=!current.value;
+    for(const id of ['w1','w2','skew']) {
+      const value=$(id).value;
+      const bad=value.trim()===''||!Number.isFinite(Number(value))||Number(value)<0||(id==='skew'&&Number(value)>=90);
+      $(id).setAttribute('aria-invalid',String(bad));
+      $(id).setAttribute('aria-describedby',`${id==='skew'?'skew-help':'width-help'} input-error`);
+    }
+    if(current.value) {
+      const r=current.value;
+      for(const [id,key] of [['pavement','pavement'],['expansion-joint','expansionJoint'],['grooving','grooving'],['rail32','rail32'],['rail42','rail42']]) $(id).textContent=f(r[key]);
+      $('plan-container').innerHTML=planDiagram(r,'plan');
+      $('width-container').innerHTML=widthDiagram(r);
+      $('geometry-mode').textContent=r.clamped?'A held at 10 ft minimum':'20 ft nominal average depth';
+      $('quantity-note').textContent=r.railHeight===0?'No rail deductions apply. Transverse grooving equals the paving area.':`${r.railHeight} in. rail applies a ${f(r.railDeduction)} SY paving deduction and a further ${f(r.grooveDeduction)} SY grooving deduction. Rail quantity is 20 LF for this end.`;
+      const rows=[['Base width WB',`${f(r.widthBase)} ft`],['Added width',`${f(r.width-r.widthBase)} ft`],['Calculation width W',`${f(r.width)} ft`],['Side A / side B',`${f(r.sideA)} / ${f(r.sideB)} ft`],['Gross trapezoid area',`${f(r.grossArea)} SY`],['Paving area deduction',`${f(r.railDeduction)} SY`],['Additional grooving deduction',`${f(r.grooveDeduction)} SY`]];
+      $('breakdown').innerHTML=rows.map(([key,value])=>`<div><dt>${key}</dt><dd>${value}</dd></div>`).join('');
+    }
+    $('end-count').textContent=`${project.ends.length} end${project.ends.length===1?'':'s'}`;
+    $('schedule-rows').innerHTML=project.ends.map((item,i)=>tableRow(item,results[i].value,i,true)).join('');
+    let total=null, totalError='';
+    if(valid) { try { total=BridgeEndPave.totals(results.map(r=>r.value)); } catch(error) { totalError=error.message; } }
+    $('schedule-total').innerHTML=total?totalRow(total):'';
+    $('project-note').textContent=totalError||(valid?'Totals sum rounded per-end quantities. Editing a record updates its quantities; add a record only for another bridge end.':results.map((r,i)=>r.error?`${label(project.ends[i],i)}: ${r.error}`:'').filter(Boolean).join(' '));
+    for(const id of ['save-project','export-text','print-report']) $(id).disabled=!total;
+    buildReport(total);
+  }
+  for(const id of ['project-number','county','prepared-by','report-date','end-id','station','w1','w2','skew']) $(id).addEventListener('input',readForm);
+  $('end-form').addEventListener('submit',event=>event.preventDefault());
+  $('rail-height').addEventListener('change',readForm);
+  $('end-select').addEventListener('change',()=>{selected=Number($('end-select').value);loadForm();});
+  $('schedule-rows').addEventListener('click',event=>{const button=event.target.closest('button[data-end]');if(button){selected=Number(button.dataset.end);loadForm();$('end-id').focus();}});
+  $('add-end').addEventListener('click',()=>{
+    if(project.ends.length>=200)return;
+    const ids=new Set(project.ends.map(end=>end.id));let id=1;while(ids.has(String(id)))id++;
+    project.ends.push(newEnd(id));selected=project.ends.length-1;markDirty();loadForm();$('end-id').focus();
+  });
+  $('remove-end').addEventListener('click',()=>{
+    if(project.ends.length===1||!confirm(`Remove ${label(project.ends[selected],selected)} from this project?`))return;
+    project.ends.splice(selected,1);selected=Math.min(selected,project.ends.length-1);markDirty();loadForm();
+  });
+  function download(content,type,extension) {
+    const url=URL.createObjectURL(new Blob([content],{type}));
+    const link=document.createElement('a');link.href=url;link.download=`BridgeEndPave-${(project.projectNumber||'project').replace(/[^a-z0-9_-]/gi,'_')}.${extension}`;
+    document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);
+  }
+  $('save-project').addEventListener('click',()=>{
+    if(results.some(r=>r.error))return;
+    download(JSON.stringify(project,null,2),'application/json','json');dirty=false;$('file-status').textContent='Project file downloaded · save again after editing';
+  });
+  $('export-text').addEventListener('click',()=>{
+    if(results.some(r=>r.error))return;
+    const lines=['ESTIMATED BRIDGE END PAVEMENT QUANTITIES',`Project: ${project.projectNumber}`,`County: ${project.county}`,`Prepared by: ${project.preparedBy}`,`Report date: ${project.date}`,''];
+    project.ends.forEach((end,i)=>{const r=results[i].value;lines.push(label(end,i),`W1 ${f(r.w1)} ft | W2 ${f(r.w2)} ft | WB ${f(r.widthBase)} ft | W ${f(r.width)} ft`,`A ${f(r.sideA)} ft | B ${f(r.sideB)} ft | Z ${f(r.skew)} degrees | Rail ${r.railHeight} in.`,...quantityFields.map(([key,title,unit])=>`${title}: ${f(r[key])} ${unit}`),'');});
+    const total=BridgeEndPave.totals(results.map(r=>r.value));
+    lines.push('PROJECT TOTALS',...quantityFields.map(([key,title,unit])=>`${title}: ${f(total[key])} ${unit}`),'','Totals sum rounded per-end quantities. Each record counted once.','Basis: recovered MDOT Bridge End Pavement, Version AI 1.2; calculation geometry matches SDBE-1A.',jointNote,railNote,'Confirm width datum, plan applicability and construction details separately.');
+    download(lines.join('\r\n'),'text/plain;charset=utf-8','txt');
+  });
+  function validateProject(input) {
+    if(!input||input.schema!=='bridge-end-pave-project-v1'||!Array.isArray(input.ends)||input.ends.length<1||input.ends.length>200)throw Error('Choose a Bridge End Pavement JSON project containing 1–200 ends.');
+    const text=(value,title,max=160)=>{if(typeof value!=='string'||value.length>max)throw Error(`${title} must be text of at most ${max} characters.`);return value;};
+    const reportDate=text(input.date,'Report date',10);
+    if(reportDate&&(!/^\d{4}-\d{2}-\d{2}$/.test(reportDate)||!Number.isFinite(Date.parse(reportDate))||new Date(reportDate).toISOString().slice(0,10)!==reportDate))throw Error('Report date must be a valid YYYY-MM-DD date.');
+    const ends=input.ends.map((end,i)=>{
+      if(!end||typeof end!=='object'||!['number','string'].includes(typeof end.w1)||!['number','string'].includes(typeof end.w2)||!['number','string'].includes(typeof end.skew)||![0,32,42].includes(end.railHeight))throw Error(`End ${i+1} has invalid calculation inputs.`);
+      if([end.w1,end.w2,end.skew].some(value=>String(value).length>80))throw Error(`End ${i+1} has an excessively long number.`);
+      const clean={id:text(end.id,`End ${i+1} ID`,80),station:text(end.station,`End ${i+1} station`,80),w1:end.w1,w2:end.w2,skew:end.skew,railHeight:end.railHeight};BridgeEndPave.calculate(clean);return clean;
+    });
+    BridgeEndPave.totals(ends.map(end=>BridgeEndPave.calculate(end)));
+    return {schema:'bridge-end-pave-project-v1',projectNumber:text(input.projectNumber,'Project number'),county:text(input.county,'County'),preparedBy:text(input.preparedBy,'Prepared by'),date:reportDate,ends};
+  }
+  $('open-project').addEventListener('click',()=>$('open-file').click());
+  $('open-file').addEventListener('change',async()=>{
+    const file=$('open-file').files[0];if(!file)return;
+    try {
+      if(file.size>1024*1024)throw Error('Project file is too large (maximum 1 MB).');
+      const loaded=validateProject(JSON.parse(await file.text()));
+      if(dirty&&!confirm('Replace the unsaved project with this file? Save your current project first if you need to keep it.'))return;
+      project=loaded;selected=0;dirty=false;loadForm();$('file-status').textContent=`Opened ${file.name} · inputs restored`;
+    } catch(error) { alert(`Could not open project. ${error.message}`); }
+    finally { $('open-file').value=''; }
+  });
+  $('print-report').addEventListener('click',()=>{if(results.every(r=>r.value))window.print();});
+  window.addEventListener('beforeprint',render);
+  window.addEventListener('beforeunload',event=>{if(dirty){event.preventDefault();event.returnValue='';}});
+  loadForm();
+})();
+</script>
+</body>
+</html>
