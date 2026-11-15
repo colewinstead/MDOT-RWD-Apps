@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Offline pipe excavation schedule using recovered MDOT rules, with Excel export and saved projects.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Structure excavation</title>
+<link rel="stylesheet" href="styles.css">
+<script src="calculations.js" defer></script>
+<script src="xlsx.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<main>
+  <header><div><h1>Structure excavation</h1><p class="muted">Enter pipe details. Export the excavation schedule to Excel.</p></div><span class="offline">Works offline</span></header>
+  <noscript>This calculator needs JavaScript enabled. All calculations run on your computer.</noscript>
+  <nav aria-label="Project files"><button id="open-project">Open project</button><button id="save-project">Save project</button><span id="save-state">Save a project file to keep your inputs.</span><button id="export-excel" class="primary" disabled>Export Excel</button></nav>
+  <input id="open-file" type="file" accept=".json,application/json" hidden>
+  <p id="file-status" role="status"></p>
+  <section class="project" aria-label="Project information">
+    <label>Project<input id="project-name" maxlength="120" placeholder="Project number or name"></label>
+    <label>County<input id="county" maxlength="120" placeholder="County"></label>
+    <label>Date<input id="date" type="date"></label>
+  </section>
+  <section aria-labelledby="pipes-heading" class="schedule">
+    <div class="schedule-heading"><div><h2 id="pipes-heading">Pipe schedule</h2><p class="muted">Lengths and depths in feet. Pipe sizes in inches.</p></div><button id="add-pipe">Add pipe</button></div>
+    <p class="scroll-hint muted">Scroll the table sideways to enter depth, FES and view CY.</p>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Editable pipe schedule">
+      <table><thead><tr><th scope="col">Pipe ID</th><th scope="col">Station</th><th scope="col">Size (in.)</th><th scope="col">Type</th><th scope="col">Length (ft)</th><th scope="col">Avg. depth (ft)</th><th scope="col">FES</th><th scope="col" class="numeric">Excavation (CY)</th><th scope="col"><span class="sr-only">Remove pipe</span></th></tr></thead><tbody id="pipes"></tbody></table>
+    </div>
+    <p id="empty-state" hidden>No pipes yet. Select Add pipe to start your schedule.</p>
+    <div class="total-line"><span id="pipe-count">0 pipes</span><span id="total-length"></span><div><span>Total excavation</span><strong id="total-cy">Pending</strong><span>CY</span></div></div>
+    <p id="validation" role="status"></p>
+  </section>
+  <details><summary>Calculation and saving help</summary><div class="help">
+    <p><strong>Excavation CY = trench CY + flared-end CY.</strong></p>
+    <p>Trench CY = [(diameter or span in inches + 24) ÷ 12] × pipe length × average excavation depth ÷ 27. For arch pipe, the first size is the span. Depth is total average excavation depth, not cover above the pipe.</p>
+    <p>FES means flared end sections (0, 1 or 2). Flared-end CY = FES count × the size allowance × depth. The Excel sheet includes the allowance and both calculation components.</p>
+    <p>Uses the recovered Mississippi DOT Structure Excavation v1.1 rules. The original EXE could not be run on this Windows system; calculations were checked against its extracted script. Check applicability to your project. This calculation does not add sloped trench walls, shoring or separate bedding allowances.</p>
+    <p>Rows display 3 decimal places. The project total displays 2, as in the original program, and sums unrounded quantities. Editing a row replaces its result.</p>
+    <p><strong>Save project</strong> downloads a JSON file, including unfinished rows. Use <strong>Open project</strong> to reopen it and save again after edits. Closing this page does not save inputs. Opening another project asks before replacing unsaved changes.</p>
+    <p><strong>Export Excel</strong> downloads a real .xlsx file with pipe inputs, formulas and totals. Open it in Excel to review or adjust the numeric inputs. Size and allowance are exported values; change pipe sizes in this app and export again. Keep the JSON file to reopen inputs in the app.</p>
+  </div></details>
+  <footer>StrExc <span>All files and calculations stay on this computer.</span></footer>
+</main>
+</body>
+</html>

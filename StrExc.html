@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Offline pipe excavation schedule using recovered MDOT rules, with Excel export and saved projects.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-9Mg7427L45QZ180xfaibRfTR6nXYcAG27iZHWFEY3Xc=' 'sha256-Amd2IYy2OUeuMOgQcY0/t8rCkCBGq6AGNDApLH3Ib1A=' 'sha256-VKgoeAAeJZFtIV3JsDxIZeRO/vN9W3yS9CRgNixe1fo='; style-src 'sha256-hlx4TfhPZht+kdr5HSpHFswhDxGryNB40cLn3/Bi2Do='; img-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Structure excavation</title>
+<style>/* Hallmark · shape: app screen · genre: modern-minimal · theme: repository neutral · signature: editable pipe schedule · surface: absolute · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R5 V3 · weakest: V, repeated form panels removed in favor of one pipe schedule */
+/* Hallmark · finish-review: subagent · 2 findings · 2 resolved · gap: none */
+:root { color-scheme:light dark; --ground:#f3f4f4; --surface:#fff; --subtle:#f7f8f8; --ink:#20292e; --muted:#57656c; --line:#d6dddf; --control-line:#78878e; --accent:#a74613; --accent-hover:#85350c; --on-accent:#fff; --error:#a22424; --error-bg:#fff1ef; --focus:#247b9a; --clear:transparent; --font-body:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; font-family:var(--font-body); font-size:16px; }
+* { box-sizing:border-box; }
+html,body { overflow-x:clip; }
+body { margin:0; background:var(--ground); color:var(--ink); line-height:1.5; }
+main { max-width:1440px; margin:0 auto; padding:32px; }
+header { display:flex; align-items:center; justify-content:space-between; gap:20px; margin-bottom:24px; }
+h1,h2 { text-wrap:balance; }
+h1 { font-size:1.6rem; line-height:1.2; margin:0 0 8px; min-width:0; overflow-wrap:break-word; }
+h2 { font-size:1.2rem; line-height:1.3; margin:0 0 4px; }
+p { margin:0; }
+.muted,.offline,footer { color:var(--muted); font-size:.875rem; }
+button,input,select { font:inherit; color:var(--ink); border:1px solid var(--control-line); border-radius:5px; background:var(--surface); min-height:40px; padding:8px 12px; }
+button { cursor:pointer; font-size:.875rem; font-weight:600; min-height:44px; }
+button:hover { background:var(--subtle); border-color:var(--muted); }
+button:active { transform:translateY(1px); }
+button:disabled { opacity:.5; cursor:not-allowed; transform:none; }
+button.primary { background:var(--accent); border-color:var(--accent); color:var(--on-accent); }
+button.primary:hover { background:var(--accent-hover); }
+:is(button,input,select,summary,.table-scroll):focus-visible { outline:3px solid var(--focus); outline-offset:2px; }
+nav { display:flex; align-items:center; flex-wrap:wrap; gap:12px; padding:16px 0; border-block:1px solid var(--line); }
+nav>span { font-size:.8rem; color:var(--muted); margin-inline:4px auto; }
+#file-status { font-variant-numeric:tabular-nums; color:var(--muted); font-size:.875rem; min-height:24px; margin:12px 0; overflow-wrap:anywhere; }
+#file-status.error { color:var(--error); }
+.project { display:grid; grid-template-columns:2fr 1fr 1fr; gap:20px; margin:0 0 24px; }
+label { display:block; font-size:.83rem; font-weight:600; }
+label input { display:block; width:100%; margin-top:8px; }
+input,select { min-width:0; font-size:.875rem; }
+.schedule { background:var(--surface); border:1px solid var(--line); border-radius:10px; }
+.schedule-heading { display:flex; gap:20px; align-items:center; justify-content:space-between; padding:24px; }
+.scroll-hint { display:none; padding:0 24px 16px; }
+.table-scroll { overflow-x:auto; position:relative; }
+table { width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; }
+th { font-size:.8rem; font-weight:600; color:var(--muted); text-align:left; padding:12px 8px; background:var(--subtle); border-block:1px solid var(--line); white-space:nowrap; }
+td { padding:12px 8px; border-bottom:1px solid var(--line); font-size:.875rem; vertical-align:top; }
+th:first-child,td:first-child { padding-left:24px; }
+th:last-child,td:last-child { padding-right:24px; }
+td input,td select { width:100%; }
+td input[data-key=id] { min-width:95px; }
+td input[data-key=station] { min-width:105px; }
+td input[type=number] { min-width:85px; max-width:120px; }
+td select[data-key=size] { min-width:128px; }
+td select[data-key=fes] { min-width:60px; }
+.type { padding-top:24px; }
+.numeric { text-align:right; }
+td.numeric { min-width:135px; padding-top:24px; font-weight:650; }
+.row-error { display:block; font-size:.75rem; font-weight:400; color:var(--error); max-width:180px; }
+[aria-invalid=true] { border-color:var(--error); }
+.remove { padding-inline:8px; color:var(--muted); }
+.total-line { display:flex; flex-wrap:wrap; gap:12px 24px; align-items:center; padding:24px; font-size:.875rem; color:var(--muted); }
+.total-line>div { margin-left:auto; display:flex; align-items:baseline; gap:12px; }
+.total-line strong { color:var(--ink); font-size:1.6rem; font-variant-numeric:tabular-nums; }
+#validation { padding:0 24px 20px; font-size:.875rem; color:var(--error); }
+#validation:empty { display:none; }
+#empty-state { padding:24px; color:var(--muted); }
+details { border-bottom:1px solid var(--line); margin-top:20px; }
+summary { padding:16px 0; cursor:pointer; font-weight:600; font-size:.875rem; }
+.help { max-width:75ch; font-size:.875rem; color:var(--muted); padding-bottom:16px; }
+.help p { margin:0 0 12px; }
+footer { display:flex; gap:20px; justify-content:space-between; margin-top:20px; font-size:.8rem; }
+.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+[hidden] { display:none!important; }
+@media(prefers-color-scheme:dark) { :root { --ground:#171d21; --surface:#20282d; --subtle:#1a2227; --ink:#e3e9ec; --muted:#b1bec5; --line:#425058; --control-line:#81939d; --accent:#ffb178; --accent-hover:#ffc99f; --on-accent:#24170f; --error:#ffaaa3; --error-bg:#3b2525; --focus:#79c6e7; } }
+@media(max-width:1100px) { .scroll-hint { display:block; } }
+@media(max-width:700px) { main { padding:24px 16px; } header { align-items:flex-start; } .offline { display:none; } .project { grid-template-columns:1fr 1fr; gap:12px; } .project label:first-child { grid-column:1/-1; } nav>span { order:4; width:100%; margin:0; } #export-excel { margin-left:auto; } .schedule-heading { padding:16px; } .schedule-heading .muted { max-width:24ch; } .total-line { padding:16px; } .total-line>div { width:100%; margin:0; } footer { display:block; } footer span { display:block; margin-top:8px; } }
+</style>
+</head>
+<body>
+<main>
+  <header><div><h1>Structure excavation</h1><p class="muted">Enter pipe details. Export the excavation schedule to Excel.</p></div><span class="offline">Works offline</span></header>
+  <noscript>This calculator needs JavaScript enabled. All calculations run on your computer.</noscript>
+  <nav aria-label="Project files"><button id="open-project">Open project</button><button id="save-project">Save project</button><span id="save-state">Save a project file to keep your inputs.</span><button id="export-excel" class="primary" disabled>Export Excel</button></nav>
+  <input id="open-file" type="file" accept=".json,application/json" hidden>
+  <p id="file-status" role="status"></p>
+  <section class="project" aria-label="Project information">
+    <label>Project<input id="project-name" maxlength="120" placeholder="Project number or name"></label>
+    <label>County<input id="county" maxlength="120" placeholder="County"></label>
+    <label>Date<input id="date" type="date"></label>
+  </section>
+  <section aria-labelledby="pipes-heading" class="schedule">
+    <div class="schedule-heading"><div><h2 id="pipes-heading">Pipe schedule</h2><p class="muted">Lengths and depths in feet. Pipe sizes in inches.</p></div><button id="add-pipe">Add pipe</button></div>
+    <p class="scroll-hint muted">Scroll the table sideways to enter depth, FES and view CY.</p>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Editable pipe schedule">
+      <table><thead><tr><th scope="col">Pipe ID</th><th scope="col">Station</th><th scope="col">Size (in.)</th><th scope="col">Type</th><th scope="col">Length (ft)</th><th scope="col">Avg. depth (ft)</th><th scope="col">FES</th><th scope="col" class="numeric">Excavation (CY)</th><th scope="col"><span class="sr-only">Remove pipe</span></th></tr></thead><tbody id="pipes"></tbody></table>
+    </div>
+    <p id="empty-state" hidden>No pipes yet. Select Add pipe to start your schedule.</p>
+    <div class="total-line"><span id="pipe-count">0 pipes</span><span id="total-length"></span><div><span>Total excavation</span><strong id="total-cy">Pending</strong><span>CY</span></div></div>
+    <p id="validation" role="status"></p>
+  </section>
+  <details><summary>Calculation and saving help</summary><div class="help">
+    <p><strong>Excavation CY = trench CY + flared-end CY.</strong></p>
+    <p>Trench CY = [(diameter or span in inches + 24) ÷ 12] × pipe length × average excavation depth ÷ 27. For arch pipe, the first size is the span. Depth is total average excavation depth, not cover above the pipe.</p>
+    <p>FES means flared end sections (0, 1 or 2). Flared-end CY = FES count × the size allowance × depth. The Excel sheet includes the allowance and both calculation components.</p>
+    <p>Uses the recovered Mississippi DOT Structure Excavation v1.1 rules. The original EXE could not be run on this Windows system; calculations were checked against its extracted script. Check applicability to your project. This calculation does not add sloped trench walls, shoring or separate bedding allowances.</p>
+    <p>Rows display 3 decimal places. The project total displays 2, as in the original program, and sums unrounded quantities. Editing a row replaces its result.</p>
+    <p><strong>Save project</strong> downloads a JSON file, including unfinished rows. Use <strong>Open project</strong> to reopen it and save again after edits. Closing this page does not save inputs. Opening another project asks before replacing unsaved changes.</p>
+    <p><strong>Export Excel</strong> downloads a real .xlsx file with pipe inputs, formulas and totals. Open it in Excel to review or adjust the numeric inputs. Size and allowance are exported values; change pipe sizes in this app and export again. Keep the JSON file to reopen inputs in the app.</p>
+  </div></details>
+  <footer>StrExc <span>All files and calculations stay on this computer.</span></footer>
+</main>
+<script>(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.StrExc = factory();
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+  const sizes = Object.freeze([
+    ['18',1.18],['24',1.41],['30',1.63],['36',2.34],['42',2.53],['48',2.71],
+    ['54',2.94],['60',3.12],['66',3.31],['72',3.48],['84',5.86],
+    ['22x13',1.2],['29x18',1.43],['36x26',1.66],['44x27',2.4],['51x31',2.59],
+    ['58x36',2.8],['65x40',2.98],['73x45',3.19],['88x54',3.91],
+  ].map(([size, factor]) => Object.freeze({size, factor, span: Number(size.split('x')[0]), type: size.includes('x') ? 'Arch' : 'Round'})));
+  const MAX_PIPES = 500;
+  function number(value, label) {
+    if (typeof value !== 'number' && (typeof value !== 'string' || !/^\d+(?:\.\d*)?$|^\.\d+$/.test(value.trim()))) throw new Error(`${label}: enter a number.`);
+    const n = Number(value);
+    if (!Number.isFinite(n)) throw new Error(`${label}: enter a finite number.`);
+    return n;
+  }
+  function text(value, label, max = 120) {
+    if (typeof value !== 'string' || value.length > max) throw new Error(`${label}: use up to ${max} characters.`);
+    return value;
+  }
+  function calculate(pipe) {
+    if (!pipe || typeof pipe !== 'object') throw new Error('Invalid pipe record.');
+    const spec = sizes.find(item => item.size === pipe.size);
+    if (!spec) throw new Error('Choose a listed pipe size.');
+    const length = number(pipe.length, 'Length'), depth = number(pipe.depth, 'Depth'), fes = number(pipe.fes, 'FES');
+    if (length <= 0) throw new Error('Length must be greater than zero.');
+    if (depth <= 0) throw new Error('Depth must be greater than zero.');
+    if (!Number.isInteger(fes) || fes < 0 || fes > 2) throw new Error('FES must be 0, 1 or 2.');
+    const width = (spec.span + 24) / 12;
+    const trench = width * length * depth / 27;
+    const ends = fes * spec.factor * depth;
+    const total = trench + ends;
+    if (!Number.isFinite(total) || total > Number.MAX_SAFE_INTEGER / 1000) throw new Error('Quantity is too large to report to 0.001 CY.');
+    return {type: spec.type, span: spec.span, factor: spec.factor, width, trench, ends, total, length};
+  }
+  function totals(results) {
+    const sum = key => results.reduce((n, result) => n + result[key], 0);
+    const result = {length: sum('length'), trench: sum('trench'), ends: sum('ends'), total: sum('total')};
+    if (Object.values(result).some(n => !Number.isFinite(n) || n > Number.MAX_SAFE_INTEGER / 1000)) throw new Error('Project total is too large to report safely.');
+    return result;
+  }
+  function project(data) {
+    if (!data || data.app !== 'StrExc' || data.version !== 1 || !Array.isArray(data.pipes) || data.pipes.length > MAX_PIPES) throw new Error('Choose a StrExc version 1 project with up to 500 pipes.');
+    return {app: 'StrExc', version: 1, name: text(data.name, 'Project'), county: text(data.county, 'County'), date: text(data.date, 'Date', 10), pipes: data.pipes.map(pipe => {
+      if (!pipe || typeof pipe !== 'object') throw new Error('Invalid pipe record.');
+      const id = text(pipe.id, 'Pipe ID', 80), station = text(pipe.station, 'Station', 80);
+      if (!id.trim()) throw new Error('Each pipe needs an ID.');
+      if (!sizes.some(item => item.size === pipe.size)) throw new Error('Unsupported pipe size in project.');
+      const input = key => pipe[key] === '' ? '' : number(pipe[key], key);
+      const length = input('length'), depth = input('depth'), fes = number(pipe.fes, 'FES');
+      if ((length !== '' && length <= 0) || (depth !== '' && depth <= 0) || !Number.isInteger(fes) || fes < 0 || fes > 2) throw new Error('Project contains invalid length, depth or FES values.');
+      if (length !== '' && depth !== '') calculate({...pipe, length, depth, fes});
+      return {id, station, size: pipe.size, length, depth, fes};
+    })};
+  }
+  return Object.freeze({sizes, MAX_PIPES, calculate, totals, project});
+});
+</script>
+<script>(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory(require('./calculations.js'));
+  else root.StrExcExcel = factory(root.StrExc);
+})(typeof globalThis !== 'undefined' ? globalThis : this, function (calc) {
+  'use strict';
+  const xml = value => String(value).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g,'').replace(/[&<>"']/g,c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+  const declaration = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+  const main = 'http://schemas.openxmlformats.org/spreadsheetml/2006/main';
+  const relationships = 'http://schemas.openxmlformats.org/package/2006/relationships';
+  const office = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships';
+  function cell(value, row, col, style = 0, formula) {
+    const ref = `${String.fromCharCode(65+col)}${row}`;
+    if (typeof value === 'number') {
+      if (!Number.isFinite(value)) throw new Error('Excel requires finite quantities.');
+      return `<c r="${ref}" s="${style}">${formula ? `<f>${xml(formula)}</f>` : ''}<v>${value}</v></c>`;
+    }
+    // Text stays text, including stations or IDs beginning with an Excel formula character.
+    return `<c r="${ref}" s="${style}" t="inlineStr"><is><t xml:space="preserve">${xml(value ?? '')}</t></is></c>`;
+  }
+  function worksheet(project, results) {
+    const rows = [], merges = [];
+    function row(values, styles = 0, formulas = {}, height = 30) {
+      const n = rows.length+1;
+      rows.push(`<row r="${n}" ht="${height}" customHeight="1">${values.map((v,i) => cell(v,n,i,Array.isArray(styles) ? styles[i] : styles,formulas[i])).join('')}</row>`);
+      return n;
+    }
+    row(['Structure excavation'],1,{},30); merges.push('A1:L1');
+    row([`Project: ${project.name || 'Not entered'}    County: ${project.county || 'Not entered'}    Date: ${project.date || 'Not entered'}`],0,{},Math.max(30,Math.ceil((project.name.length+project.county.length+50)/120)*15)); merges.push('A2:L2');
+    row(['Inputs: length and depth in feet; pipe diameter or arch span in inches. FES = flared end sections.'],0); merges.push('A3:L3');
+    row(['Pipe ID','Station','Type','Size (in.)','Diameter / span (in.)','Length (ft)','Avg. excavation depth (ft)','FES count','FES factor (CY / ft / end)','Trench (CY)','FES (CY)','Excavation (CY)'],2,{},48);
+    project.pipes.forEach((pipe,i) => {
+      const r = results[i], n = rows.length+1;
+      const height = Math.max(30,Math.ceil(pipe.id.length/14)*15,Math.ceil(pipe.station.length/16)*15);
+      row([pipe.id,pipe.station,r.type,pipe.size,r.span,Number(pipe.length),Number(pipe.depth),Number(pipe.fes),r.factor,r.trench,r.ends,r.total],
+        [0,0,0,0,3,3,3,0,3,3,3,3],{9:`((E${n}+24)/12)*F${n}*G${n}/27`,10:`H${n}*I${n}*G${n}`,11:`J${n}+K${n}`},height);
+    });
+    const last = rows.length, totals = calc.totals(results), n = last+1;
+    row(['Total','','','','',totals.length,'','','',totals.trench,totals.ends,totals.total],
+      [2,2,2,2,2,4,2,2,2,4,4,4],{5:`SUM(F5:F${last})`,9:`SUM(J5:J${last})`,10:`SUM(K5:K${last})`,11:`SUM(L5:L${last})`}); merges.push(`A${n}:E${n}`,`G${n}:I${n}`);
+    const notes = [
+      'Trench CY = ((diameter or span + 24) / 12) x length x average excavation depth / 27. FES CY = count x factor x depth.',
+      'Source: Legacy/strexc.exe, Mississippi DOT Structure Excavation v1.1. Formula and allowance table recovered from its embedded script.',
+      'Rows display 3 decimals; totals display 2 and sum unrounded values. Formula cells recalculate when numeric inputs are edited in Excel.',
+      'Size, span and FES factor are exported values. Change pipe size in the app and export again to keep them consistent. Save JSON to reopen app inputs.',
+    ];
+    for (const note of notes) { const n = row([note],5,{},30); merges.push(`A${n}:L${n}`); }
+    const widths = [16,18,10,15,14,14,16,10,16,16,16,18];
+    const validation = [['decimal','F','0','1E+12'],['decimal','G','0','1E+12'],['whole','H','0','2']].map(([type,col,min,max]) => `<dataValidation type="${type}" operator="${col === 'H' ? 'between' : 'greaterThan'}" allowBlank="0" showErrorMessage="1" errorTitle="Invalid input" error="${col === 'H' ? 'Enter 0, 1 or 2.' : 'Enter a number greater than zero.'}" sqref="${col}5:${col}${last}"><formula1>${min}</formula1>${col === 'H' ? `<formula2>${max}</formula2>` : ''}</dataValidation>`).join('');
+    return {lastRow:rows.length,sheet:`${declaration}<worksheet xmlns="${main}"><sheetPr><pageSetUpPr fitToPage="1"/></sheetPr><dimension ref="A1:L${rows.length}"/><sheetViews><sheetView workbookViewId="0" showGridLines="0"><pane xSplit="2" ySplit="4" topLeftCell="C5" activePane="bottomRight" state="frozen"/></sheetView></sheetViews><sheetFormatPr defaultRowHeight="20"/><cols>${widths.map((width,i) => `<col min="${i+1}" max="${i+1}" width="${width}" customWidth="1"/>`).join('')}</cols><sheetData>${rows.join('')}</sheetData><autoFilter ref="A4:L${last}"/><mergeCells count="${merges.length}">${merges.map(ref => `<mergeCell ref="${ref}"/>`).join('')}</mergeCells><dataValidations count="3">${validation}</dataValidations><pageMargins left="0.25" right="0.25" top="0.4" bottom="0.4" header="0.2" footer="0.2"/><pageSetup paperSize="5" orientation="landscape" fitToWidth="1" fitToHeight="0"/></worksheet>`};
+  }
+  function styles() {
+    const formats = [[0,0,0],[1,0,0],[2,0,1],[0,164,0],[2,165,1],[3,0,0]];
+    return `${declaration}<styleSheet xmlns="${main}"><numFmts count="2"><numFmt numFmtId="164" formatCode="#,##0.000"/><numFmt numFmtId="165" formatCode="#,##0.00"/></numFmts><fonts count="4"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="18"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font><font><i/><sz val="9"/><name val="Calibri"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFE5ECEF"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border><border><left/><right/><top/><bottom style="thin"><color rgb="FFD6DDDF"/></bottom><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="6">${formats.map(([font,num,fill]) => `<xf numFmtId="${num}" fontId="${font}" fillId="${fill ? 2 : 0}" borderId="1" xfId="0" applyAlignment="1" applyNumberFormat="1"><alignment vertical="center" wrapText="1"/></xf>`).join('')}</cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
+  }
+  // ZIP writer reused from JB-1/xlsx.js; no runtime library or network service.
+  function zip(files) {
+    const encoder = new TextEncoder(), parts = [], directory = [];
+    const table = Uint32Array.from({length: 256}, (_, value) => {
+      for (let bit = 0; bit < 8; bit++) value = value & 1 ? 0xedb88320 ^ (value >>> 1) : value >>> 1;
+      return value >>> 0;
+    });
+    let offset = 0;
+    for (const [name, source] of files) {
+      const filename = encoder.encode(name), data = encoder.encode(source);
+      let crc = 0xffffffff;
+      for (const byte of data) crc = table[(crc ^ byte) & 255] ^ (crc >>> 8);
+      crc = (crc ^ 0xffffffff) >>> 0;
+      const local = new Uint8Array(30 + filename.length), entry = new Uint8Array(46 + filename.length);
+      const l = new DataView(local.buffer), e = new DataView(entry.buffer);
+      l.setUint32(0, 0x04034b50, true); l.setUint16(4, 20, true); l.setUint16(6, 0x800, true); l.setUint16(12, 33, true);
+      l.setUint32(14, crc, true); l.setUint32(18, data.length, true); l.setUint32(22, data.length, true); l.setUint16(26, filename.length, true); local.set(filename, 30);
+      e.setUint32(0, 0x02014b50, true); e.setUint16(4, 20, true); e.setUint16(6, 20, true); e.setUint16(8, 0x800, true); e.setUint16(14, 33, true);
+      e.setUint32(16, crc, true); e.setUint32(20, data.length, true); e.setUint32(24, data.length, true); e.setUint16(28, filename.length, true); e.setUint32(42, offset, true); entry.set(filename, 46);
+      parts.push(local, data); directory.push(entry); offset += local.length + data.length;
+    }
+    const size = directory.reduce((sum, part) => sum + part.length, 0), end = new Uint8Array(22), e = new DataView(end.buffer);
+    e.setUint32(0, 0x06054b50, true); e.setUint16(8, files.length, true); e.setUint16(10, files.length, true); e.setUint32(12, size, true); e.setUint32(16, offset, true);
+    const bytes = new Uint8Array(offset + size + end.length);
+    let cursor = 0;
+    for (const part of [...parts, ...directory, end]) { bytes.set(part, cursor); cursor += part.length; }
+    return bytes;
+  }
+  function createWorkbook(input) {
+    const project = calc.project(input);
+    if (!project.pipes.length) throw new Error('Add at least one valid pipe before exporting.');
+    const results = project.pipes.map(calc.calculate), {sheet,lastRow} = worksheet(project,results);
+    return zip([
+      ['[Content_Types].xml',`${declaration}<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>`],
+      ['_rels/.rels',`${declaration}<Relationships xmlns="${relationships}"><Relationship Id="rId1" Type="${office}/officeDocument" Target="xl/workbook.xml"/></Relationships>`],
+      ['xl/workbook.xml',`${declaration}<workbook xmlns="${main}" xmlns:r="${office}"><sheets><sheet name="Structure excavation" sheetId="1" r:id="rId1"/></sheets><definedNames><definedName name="_xlnm.Print_Area" localSheetId="0">'Structure excavation'!$A$1:$L$${lastRow}</definedName><definedName name="_xlnm.Print_Titles" localSheetId="0">'Structure excavation'!$1:$4</definedName></definedNames><calcPr calcMode="auto" fullCalcOnLoad="1" forceFullCalc="1"/></workbook>`],
+      ['xl/_rels/workbook.xml.rels',`${declaration}<Relationships xmlns="${relationships}"><Relationship Id="rId1" Type="${office}/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="${office}/styles" Target="styles.xml"/></Relationships>`],
+      ['xl/styles.xml',styles()],['xl/worksheets/sheet1.xml',sheet],
+    ]);
+  }
+  return Object.freeze({createWorkbook});
+});
+</script>
+<script>/* global StrExc, StrExcExcel */
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const today = new Date();
+  let project = {app:'StrExc', version:1, name:'', county:'', date:`${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`, pipes:[]};
+  let dirty = false;
+  const format = (n, digits = 3) => n.toLocaleString('en-US', {minimumFractionDigits:digits, maximumFractionDigits:digits});
+  function changed() { dirty = true; $('save-state').textContent = 'Unsaved changes. Save project to keep your inputs.'; }
+  function status(message, error = false) { $('file-status').textContent = message; $('file-status').classList.toggle('error', error); }
+  function download(data, name, type) {
+    const link = document.createElement('a'), url = URL.createObjectURL(new Blob([data], {type}));
+    link.href = url; link.download = name; document.body.append(link); link.click(); link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 10000);
+  }
+  const filename = () => (project.name || 'structure-excavation').replace(/[^a-z0-9_-]+/gi,'-').slice(0,80);
+  function control(tag, key, value, index) {
+    const el = document.createElement(tag);
+    el.dataset.key = key; el.setAttribute('aria-label', `${{id:'Pipe ID',station:'Station',size:'Pipe size',length:'Length (ft)',depth:'Average depth (ft)',fes:'FES count'}[key]}, row ${index+1}`);
+    if (tag === 'input') {
+      el.type = ['length','depth'].includes(key) ? 'number' : 'text';
+      if (el.type === 'number') { el.min = '0'; el.step = 'any'; el.required = true; el.placeholder = 'Enter'; }
+      else el.maxLength = 80;
+      if (key === 'id') el.required = true;
+    } else {
+      const options = key === 'size' ? StrExc.sizes.map(spec => [spec.size, `${spec.size.replace('x',' x ')} ${spec.type.toLowerCase()}`]) : [0,1,2].map(n => [n,n]);
+      for (const [value, label] of options) { const option = document.createElement('option'); option.value = value; option.textContent = label; el.append(option); }
+    }
+    el.value = value;
+    return el;
+  }
+  function render() {
+    $('project-name').value = project.name; $('county').value = project.county; $('date').value = project.date;
+    $('pipes').replaceChildren();
+    project.pipes.forEach((pipe,index) => {
+      const tr = document.createElement('tr'); tr.dataset.index = index;
+      for (const key of ['id','station','size','type','length','depth','fes','result','remove']) {
+        const td = document.createElement('td');
+        if (key === 'type') { td.className = 'type'; td.dataset.output = 'type'; }
+        else if (key === 'result') { td.className = 'numeric'; td.dataset.output = 'result'; }
+        else if (key === 'remove') {
+          const button = document.createElement('button'); button.className = 'remove'; button.textContent = 'Remove'; button.setAttribute('aria-label', `Remove pipe ${pipe.id}`);
+          button.addEventListener('click', () => {
+            if (!confirm(`Remove pipe ${project.pipes[index].id}?`)) return;
+            project.pipes.splice(index,1); changed(); render(); $('add-pipe').focus();
+          }); td.append(button);
+        } else td.append(control(['size','fes'].includes(key) ? 'select' : 'input',key,pipe[key],index));
+        tr.append(td);
+      }
+      $('pipes').append(tr);
+    });
+    update();
+  }
+  function update() {
+    let invalid = 0;
+    const results = [];
+    [...$('pipes').children].forEach((tr,index) => {
+      const pipe = project.pipes[index], output = tr.querySelector('[data-output=result]');
+      tr.querySelector('.remove').setAttribute('aria-label', `Remove pipe ${pipe.id}`);
+      tr.querySelector('[data-output=type]').textContent = StrExc.sizes.find(s => s.size === pipe.size).type;
+      for (const input of tr.querySelectorAll('input')) {
+        const bad = input.dataset.key === 'id' ? !input.value.trim() : input.type === 'number' ? !(Number(input.value) > 0) || !input.validity.valid : false;
+        input.setAttribute('aria-invalid', String(bad));
+      }
+      try {
+        if (!pipe.id.trim()) throw new Error('Enter a pipe ID.');
+        const result = StrExc.calculate(pipe); results.push(result); output.textContent = format(result.total);
+      } catch (error) {
+        invalid++; output.textContent = 'Pending'; const message = document.createElement('span'); message.className = 'row-error'; message.textContent = error.message; output.append(message);
+      }
+    });
+    $('pipe-count').textContent = `${project.pipes.length} ${project.pipes.length === 1 ? 'pipe' : 'pipes'}`;
+    $('empty-state').hidden = project.pipes.length > 0;
+    $('add-pipe').disabled = project.pipes.length >= StrExc.MAX_PIPES;
+    let total = null;
+    if (!invalid && results.length) {
+      try { total = StrExc.totals(results); } catch (error) { invalid++; $('validation').textContent = error.message; }
+    }
+    $('total-cy').textContent = total ? format(total.total,2) : 'Pending';
+    $('total-length').textContent = total ? `${format(total.length,2)} ft of pipe` : '';
+    $('export-excel').disabled = !total;
+    if (invalid && !total) $('validation').textContent = `${invalid} ${invalid === 1 ? 'row needs' : 'rows need'} attention. Complete all rows before exporting.`;
+    else $('validation').textContent = '';
+  }
+  function addPipe(markDirty = true) {
+    if (project.pipes.length >= StrExc.MAX_PIPES) return;
+    let n = project.pipes.length+1;
+    while (project.pipes.some(pipe => pipe.id === `P-${n}`)) n++;
+    project.pipes.push({id:`P-${n}`, station:'', size:'18', length:'', depth:'', fes:0});
+    if (markDirty) changed(); render();
+    if (markDirty) $('pipes').lastElementChild.querySelector('input').focus();
+  }
+  $('pipes').addEventListener('input', event => {
+    const key = event.target.dataset.key; if (!key) return;
+    const pipe = project.pipes[Number(event.target.closest('tr').dataset.index)];
+    pipe[key] = event.target.value; changed(); update();
+  });
+  for (const [id,key] of [['project-name','name'],['county','county'],['date','date']]) $(id).addEventListener('input', () => { project[key] = $(id).value; changed(); });
+  $('add-pipe').addEventListener('click', () => addPipe());
+  $('save-project').addEventListener('click', () => {
+    try {
+      const saved = StrExc.project(project);
+      download(JSON.stringify(saved,null,2), `${filename()}.strexc.json`, 'application/json');
+      dirty = false; $('save-state').textContent = 'Project file downloaded. Save again after edits.'; status('Keep the JSON file. Use Open project to reopen it.');
+    } catch (error) { status(error.message, true); }
+  });
+  $('open-project').addEventListener('click', () => $('open-file').click());
+  $('open-file').addEventListener('change', async event => {
+    const file = event.target.files[0]; if (!file) return;
+    try {
+      if (file.size > 2_000_000) throw new Error('Project file is too large (maximum 2 MB).');
+      const next = StrExc.project(JSON.parse(await file.text()));
+      if (dirty && !confirm('Replace unsaved changes with this project? Save first if you want to keep them.')) return;
+      project = next; dirty = false; render(); $('save-state').textContent = 'Project opened. Save again after edits.'; status(`Opened ${file.name}.`);
+    } catch (error) { status(`Could not open project: ${error.message}`,true); }
+    finally { event.target.value = ''; }
+  });
+  $('export-excel').addEventListener('click', () => {
+    try { const valid = StrExc.project(project); download(StrExcExcel.createWorkbook(valid), `${filename()}.xlsx`, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); status('Excel schedule downloaded. Keep your JSON project for reopening app inputs.'); }
+    catch (error) { status(error.message,true); }
+  });
+  window.addEventListener('beforeunload', event => { if (dirty) { event.preventDefault(); event.returnValue = ''; } });
+  addPipe(false);
+})();
+</script>
+</body>
+</html>

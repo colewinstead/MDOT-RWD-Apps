@@ -1,0 +1,10 @@
+{
+  "source": "Legacy/strexc.exe",
+  "source_sha256": "e9978456ced24aca404ea9d33665d17bfdc26f36d0d24b157ef8e95075df7b63",
+  "source_bytes": 306035,
+  "extractor": "autoit-ripper 1.2.0",
+  "runtime_execution": false,
+  "output": "recovered-script.au3",
+  "output_bytes": 8266,
+  "output_sha256": "4fc94c6d4ba30df92f580c5e9672ade2971303c823b2cbe1606a08ac7a4ed4be"
+}

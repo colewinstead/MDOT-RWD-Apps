@@ -7,10 +7,13 @@ Open a modernized HTML file directly in a current browser on Mac or Windows. Eac
 | [JB.html](JB.html) | JB-1 and JB-2 junction box quantities | [JB guide](Updated%20Source%20Code/JB-1/README.md) |
 | [SS-2A.html](SS-2A.html) | Storm sewer inlet quantities | [SS-2A guide](Updated%20Source%20Code/SS-2A/README.md) |
 | [SS-3.html](SS-3.html) | SS-3 and SS-4 storm sewer inlet quantities | [SS-3 guide](Updated%20Source%20Code/SS-3/README.md) |
+| [StrExc.html](StrExc.html) | Pipe structure excavation in CY, with an Excel schedule | [Structure excavation guide](Updated%20Source%20Code/StrExc/README.md) |
 
 **Save project** downloads your inputs as a separate JSON file. Keep that file and use **Open project** to reopen it. Save again after edits; closing the app does not save your work. Use the app's print action and your browser's Save as PDF destination for reports.
 
 JB also offers **Export Excel**, which downloads the main junction-box quantity schedule as a single-sheet `.xlsx` report with work sheet numbers, box IDs, LT/RT and formulas for steel/bar-length/project totals. Keep the JSON project to reopen app inputs; recalculate pipe or standard changes in the app before exporting again.
+
+StrExc offers **Export Excel** for pipe IDs, stations, sizes, lengths, average excavation depths, flared ends and calculated excavation CY. It includes formulas for trench, flared-end and project totals. Save the separate JSON project to reopen its inputs.
 
 Repository layout:
 
@@ -24,6 +27,8 @@ To rebuild and check the apps with an existing Node.js installation, run from th
 node "Updated Source Code/JB-1/build-standalone.cjs"
 node "Updated Source Code/SS-2A/build-standalone.cjs"
 node "Updated Source Code/SS-3/build-standalone.cjs"
+node "Updated Source Code/StrExc/build-standalone.cjs"
+node --test "Updated Source Code/StrExc/calculations.test.cjs"
 node --test "Updated Source Code/JB-1/calculations.test.cjs" "Updated Source Code/JB-1/jb2.test.cjs" "Updated Source Code/SS-2A/calculations.test.cjs" "Updated Source Code/SS-3/calculations.test.cjs"
 python "Updated Source Code/JB-1/xlsx.test.py"
 ```

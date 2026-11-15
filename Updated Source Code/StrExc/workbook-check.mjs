@@ -1,0 +1,24 @@
+// Developer-only verification using the existing artifact-tool installation.
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import {pathToFileURL,fileURLToPath} from 'node:url';
+const {FileBlob,SpreadsheetFile} = await import(process.env.ARTIFACT_TOOL_MODULE ? pathToFileURL(process.env.ARTIFACT_TOOL_MODULE).href : '@oai/artifact-tool');
+const evidence = new URL('./evidence/',import.meta.url);
+const workbook = await SpreadsheetFile.importXlsx(await FileBlob.load(fileURLToPath(new URL('sample-export.xlsx',evidence))));
+const sheet = workbook.worksheets.getItemAt(0);
+workbook.recalculate();
+const close = (actual,expected) => assert.ok(Math.abs(actual-expected)<1e-8,`${actual} != ${expected}`);
+close(sheet.getRange('L7').values[0][0],65.2);
+sheet.getRange('G6').values = [[6]];
+workbook.recalculate();
+close(sheet.getRange('L6').values[0][0],60.4);
+close(sheet.getRange('L7').values[0][0],95.4);
+sheet.getRange('G6').values = [[3]];
+workbook.recalculate();
+close(sheet.getRange('L7').values[0][0],65.2);
+console.log((await workbook.inspect({kind:'table',range:"'Structure excavation'!J4:L7",include:'values,formulas',tableMaxRows:4,tableMaxCols:3,maxChars:2000})).ndjson);
+const errors = await workbook.inspect({kind:'match',searchTerm:'#REF!|#DIV/0!|#VALUE!|#NAME\\?|#N/A|#NUM!|#NULL!',options:{useRegex:true,maxResults:10},maxChars:1000});
+console.log(errors.ndjson);
+const preview = await workbook.render({sheetName:sheet.name,range:'A1:L12',scale:1.5,format:'png'});
+await fs.writeFile(new URL('workbook-preview.png',evidence),new Uint8Array(await preview.arrayBuffer()));
+console.log('PASS: independent spreadsheet-engine recalculation, changed-depth propagation, restored totals and workbook render.');
