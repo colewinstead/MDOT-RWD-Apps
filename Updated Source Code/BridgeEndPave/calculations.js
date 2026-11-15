@@ -3,7 +3,7 @@ const BridgeEndPave = (() => {
   const railKeys = [['rail32', 32], ['rail33_5', 33.5], ['rail37_5', 37.5], ['rail42', 42], ['rail43_5', 43.5]];
   const quantityKeys = ['pavement', 'expansionJoint', 'grooving', 'bridgeExpansionJoint', 'roadwayExpansionJoint', 'bridgeJointSeal', 'railLength', ...railKeys.map(([key]) => key)];
   const drawings = [
-    { id: 'LEGACY', label: 'Legacy AI 1.2', description: 'Recovered executable calculation with original constants and rounding.', railHeights: [0, 32, 42], thicknesses: [9, 12], groovingMode: 'legacy', jointMode: 'legacy', normalEdge: 0.5 },
+    { id: 'LEGACY', label: 'Legacy MDOT Program', description: 'Recovered executable calculation with original constants and rounding.', railHeights: [0, 32, 42], thicknesses: [9, 12], groovingMode: 'legacy', jointMode: 'legacy', normalEdge: 0.5 },
     { id: 'BE-1', label: 'BE-1 · Overlay and sleeper slab', description: '2017 standard drawing with full asphalt overlay and no bridge-seat expansion joint.', railHeights: [33.5, 43.5], thicknesses: [12], groovingMode: 'full-overlay', jointMode: 'none', normalEdge: 0.5 },
     { id: 'BE-2', label: 'BE-2 · Overlay, no sleeper slab', description: '2017 standard drawing with full asphalt overlay and a premolded bridge-interface joint.', railHeights: [33.5, 43.5], thicknesses: [9, 12], groovingMode: 'full-overlay', jointMode: 'bridge-premolded', normalEdge: 0.5 },
     { id: 'SDBE-1', label: 'SDBE-1 · Special overlay and sleeper slab', description: 'Special drawing with 37.5/43.5-inch rails and a three-foot exposed strip normal to the bridge joint.', railHeights: [37.5, 43.5], thicknesses: [12], groovingMode: 'normal-strip', jointMode: 'bridge-seal', normalEdge: 0 },

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-VFWD4k1iPJJnCU8uo+SsGwi6SLrhKKHObMsIQc0drMg=' 'sha256-74t0ZKkIfa1sQ8zxnZjmK3ZliVSpJicdy0zkYqIiqKQ=' 'sha256-Lk9sEz7FCSOtFragKpTIpwDfFxl4KqVbQqInVUxX4C4='; style-src 'sha256-9ygiWRtJpmdAMFG2S9LjPSwB/c+V60sMbs4axvQQ9Hg='; img-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-8AXLyh3+volq6duzDnSiMqHyqGTZNU+O8dm23/hPU0A=' 'sha256-74t0ZKkIfa1sQ8zxnZjmK3ZliVSpJicdy0zkYqIiqKQ=' 'sha256-Lk9sEz7FCSOtFragKpTIpwDfFxl4KqVbQqInVUxX4C4='; style-src 'sha256-9ygiWRtJpmdAMFG2S9LjPSwB/c+V60sMbs4axvQQ9Hg='; img-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>Bridge end pavement · Roadway design</title>
   <style>:root { color-scheme:light dark; --ground:#f3f4f4; --surface:#fff; --subtle:#f7f8f8; --ink:#20292e; --muted:#57656c; --line:#d6dddf; --accent:#a74613; --accent-hover:#85350c; --accent-soft:#fff1e7; --error:#a22424; --error-bg:#fff1ef; --focus:#247b9a; --joint:#247b9a; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; font-size:16px; }
 * { box-sizing:border-box; }
@@ -211,7 +211,7 @@ const BridgeEndPave = (() => {
   const railKeys = [['rail32', 32], ['rail33_5', 33.5], ['rail37_5', 37.5], ['rail42', 42], ['rail43_5', 43.5]];
   const quantityKeys = ['pavement', 'expansionJoint', 'grooving', 'bridgeExpansionJoint', 'roadwayExpansionJoint', 'bridgeJointSeal', 'railLength', ...railKeys.map(([key]) => key)];
   const drawings = [
-    { id: 'LEGACY', label: 'Legacy AI 1.2', description: 'Recovered executable calculation with original constants and rounding.', railHeights: [0, 32, 42], thicknesses: [9, 12], groovingMode: 'legacy', jointMode: 'legacy', normalEdge: 0.5 },
+    { id: 'LEGACY', label: 'Legacy MDOT Program', description: 'Recovered executable calculation with original constants and rounding.', railHeights: [0, 32, 42], thicknesses: [9, 12], groovingMode: 'legacy', jointMode: 'legacy', normalEdge: 0.5 },
     { id: 'BE-1', label: 'BE-1 · Overlay and sleeper slab', description: '2017 standard drawing with full asphalt overlay and no bridge-seat expansion joint.', railHeights: [33.5, 43.5], thicknesses: [12], groovingMode: 'full-overlay', jointMode: 'none', normalEdge: 0.5 },
     { id: 'BE-2', label: 'BE-2 · Overlay, no sleeper slab', description: '2017 standard drawing with full asphalt overlay and a premolded bridge-interface joint.', railHeights: [33.5, 43.5], thicknesses: [9, 12], groovingMode: 'full-overlay', jointMode: 'bridge-premolded', normalEdge: 0.5 },
     { id: 'SDBE-1', label: 'SDBE-1 · Special overlay and sleeper slab', description: 'Special drawing with 37.5/43.5-inch rails and a three-foot exposed strip normal to the bridge joint.', railHeights: [37.5, 43.5], thicknesses: [12], groovingMode: 'normal-strip', jointMode: 'bridge-seal', normalEdge: 0 },

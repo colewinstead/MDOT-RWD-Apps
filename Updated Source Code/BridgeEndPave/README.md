@@ -22,7 +22,7 @@ The plan, section and rail diagram update with the inputs. Green identifies incl
 | BE-2 standard | 33.5, 43.5 in | 9 or 12 in; overlay without sleeper | Zero: the shown surface is fully overlaid | Bridge premolded joint plus conditional doweled roadway joint |
 | SDBE-1 special | 37.5, 43.5 in | 12 in; overlay and sleeper | Three-foot strip measured normal to the skewed bridge joint, bounded by clear pavement | Bridge-plan seal span reported separately; conditional doweled roadway joint |
 | SDBE-1A special | 32, 42 in | 9 or 12 in; bare concrete | Exposed pavement less the two rail footprints | Bridge premolded joint plus conditional doweled roadway joint |
-| Legacy AI 1.2 | No rail, 32, 42 in | Section metadata does not change its old area calculation | Recovered executable result when included | Preserves its original single joint span; roadway type adds no second joint |
+| Legacy MDOT Program | No rail, 32, 42 in | Section metadata does not change its old area calculation | Recovered executable result when included | Preserves its original single joint span; roadway type adds no second joint |
 
 No-rail is a separately identified legacy option. The normal roadway block marked WB+12 in is not proof of a no-rail bridge-end alternative on a standard sheet. Unsupported rail/family combinations are rejected.
 
