@@ -17,7 +17,7 @@ the recovered EXE's allowances (with its stored decimal approximation for 34/12)
 | --- | --- | --- |
 | 32 inches | W = WB + 2 ft 10 in | W = W1 + W2 + 2.833333 |
 | 42 inches | W = WB + 3 ft | W = W1 + W2 + 3 |
-| No-rail end shown in lower-middle joint plan | W = WB + 12 in | W = W1 + W2 + 1 |
+| Normal roadway block in lower-middle joint plan | W = WB + 12 in | Consistent with the legacy generic no-rail width, but not proof of an SDBE-1A no-rail bridge end |
 
 The upper-right bridge-end plan dimensions WB between the bridge curb lines and
 shows W1 and W2 on opposite sides of the crown line. This supplies a physical
@@ -108,9 +108,10 @@ name, and it is stamped preliminary/not for construction. Do not infer a
 
 ## Implications for the app
 
-Keep the recovered EXE arithmetic. Cite SDBE-1A plus the 32/42-inch SDBEPR
-details as dimensional corroboration and diagram references, with their
-preliminary/project-selection limits. Do not relabel the app as implementing
-the overlay/sleeper-slab SDBE-1 system, change its grooving to a three-foot
-strip, or add another joint quantity without an explicit new calculation
-scope. Diagrams remain quantity schematics, not construction details.
+The initial app retained the recovered EXE arithmetic. The user subsequently
+authorized separate drawing-based calculations for all families, limited to
+paving, grooving, joint lengths and rail lengths. The expanded app keeps the
+legacy mode and adds distinct BE-1/BE-2/SDBE-1/SDBE-1A modes; it does not apply
+the SDBE-1 three-foot strip to the bare-slab or standard overlay families.
+See `CALCULATION-CHECKS.md` and the two `COVERAGE-*.md` audits for that extension.
+Diagrams remain quantity schematics, not construction details.

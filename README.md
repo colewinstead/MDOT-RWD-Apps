@@ -7,7 +7,7 @@ Open a modernized HTML file directly in a current browser on Mac or Windows. Eac
 | [JB.html](JB.html) | JB-1 and JB-2 junction box quantities | [JB guide](Updated%20Source%20Code/JB-1/README.md) |
 | [SS-2A.html](SS-2A.html) | Storm sewer inlet quantities | [SS-2A guide](Updated%20Source%20Code/SS-2A/README.md) |
 | [SS-3.html](SS-3.html) | SS-3 and SS-4 storm sewer inlet quantities | [SS-3 guide](Updated%20Source%20Code/SS-3/README.md) |
-| [BridgeEndPave.html](BridgeEndPave.html) | Bridge end paving, grooving, joint and rail quantities with plan/section diagrams | [Bridge end paving guide](Updated%20Source%20Code/BridgeEndPave/README.md) |
+| [BridgeEndPave.html](BridgeEndPave.html) | Standard and special bridge-end paving, grooving, joints and all five rail sizes; offline drawing sheets | [Bridge end paving guide](Updated%20Source%20Code/BridgeEndPave/README.md) |
 
 **Save project** downloads your inputs as a separate JSON file. Keep that file and use **Open project** to reopen it. Save again after edits; closing the app does not save your work. Use the app's print action and your browser's Save as PDF destination for reports.
 
@@ -30,4 +30,4 @@ node --test "Updated Source Code/JB-1/calculations.test.cjs" "Updated Source Cod
 python "Updated Source Code/JB-1/xlsx.test.py"
 ```
 
-The app guides document the recovered legacy calculations and the JB-2 drawing-based calculation. Read each app's documented limits before using its quantities.
+The app guides document the recovered legacy and drawing-based calculations. Read each app's documented limits before using its quantities.

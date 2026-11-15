@@ -58,9 +58,9 @@ engineering suitability. The source does not define what physical datum W1/W2
 measure or how negative skew should be interpreted in a drawing; diagrams should
 label the entered widths and recovered geometry without inventing those details.
 
-## Modern calculation safeguards
+## Legacy-mode calculation safeguards
 
-`calculations.js` accepts finite decimal numbers or decimal-number strings. W1/W2
+The `LEGACY` mode in `calculations.js` accepts finite decimal numbers or decimal-number strings. W1/W2
 must be nonnegative with a positive combined width. Rail height must be exactly
 0, 32, or 42 inches. Skew is entered as a **nonnegative magnitude**, 0 <= Z < 90;
 negative skew is rejected instead of silently taking its absolute value. This is

@@ -4,7 +4,8 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const assert = require('node:assert/strict');
 const read = name => fs.readFileSync(path.join(__dirname,name),'utf8').replace(/\r\n/g,'\n');
-const css=read('styles.css'), scripts=[read('calculations.js'),read('app.js')];
+const css=read('styles.css'), scripts=[read('calculations.js'),read('drawing-sheets.js'),read('app.js')];
+assert.equal((scripts[1].match(/"image":"data:image\/png;base64,/g)||[]).length,12,'All twelve reference sheets must be embedded.');
 assert.ok(!/<\/style/i.test(css),'Stylesheet must not contain a closing style tag.');
 for(const script of scripts)assert.ok(!/<\/script/i.test(script),'JavaScript must not contain a closing script tag.');
 const hash=content=>`'sha256-${crypto.createHash('sha256').update(content).digest('base64')}'`;
@@ -12,10 +13,10 @@ const policy=`default-src 'none'; script-src ${scripts.map(hash).join(' ')}; sty
 const html=read('index.html')
   .replace(/(<meta http-equiv="Content-Security-Policy" content=")[^"]*(">)/,(_,start,end)=>start+policy+end)
   .replace('<link rel="stylesheet" href="styles.css">',()=>`<style>${css}</style>`)
-  .replace(/\s*<script src="(?:calculations|app)\.js" defer><\/script>/g,'')
+  .replace(/\s*<script src="(?:calculations|drawing-sheets|app)\.js" defer><\/script>/g,'')
   .replace('</body>',()=>scripts.map(script=>`<script>${script}</script>`).join('\n')+'\n</body>');
 assert.equal((html.match(/<style>/g)||[]).length,1);
-assert.equal((html.match(/<script>/g)||[]).length,2);
+assert.equal((html.match(/<script>/g)||[]).length,3);
 assert.ok(!/\b(?:src|href)="(?!#|data:)[^"]+"/.test(html),'Standalone HTML still references another file.');
 assert.ok(html.includes(`style-src ${hash(css)}`));
 for(const script of scripts)assert.ok(html.includes(hash(script)));

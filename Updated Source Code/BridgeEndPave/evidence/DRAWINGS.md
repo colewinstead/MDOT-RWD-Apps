@@ -3,10 +3,11 @@
 The supplied standard set below was inspected first. Subsequent inspection of
 MDOT's special design sheets identified **SDBE-1A** as the closer reference for
 the recovered EXE. See [SPECIAL-DRAWINGS.md](SPECIAL-DRAWINGS.md) and the retained
-PDFs/URL/hash manifest under `reference-drawings/`. The final app uses SDBE-1A as
-its main diagram basis while retaining these observations about the different
-BE-1/BE-2/BER families. The special templates are marked preliminary, not for
-construction.
+PDFs/URL/hash manifest under `reference-drawings/`. The first app used SDBE-1A as
+its main diagram basis. The expanded app now provides separate calculations and
+diagrams for every inspected family; see `COVERAGE-STANDARD.md`,
+`COVERAGE-SPECIAL.md` and `CALCULATION-CHECKS.md`. Several special templates are
+marked preliminary, not for construction.
 
 The user identified physical PDF pages 10-13 of
 `C:\Users\johnc\Downloads\Roadway Design Standard Drawings.pdf`.

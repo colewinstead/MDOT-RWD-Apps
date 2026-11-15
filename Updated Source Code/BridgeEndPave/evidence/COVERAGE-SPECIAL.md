@@ -17,13 +17,16 @@ in SDBER files, so the dimensions below were checked in the rendered drawings.
 
 | Family | Rail choices supported by these sheets | Surface/detail | Dimensional source |
 | --- | --- | --- | --- |
-| SDBE-1A, bare slab | No rail, 32 in, 42 in | Bare concrete; slab sheet shows 9-in minimum; separate 9/12-in rail/embedment variants | SDBE-1A with SDBEPR-1-9/-12 or SDBEPR-1A-9/-12 |
+| SDBE-1A, bare slab | 32 in, 42 in | Bare concrete; slab sheet shows 9-in minimum; separate 9/12-in rail/embedment variants | SDBE-1A with SDBEPR-1-9/-12 or SDBEPR-1A-9/-12 |
 | SDBE-1, overlay and sleeper slab | 37.5 in, 43.5 in | 12-in slab, 1.5-in overlay, exposed 3-ft strip normal to bridge joint | SDBE-1 with SDBER-1 or SDBER-2 |
 
 This is a compatibility table, not permission to combine every rail height with
 every family. The standard BE-1/BE-2 33.5/43.5-in family is a separate source
 audit. In particular, the 37.5-in special rail must not silently become a
 33.5-in standard rail, and the old 32/42-in details must not be used as aliases.
+The lower-plan `WB + 12 in` block is normal upstream roadway pavement, not a
+verified no-rail bridge-end alternative. Zero rail is available only in the
+separately labeled legacy computation.
 
 ## SDBER-1 and SDBER-2: new source observations
 

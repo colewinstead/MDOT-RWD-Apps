@@ -1,64 +1,100 @@
-# Validation
+# Expanded-app validation
 
-Host: Windows 11, local Chrome in headless mode, existing Node.js and Playwright.
-App runs directly from `file://`. No application dependency was installed.
-The AutoIt extractor was a separate developer-only temporary tool.
+Verified November 14, 2026 on Windows 11 using local headless Chrome, existing
+Node.js/Playwright, and the existing Python/PyMuPDF developer tools. No app
+runtime dependency was installed. The delivered HTML works directly from
+`file://` without the repository or its reference PDFs.
 
-## Calculation checks
+## Calculation checks: passed
 
-`node --test "Updated Source Code/BridgeEndPave/calculations.test.cjs"`
+```sh
+node --test "Updated Source Code/BridgeEndPave/calculations.test.cjs"
+```
 
-Eight tests cover zero-skew hand cases for all three rail options, clamped
-45-degree cases, the A=10 switch boundary, exact approximate-pi behavior,
-the historical report fixture, strict numeric/domain validation, rounding
-before accumulation, integer-cent totals, and classic browser-script loading.
+All **16 tests pass**. They retain the eight original legacy regression tests
+and cover **216 valid combinations** of drawing, rail, slab section, roadway
+surface, grooving inclusion and ordinary skew. Additional checks include:
 
-The historical report fixture for W1=30, W2=25, skew=10, rail=32 matches:
-126.48 SY pavement, 58.73 LF joint, 123.33 SY grooving, and 20 LF rail.
-The 12/12-ft, 45-degree project with rail options 0, 32, and 42 totals
-197.08 SY pavement, 111.49 LF joint, 190.61 SY grooving, 20 LF rail32,
-and 20 LF rail42. Repeated edits do not add another quantity entry.
+- Independent zero-skew hand quantities for all rail and joint branches.
+- Independent shoelace area of the notched pavement outline.
+- Independent half-plane polygon clipping for SDBE-1's three-foot normal strip,
+  including partial and full intersections at extreme skew.
+- Actual 14.5/15.5-in SDBER profile projections kept separate from the nominal
+  15/16-in slab allocations used in the area calculation.
+- Separate bridge premolded, roadway doweled and bridge-plan seal quantities.
+- Rejection of incompatible drawing/rail/thickness combinations and invalid
+  numeric/contract-choice types.
+- Integer-hundredth totals with all five rail heights and no seal double count.
 
-## Standalone and browser checks
+The historical EXE fixture remains 126.48 SY paving, 58.73 LF joint,
+123.33 SY grooving and 20 LF rail for 30/25-ft widths, 10 degrees and rail 32.
+New drawing modes use rational dimensions and normal trigonometry rather than
+silently sharing the original program's rail constants or approximate pi.
+See `CALCULATION-CHECKS.md` for exact hand cases and geometric evidence.
 
-`node "Updated Source Code/BridgeEndPave/build-standalone.cjs"`
+## Standalone packaging: passed
 
-The builder checks exact inline CSP hashes, two embedded scripts, one embedded
-stylesheet, and no required companion references. Two consecutive builds
-produce identical bytes. No original app source or EXE is overwritten.
+```sh
+python "Updated Source Code/BridgeEndPave/build-drawing-assets.py" --standard-pdf "PATH/TO/Roadway Design Standard Drawings.pdf"
+node "Updated Source Code/BridgeEndPave/build-standalone.cjs"
+```
 
-`node "Updated Source Code/BridgeEndPave/browser.test.cjs"`
+Regenerating the twelve complete reference sheets from hash-verified PDFs
+produces identical `drawing-sheets.js` bytes. Two consecutive standalone
+builds also produce identical HTML. The builder verifies three embedded
+scripts, one stylesheet, twelve inline PNG images, matching CSP hashes and
+no required companion-file references. Final app size is about 6.2 MB,
+including the full offline reference sheets.
 
-The browser test copies **only BridgeEndPave.html** into a new temporary folder
-and opens it directly. It verifies:
+## Browser checks: passed
 
-- Legacy sample quantities, all rail options, and the 10-ft minimum.
-- Blank/negative inputs hide invalid results and disable file/report actions.
-- Add/remove/select/edit records and totals without duplicate accumulation.
-- Actual JSON download and reopen restores inputs and multiple ends.
-- Bad schema, dates, boolean dimensions, unsupported rail, oversized totals,
-  and more than 200 records are rejected without replacing edits.
-- Cancelling replacement preserves the current unsaved project.
-- Text download totals agree with the displayed schedule.
-- Imported markup stays text and does not execute or create images.
-- SVG titles/descriptions, desktop and 390-pixel layouts, light/dark appearance.
-- A 12-end Letter report prints with schedule and per-end plan diagrams.
-- No HTTP(S) requests, JavaScript errors, or console errors during app use.
+```sh
+node "Updated Source Code/BridgeEndPave/browser.test.cjs"
+```
 
-Screenshots are generated locally under `evidence/` (PNG files follow the
-repository's ignore rule). `report-sample.pdf` is a synthetic developer artifact,
-not part of the app package. Full-page desktop/mobile/dark screenshots and
-rendered report pages are visually inspected after meaningful diagram changes.
+The test copies **only BridgeEndPave.html** into a task-created temporary
+directory. It verifies:
 
-## Limits
+- All 11 legal drawing/rail combinations through the actual UI against hand
+  fixtures, including all five rail heights and the legacy no-rail option.
+- Roadway surface changes the conditional joint; grooving inclusion and
+  thickness/reference choices update correctly without losing dimensions.
+- v1 files migrate to Legacy records with identical inputs and quantities;
+  actual downloads reopen as v2 with all new fields intact.
+- Mixed-family schedules, separate joint totals, rail totals by height and
+  distinct source detail, text exports and print reports.
+- Editing does not duplicate entries. Blank inputs suppress invalid totals
+  and disable file/report actions; add/remove/select behavior works.
+- Invalid dates, schema, numeric types, rail/family/thickness pairings,
+  contract-choice types, unsafe totals and more than 200 records are rejected
+  before replacing edits. Cancelled replacement preserves the current work.
+- All twelve embedded source images decode without fetching companion assets.
+- Imported markup is escaped rather than executed.
+- Accessible SVG titles, light/dark appearance and 390-pixel layout without
+  whole-page horizontal overflow. Large diagrams/sheets scroll locally.
+- Both LF and Windows CRLF standalone files load with the CSP intact.
+- No HTTP(S) requests, JavaScript errors or browser console errors in app use.
 
-Direct-file testing was performed on Windows Chrome. Mac Safari and other
-browsers were not run in this environment. The browser print destination and
-download location remain browser/operating-system choices.
+The synthetic 11-end print report has 12 nonempty Letter pages: a schedule,
+rail-detail summary and individual plans. Full screenshots of every modern
+family and desktop/mobile/dark layouts were visually reviewed. The final PDF
+was rendered and checked for readable columns, separate rail identities,
+heading placement and unclipped diagrams. Screenshots follow the repository's
+PNG ignore rule; `report-sample.pdf` is developer evidence, not an app dependency.
 
-The legacy UI was inspected from a byte-identical temporary copy; the user
-stopped desktop control with Escape before a new controlled Calculate run.
-The historical output fixture and recovered script establish the tested
-comparison, not exhaustive live-runtime parity. Half-cent tie behavior is
-unverified. Structural adequacy and applicability of a particular project
-drawing are outside this quantity-port verification.
+## Preservation and limits
+
+The original `Legacy/BridgeEndPave.exe` still has SHA-256
+`114820772dbd045a88a32b6c23287057396fac691fe523bfd57fc1d41274f323`.
+Original EXEs, DLLs and the user's source PDFs were not modified.
+
+Mac Safari and other browser/OS combinations were not run here. Browser
+downloads and print destinations follow browser/OS settings. New quantity
+formulas are documented dimensional interpretations of the inspected drawing
+geometry; project-approved sheets, contract grooving limits and joint details
+govern applicability. Several special sheets are preliminary templates.
+
+Further live EXE comparisons stopped when the user ended desktop control in
+the original investigation. Half-cent legacy rounding ties remain unverified.
+Structural design, concrete volumes, steel and drainage quantities are outside
+the user's clarified scope.

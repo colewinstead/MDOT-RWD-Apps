@@ -50,7 +50,7 @@ const BridgeEndPave = (() => {
     const grooving = pavement - grooveDeduction;
     if ([width, sideA, sideB, grossArea, pavement, expansionJoint, grooving].some(value => !Number.isFinite(value) || value < 0)) throw Error('These dimensions produce an invalid quantity. Check the widths and skew.');
     const result = { w1, w2, skew, railHeight, widthBase, width, sideA, sideB, grossArea, pavement: round2(pavement), expansionJoint: round2(expansionJoint), grooving: round2(grooving), rail32: railHeight === 32 ? 20 : 0, rail42: railHeight === 42 ? 20 : 0, clamped, railDeduction, grooveDeduction };
-    if (quantityKeys.some(key => !Number.isFinite(result[key]))) throw Error('The calculated quantities exceed the numeric range.');
+    if (['pavement', 'expansionJoint', 'grooving', 'rail32', 'rail42'].some(key => !Number.isFinite(result[key]))) throw Error('The calculated quantities exceed the numeric range.');
     return result;
   }
 
@@ -125,6 +125,7 @@ const BridgeEndPave = (() => {
       if (config.groovingMode === 'full-overlay') notes.push('The shown asphalt overlay covers the concrete surface: exposed-concrete grooving is zero. Project-specific grooving on other finishes is outside this drawing model.');
       if (config.groovingMode === 'bare') notes.push('When included, grooving is the exposed bare-concrete plan area excluding both rail footprints. SDBE-1A does not explicitly require grooving; inclusion is a project choice.');
       if (config.groovingMode === 'normal-strip') notes.push('Grooving covers the three-foot strip measured normal to the skewed bridge joint, between the bridge curb lines. The bridge-plan joint/seal span is separate from premolded expansion joints.');
+      if (drawing === 'SDBE-1') notes.push('The slab wings use the nominal 15/16-inch per-side plan allowances; the corresponding rail profiles project 14.5/15.5 inches.');
       if (drawing.startsWith('SDBE-')) notes.push('The special slab sheet is marked preliminary / not for construction; verify the project-selected drawing and dimensions.');
       notes.push(roadwayPavement === 'concrete' ? 'A separate doweled roadway expansion joint is included across the normal roadway-end slab width.' : 'The conditional roadway expansion joint is omitted for asphalt roadway pavement.');
       if (drawing === 'BE-1') notes.push('BE-1 specifies no expansion joint at the bridge seat.');
@@ -136,7 +137,8 @@ const BridgeEndPave = (() => {
     if (!legacy) result.expansionJoint = round2(result.bridgeExpansionJoint + result.roadwayExpansionJoint);
     for (const [key, height] of railKeys) result[key] = railHeight === height ? 20 : 0;
     const railDetail = railHeight === 0 ? 'None' : drawing === 'SDBE-1' ? (railHeight === 37.5 ? 'SDBER-1' : 'SDBER-2') : drawing === 'BE-1' || drawing === 'BE-2' ? (railHeight === 33.5 ? 'BER-1' : 'BER-2') : `SDBEPR-${railHeight === 32 ? '1' : '1A'}-${thickness}`;
-    Object.assign(result, { drawing, label: config.label, thickness, pavementThickness: thickness, roadwayPavement, groovingIncluded, normalEdge, railBaseWidth, railCut, groovingMode: config.groovingMode, interfaceLength, roadwayWidth: result.widthBase + 2 * normalEdge, railLength, railDetail, notes });
+    const railProfileBaseWidth = railHeight === 0 ? 0 : drawing === 'SDBE-1' ? (railHeight === 37.5 ? 14.5 : 15.5) / 12 : railBaseWidth;
+    Object.assign(result, { drawing, label: config.label, thickness, pavementThickness: thickness, roadwayPavement, groovingIncluded, normalEdge, sideAllowance: railBaseWidth, railBaseWidth, railProfileBaseWidth, railCut, groovingMode: config.groovingMode, interfaceLength, roadwayWidth: result.widthBase + 2 * normalEdge, railLength, railDetail, notes });
     if (!groovingIncluded) notes.push('Grooving is not included in this project record; its reported quantity is zero.');
     if (Object.values(result).some(value => typeof value === 'number' && (!Number.isFinite(value) || value < 0))) throw Error('These dimensions produce an invalid quantity. Check the widths and skew.');
     return result;

@@ -1,5 +1,14 @@
 # Recovery ledger
 
+Expansion note, November 14, 2026: the user authorized separate quantity
+calculations for all inspected standard/special families and all five rail
+heights, limited to paving, grooving, joint and rail lengths. The recovered
+arithmetic remains in Legacy mode for v1 projects. New drawing-based modes,
+joint locations, grooving choices and embedded sheets are documented in
+`COVERAGE-STANDARD.md`, `COVERAGE-SPECIAL.md` and `CALCULATION-CHECKS.md`.
+The investigation below records the original recovery, not the complete
+expanded-app feature list.
+
 Investigation date: November 12, 2026 (America/Chicago).
 
 ## Target identity and route
