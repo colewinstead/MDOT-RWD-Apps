@@ -1,6 +1,6 @@
 # Updated Source Code
 
-The portable apps are at the repository root: [JB (JB-1 and JB-2)](../JB.html), [SS-2A](../SS-2A.html), and [SS-3](../SS-3.html). Each HTML file works by itself. Junction-box editable sources remain in `JB-1/`.
+The portable apps are at the repository root: [JB (JB-1 and JB-2)](../JB.html), [SS-2A](../SS-2A.html), [SS-3](../SS-3.html), and [BridgeEndPave](../BridgeEndPave.html). Each HTML file works by itself. Junction-box editable sources remain in `JB-1/`.
 
 This folder holds each app's editable HTML, CSS, JavaScript, tests, documentation, and recovery evidence. Run its `build-standalone.cjs` after source changes to regenerate the root HTML file. See the per-app README for commands and calculation limits.
 

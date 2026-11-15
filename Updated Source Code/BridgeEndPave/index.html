@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' file:; script-src 'self' file:; style-src 'self' file:; img-src 'self' file: data:; connect-src 'none'; object-src 'none'; base-uri 'none'">
+  <title>Bridge end pavement · Roadway design</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="calculations.js" defer></script>
+  <script src="drawing-sheets.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="identity"><span class="app-mark" aria-hidden="true">BE</span><div><h1>Bridge end pavement</h1><p>Standard and special drawing quantities</p></div></div>
+    <nav aria-label="Project files"><button id="open-project" type="button">Open project</button><button id="save-project" type="button">Save project</button><button id="export-text" type="button">Export text</button><button id="print-report" class="primary" type="button">Print / PDF</button></nav>
+    <input id="open-file" type="file" accept=".json,application/json" hidden>
+  </header>
+  <div class="project-status"><span id="file-status" role="status">Example inputs · not saved</span><span>Offline · runs entirely on this computer</span></div>
+  <main class="workspace">
+    <aside class="inputs" aria-label="Project and bridge end inputs">
+      <details class="project-details" open><summary>Project information</summary><div class="project-fields">
+        <label>Project number<input id="project-number" type="text" maxlength="160" placeholder="Enter project number"></label>
+        <label>County<input id="county" type="text" maxlength="160" placeholder="Enter county"></label>
+        <label>Prepared by<input id="prepared-by" type="text" maxlength="160" placeholder="Enter name"></label>
+        <label>Report date<input id="report-date" type="date"></label>
+      </div></details>
+      <div class="end-picker"><label for="end-select">Bridge end</label><div><select id="end-select"></select><button id="add-end" type="button">Add end</button></div></div>
+      <form id="end-form" novalidate>
+        <div class="identifier-fields"><label>End ID<input id="end-id" type="text" maxlength="80"></label><label>Abutment station<input id="station" type="text" maxlength="80" placeholder="e.g. 100+00.00"></label></div>
+        <label class="drawing-choice">Drawing family<select id="drawing" aria-describedby="family-status"></select></label>
+        <p id="family-status" class="input-note" role="status"></p>
+        <div class="section-title"><h2>Geometry &amp; detail</h2><span>Decimal feet</span></div>
+        <div class="geometry-fields">
+          <label>W1 <span class="label-unit">ft</span><input id="w1" type="number" step="any" min="0" aria-describedby="width-help"></label>
+          <label>W2 <span class="label-unit">ft</span><input id="w2" type="number" step="any" min="0" aria-describedby="width-help"></label>
+          <label>Skew Z <span class="label-unit">degrees</span><input id="skew" type="number" step="any" min="0" max="89.999999" aria-describedby="skew-help"></label>
+          <label>Rail height <span class="label-unit">inches</span><select id="rail-height" aria-describedby="rail-help"></select></label>
+          <label>Pavement thickness <span class="label-unit">inches</span><select id="pavement-thickness" aria-describedby="thickness-help"></select></label>
+          <label>Roadway pavement<select id="roadway-pavement" aria-describedby="roadway-help"><option value="asphalt">Asphalt</option><option value="concrete">Concrete</option></select></label>
+        </div>
+        <label class="checkbox-label"><input id="grooving-included" type="checkbox">Include transverse grooving pay item</label>
+        <p id="grooving-help" class="input-note">Check when transverse grooving is included in the project. Only the selected drawing's exposed concrete is counted.</p>
+        <p id="rail-help" class="input-note"></p><p id="thickness-help" class="input-note"></p><p id="roadway-help" class="input-note"></p>
+        <p id="width-help" class="input-note">W1 and W2 run from the crown line to the bridge curb lines. WB = W1 + W2.</p>
+        <p id="skew-help" class="input-note">Enter nonnegative skew below 90°. Side A has a 10 ft minimum; the 20 ft reference is at mid-width.</p>
+        <button id="remove-end" class="text-button danger" type="button">Remove this end</button>
+      </form>
+      <div class="basis-note"><strong>One record per bridge end</strong><p>Add the other end separately. Editing updates this record; totals count each record once.</p></div>
+    </aside>
+    <section class="results" aria-labelledby="results-heading">
+      <div class="results-title"><div><h2 id="results-heading">Bridge end 1</h2><p id="result-context"></p></div><span class="unit-note">ft · SY · LF</span></div>
+      <div id="input-error" class="error-message" role="alert" hidden></div>
+      <div id="result-content">
+        <div class="drawing-panel"><div class="drawing-heading"><h3 id="plan-heading">Calculation plan</h3><span id="geometry-mode"></span></div><div id="plan-container"></div><p>Dimensioned quantity schematic · proportions adjusted for readability</p></div>
+        <div class="section-title"><h3>Quantities for this end</h3><span>SY = square yards · LF = linear feet</span></div>
+        <dl class="quantity-list">
+          <div><dt>Bridge end pavement</dt><dd><span id="pavement"></span> <small>SY</small></dd></div>
+          <div><dt>Transverse grooving</dt><dd><span id="grooving"></span> <small>SY</small></dd></div>
+          <div><dt id="bridge-expansion-label">Bridge expansion joint · not doweled</dt><dd><span id="bridge-expansion-joint"></span> <small>LF</small></dd></div>
+          <div><dt>Roadway expansion joint · doweled</dt><dd><span id="roadway-expansion-joint"></span> <small>LF</small></dd></div>
+          <div><dt>Premolded expansion joints · total</dt><dd><span id="expansion-joint"></span> <small>LF</small></dd></div>
+          <div><dt>Bridge-plan joint / seal span</dt><dd><span id="bridge-joint-seal"></span> <small>LF</small></dd></div>
+          <div><dt>Selected rail · both sides</dt><dd><span id="rail-length"></span> <small>LF</small></dd></div>
+        </dl>
+        <p id="quantity-note" class="input-note"></p>
+        <details class="calculation-details" open><summary>Width &amp; calculation breakdown</summary><div class="drawing-panel width-panel"><div id="width-container"></div><p>Arithmetic width breakdown · blocks are symbolic</p></div><dl id="breakdown" class="breakdown-list"></dl><details class="basis-details"><summary>Calculation basis &amp; limits</summary><div id="calculation-notes" class="calculation-notes"></div></details></details>
+        <details class="calculation-details" open><summary>Longitudinal section &amp; rail profile</summary><div class="drawing-panel"><div id="section-container"></div><p>Selected drawing arrangement · thickness shown for identification; no volume or reinforcing calculation</p></div><div class="drawing-panel"><div id="rail-container"></div><p>Rail section schematic · see the embedded detail for complete construction geometry</p></div></details>
+      </div>
+      <details id="source-drawings" class="calculation-details"><summary>Embedded drawing sheets · offline reference</summary><div class="source-controls"><label>Drawing sheet<select id="source-sheet"></select></label><button id="source-zoom" type="button">Enlarge drawing</button></div><p id="source-caption" class="input-note"></p><div id="source-viewport" class="source-viewport" tabindex="0" aria-label="Drawing sheet; scroll to inspect an enlarged image"><img id="source-image" alt="Selected drawing sheet"></div></details>
+      <section class="project-summary" aria-labelledby="schedule-heading"><div class="section-title"><h3 id="schedule-heading">Project quantity schedule</h3><span id="end-count"></span></div><div class="table-scroll"><table class="schedule"><thead id="schedule-head"></thead><tbody id="schedule-rows"></tbody><tfoot id="schedule-total"></tfoot></table></div><div id="rail-totals" class="rail-totals" aria-label="Rail totals by height"></div><div class="section-title"><h3>Rail totals by detail</h3></div><div id="rail-detail-totals" class="rail-totals" aria-label="Rail totals by drawing detail"></div><p id="project-note" class="input-note"></p></section>
+    </section>
+  </main>
+  <section id="report" aria-label="Printable project report"></section>
+  <footer><span>Bridge end pavement · Mississippi roadway design utility</span><details><summary>Instructions &amp; calculation basis</summary><p>Select the slab drawing first, then a compatible rail and pavement detail. BE-1 and BE-2 use BER-1/BER-2 rails; SDBE-1 uses SDBER-1/SDBER-2; SDBE-1A uses the 9- or 12-inch SDBEPR detail. The legacy family preserves the original executable's 0/32/42-inch cases. Standard and special families have different surface and joint requirements.</p><p>Enter W1/W2 and skew, select the roadway pavement, and check the grooving pay item only when included in the project. Asphalt-covered concrete is excluded from grooving. SDBE-1 uses the exposed 3 ft strip normal to the skewed interface; bare SDBE-1A uses exposed pavement excluding rail footprints. Project totals keep bridge expansion joints, roadway expansion joints, bridge-plan joint/seal spans, and each rail height separate.</p><p><strong>Save project</strong> downloads all inputs as a JSON file. Keep it separately and use <strong>Open project</strong> to continue. Save again after edits; closing does not save. Older project files reopen in the legacy family without changing their quantities. <strong>Export text</strong> downloads a report; <strong>Print / PDF</strong> uses the browser print dialog. Reports do not reopen as projects.</p><p>The standard sheets are the supplied August 2017 BE-1/BE-2/BER-1/BER-2 set. Special-sheet sources are retained snapshots from MDOT; several are preliminary/not for construction. Drawing-derived plan areas use the drawn perimeter and nominal side allowances; the equations are dimensional interpretations, not printed pay formulas. Verify the applicable contract, drawing revision, and project grooving limits. Schematics and reference sheets do not provide structural approval. This app calculates paving, grooving, joints, and rail lengths only.</p></details></footer>
+  <noscript>This calculator needs JavaScript enabled. It does not need an internet connection.</noscript>
+</body>
+</html>

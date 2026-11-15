@@ -1,0 +1,7 @@
+{
+  "source": "Legacy/output test/BridgeEndPave.txt",
+  "evidence_type": "existing user report, read only",
+  "input": { "w1": 30, "w2": 25, "skew": 10, "railHeight": 32 },
+  "quantities": [126.48, 58.73, 123.33, 20, 0],
+  "quantity_order": ["pavement", "expansionJoint", "grooving", "rail32", "rail42"]
+}

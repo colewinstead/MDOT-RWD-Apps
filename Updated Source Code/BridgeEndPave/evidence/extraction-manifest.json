@@ -1,0 +1,14 @@
+{
+  "source": "Legacy/BridgeEndPave.exe",
+  "source_bytes": 371907,
+  "source_sha256": "114820772dbd045a88a32b6c23287057396fac691fe523bfd57fc1d41274f323",
+  "extractor": "autoit-ripper 1.2.0",
+  "extractor_source": "https://github.com/nazywam/AutoIt-Ripper",
+  "locator_offset": 367104,
+  "ea06_marker_offset": 367120,
+  "extraction_route": "extract(data), appended container with EA06 bytecode",
+  "output": "recovered-script.au3",
+  "output_bytes": 8307,
+  "output_sha256": "7f7ec6b383a94fe6829391ce5e58f52891e120b755833aac18a21a748ee5fd96",
+  "runtime_execution": false
+}
